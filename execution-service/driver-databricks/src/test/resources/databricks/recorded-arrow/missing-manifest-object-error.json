@@ -1,0 +1,9 @@
+{
+  "status": {
+    "state": "FAILED",
+    "sql_state": "42703",
+    "error": {
+      "error_code": "BAD_REQUEST"
+    }
+  }
+}

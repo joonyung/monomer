@@ -1,0 +1,226 @@
+syntax = "proto3";
+
+package monomer.execution.v1;
+
+option java_multiple_files = true;
+option java_outer_classname = "ExecutionPlaneProto";
+option java_package = "cc.monomer.execution.protocol.v1";
+
+// The only Control–Execution wire boundary. Control is the gRPC client and
+// Execution is a DB-less server. The RPC is not a durable queue or ledger.
+service ExecutionPlane {
+  // Control sends one assignment and Execution runs that one query. Control
+  // performs any product authorization before opening this call.
+  // Cancelling the RPC cancels warehouse work and aborts an open multipart
+  // upload.
+  rpc Run(stream ControlMessage) returns (stream ExecutionEvent);
+
+  // Validate one Raw SQL query. This is a non-durable statement safety call; Control
+  // owns authorization and may then issue a separate Run call with the same
+  // captured connector binding.
+  rpc ValidateRawSql(ValidateRawSqlRequest)
+      returns (ValidateRawSqlResponse);
+}
+
+message ControlMessage {
+  oneof message {
+    ControlAssignment assignment = 1;
+  }
+}
+
+message ValidateRawSqlRequest {
+  string run_id = 1;
+  string workspace_id = 2;
+  ConnectorRuntimeBinding connector = 3;
+  string sql = 4;
+  repeated QueryParameter parameters = 5;
+  int64 deadline_epoch_millis = 6;
+}
+
+message ValidateRawSqlResponse {
+  oneof result {
+    RawSqlAccepted accepted = 1;
+    RawSqlValidationFailed failed = 2;
+  }
+}
+
+message RawSqlAccepted {}
+
+message RawSqlValidationFailed {
+  string failure_code = 1;
+  string safe_message = 2;
+}
+
+message ControlAssignment {
+  string run_id = 1;
+  string workspace_id = 2;
+  ConnectorRuntimeBinding connector = 3;
+  QueryRequest request = 4;
+  int64 deadline_epoch_millis = 5;
+}
+
+message ConnectorRuntimeBinding {
+  uint32 schema_version = 1;
+  string connector_id = 2;
+  // duckdb is reserved for Monomer-authored read-only sample datasets.
+  string connector_type = 3;
+  repeated ConnectorRuntimeProperty properties = 4;
+  // duckdb properties contain only sample_dataset: acme-cloud@1 or acme-cloud@2.
+  // MCR1 credential document. Live RPC memory only. Never persist or log.
+  // duckdb uses non-secret SampleDatasetAccess: one dataset field matching sample_dataset.
+  bytes credential_document = 5;
+}
+
+message ConnectorRuntimeProperty {
+  string name = 1;
+
+  oneof value {
+    string string_value = 2;
+    int64 integer_value = 3;
+    bool boolean_value = 4;
+    StringList string_list = 5;
+  }
+}
+
+message StringList {
+  repeated string values = 1;
+}
+
+message QueryRequest {
+  uint32 schema_version = 1;
+  string sql = 2;
+  repeated QueryParameter parameters = 3;
+
+  oneof delivery {
+    InlineStreamTarget inline_stream = 5;
+    ArtifactUploadTarget artifact_upload = 6;
+  }
+
+  bool validate_raw_sql_before_run = 13;
+  repeated string expected_column_names = 14;
+
+  reserved 4, 7 to 12;
+  reserved "connector_validation",
+    "raw_sql",
+    "catalog_scan",
+    "scopes",
+    "object_kinds",
+    "include_relationships",
+    "object_key",
+    "maximum_artifact_rows",
+    "maximum_artifact_bytes",
+    "maximum_record_batch_rows",
+    "maximum_record_batch_bytes",
+    "maximum_cell_bytes",
+    "maximum_multipart_part_bytes";
+}
+
+message InlineStreamTarget {
+  uint32 maximum_record_batch_rows = 1;
+  uint64 maximum_record_batch_bytes = 2;
+  uint64 maximum_cell_bytes = 3;
+}
+
+message ArtifactUploadTarget {
+  string object_key = 1;
+  uint64 maximum_artifact_rows = 2;
+  uint64 maximum_artifact_bytes = 3;
+  uint32 maximum_record_batch_rows = 4;
+  uint64 maximum_record_batch_bytes = 5;
+  uint64 maximum_cell_bytes = 6;
+  uint64 maximum_multipart_part_bytes = 7;
+}
+
+message QueryParameter {
+  oneof value {
+    string string_value = 1;
+    sint64 int64_value = 2;
+    double float64_value = 3;
+    bool boolean_value = 4;
+    bytes bytes_value = 5;
+    NullQueryParameter null_value = 6;
+    string decimal_value = 7;
+    string date_value = 8;
+    string timestamp_value = 9;
+  }
+  string name = 10;
+}
+
+message NullQueryParameter {
+  QueryParameterType type = 1;
+}
+
+enum QueryParameterType {
+  QUERY_PARAMETER_TYPE_UNSPECIFIED = 0;
+  QUERY_PARAMETER_TYPE_TEXT = 1;
+  QUERY_PARAMETER_TYPE_INTEGER64 = 2;
+  QUERY_PARAMETER_TYPE_FLOAT64 = 3;
+  QUERY_PARAMETER_TYPE_BOOLEAN = 4;
+  QUERY_PARAMETER_TYPE_BYTES = 5;
+  QUERY_PARAMETER_TYPE_DECIMAL = 6;
+  QUERY_PARAMETER_TYPE_DATE = 7;
+  QUERY_PARAMETER_TYPE_TIMESTAMP = 8;
+}
+
+message ExecutionEvent {
+  oneof event {
+    RunProgress progress = 1;
+    InlineResultBatch inline_result_batch = 3;
+    PhysicalOutcome physical_outcome = 5;
+  }
+  reserved 4;
+  reserved "catalog_metadata_batch", "prepared_raw_sql_reference_proof";
+}
+
+message RunProgress {
+  uint64 rows_processed = 1;
+  uint64 bytes_processed = 2;
+  string phase = 3;
+}
+
+// Each arrow_ipc value is a complete, independently parseable Arrow IPC file:
+// it contains its own schema and zero or one bounded record batch. Control
+// consumes each frame independently and must not concatenate frames or stage
+// them. An empty query still emits one complete Arrow file containing the
+// schema and no rows. sha256 is lowercase SHA-256 over the exact arrow_ipc
+// bytes in this batch; the sequence and protobuf envelope are not included in
+// the digest.
+//
+// An Arrow Utf8 field that physically carries an exact decimal has exactly
+// these field metadata entries:
+//   cc.monomer.logical_type = DECIMAL
+//   cc.monomer.physical_encoding = UTF8_CANONICAL_DECIMAL
+// Finite values use exponent-free canonical decimal text. The only special
+// values are NaN, Infinity, and -Infinity. Consumers fail closed on a partial,
+// unknown, or physically incompatible metadata combination. The Arrow schema
+// is the column contract; result manifests do not duplicate it.
+message InlineResultBatch {
+  uint64 sequence = 1;
+  bytes arrow_ipc = 2;
+  string sha256 = 3;
+}
+
+message PhysicalOutcome {
+  PhysicalOutcomeKind kind = 1;
+  string failure_code = 2;
+  string safe_message = 3;
+  ArrowResultManifest arrow_result_manifest = 4;
+}
+
+message ArrowResultManifest {
+  // The object is an Arrow IPC file and uses the same field metadata contract
+  // documented on InlineResultBatch.
+  string object_key = 1;
+  uint64 byte_size = 2;
+  string object_etag = 3;
+  uint64 row_count = 4;
+  uint32 column_count = 5;
+  string media_type = 6;
+}
+
+enum PhysicalOutcomeKind {
+  PHYSICAL_OUTCOME_KIND_UNSPECIFIED = 0;
+  PHYSICAL_OUTCOME_KIND_SUCCEEDED = 1;
+  PHYSICAL_OUTCOME_KIND_FAILED = 2;
+  PHYSICAL_OUTCOME_KIND_CANCELLED = 3;
+}

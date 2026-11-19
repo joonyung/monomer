@@ -1,0 +1,29 @@
+{
+  "sha256": "68bda38156ae6616403f7095db5a05f0f5209ee8fd5464a838eec4dbf13cf64e",
+  "columns": [
+    {
+      "name": "ts_min",
+      "type": "Timestamp(MICROSECOND, Etc/UTC)",
+      "nullable": false,
+      "values": [
+        "-9223372036854775808"
+      ]
+    },
+    {
+      "name": "ntz_min",
+      "type": "Timestamp(MICROSECOND, null)",
+      "nullable": false,
+      "values": [
+        "-9223372036854775808"
+      ]
+    },
+    {
+      "name": "ref_min",
+      "type": "Int(64, true)",
+      "nullable": false,
+      "values": [
+        "-9223372036854775808"
+      ]
+    }
+  ]
+}

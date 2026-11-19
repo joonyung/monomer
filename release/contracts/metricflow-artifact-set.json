@@ -1,0 +1,99 @@
+{
+  "$schema": "../schemas/metricflow-artifact-set.schema.json",
+  "schemaVersion": 1,
+  "version": "0.2.11",
+  "artifactSetDigest": "sha256:c53b33fa4c6871f9a7f6a05f92e0575f9ab2ba8818244d27ae2fed2c07d4e7e6",
+  "source": {
+    "uri": "https://github.com/monomerhq/metricflow-kotlin",
+    "commit": "6e325d91258cd4db7f76d67dcd9e1101b5ae686f"
+  },
+  "artifacts": [
+    {
+      "coordinate": "cc.monomer.metricflow:metricflow-core:0.2.11",
+      "relativePath": "cc/monomer/metricflow/metricflow-core/0.2.11/metricflow-core-0.2.11.jar",
+      "sha256": "sha256:423485c126e1a9bf28fe2fb59293e116f27d457a273fa0e456d1267d4f1ea21f"
+    },
+    {
+      "coordinate": "cc.monomer.metricflow:metricflow-engine:0.2.11",
+      "relativePath": "cc/monomer/metricflow/metricflow-engine/0.2.11/metricflow-engine-0.2.11.jar",
+      "sha256": "sha256:72391c8d29cd78dedc25b0ef665c11f00eddf0ff4c2a4ae0a912ef80d0f6c23b"
+    },
+    {
+      "coordinate": "cc.monomer.metricflow:metricflow-render-bigquery:0.2.11",
+      "relativePath": "cc/monomer/metricflow/metricflow-render-bigquery/0.2.11/metricflow-render-bigquery-0.2.11.jar",
+      "sha256": "sha256:e48735df92bf0e1ea185ecefcb7615ccd79db198db5bcd7d54bd0e6a3be260e6"
+    },
+    {
+      "coordinate": "cc.monomer.metricflow:metricflow-render-databricks:0.2.11",
+      "relativePath": "cc/monomer/metricflow/metricflow-render-databricks/0.2.11/metricflow-render-databricks-0.2.11.jar",
+      "sha256": "sha256:fb01615efd2a047b10120102e15524914ad046e905b90e044232027807e68801"
+    },
+    {
+      "coordinate": "cc.monomer.metricflow:metricflow-render-duckdb:0.2.11",
+      "relativePath": "cc/monomer/metricflow/metricflow-render-duckdb/0.2.11/metricflow-render-duckdb-0.2.11.jar",
+      "sha256": "sha256:84e858a91c227f7d1bdb26e38ef2a6e5aaccf6303a15235002c614950bd02dec"
+    },
+    {
+      "coordinate": "cc.monomer.metricflow:metricflow-render-postgres:0.2.11",
+      "relativePath": "cc/monomer/metricflow/metricflow-render-postgres/0.2.11/metricflow-render-postgres-0.2.11.jar",
+      "sha256": "sha256:e427ecc70d2b6c26fc4e0ad20dd5d4e81813ef118fc9cfdf326c6c6377e10c02"
+    },
+    {
+      "coordinate": "cc.monomer.metricflow:metricflow-render-redshift:0.2.11",
+      "relativePath": "cc/monomer/metricflow/metricflow-render-redshift/0.2.11/metricflow-render-redshift-0.2.11.jar",
+      "sha256": "sha256:15d3a73ec5656b93caa54e9e3aeac0dda8a3542e8581fabead1d066278b232f5"
+    },
+    {
+      "coordinate": "cc.monomer.metricflow:metricflow-render-snowflake:0.2.11",
+      "relativePath": "cc/monomer/metricflow/metricflow-render-snowflake/0.2.11/metricflow-render-snowflake-0.2.11.jar",
+      "sha256": "sha256:3f3232a46d3c7053da6725c1aa2089549ac5afdd702aae7e8bb23592fff3b7da"
+    },
+    {
+      "coordinate": "cc.monomer.metricflow:metricflow-render-trino:0.2.11",
+      "relativePath": "cc/monomer/metricflow/metricflow-render-trino/0.2.11/metricflow-render-trino-0.2.11.jar",
+      "sha256": "sha256:4be4f355a0268ef657ef6fedbb6467f33fccd7814bc8440392194d8045cbcbd1"
+    }
+  ],
+  "distribution": {
+    "status": "ACTIVATED",
+    "productModuleAllowlist": [
+      "metricflow-core",
+      "metricflow-engine",
+      "metricflow-render-bigquery",
+      "metricflow-render-databricks",
+      "metricflow-render-duckdb",
+      "metricflow-render-postgres",
+      "metricflow-render-redshift",
+      "metricflow-render-snowflake",
+      "metricflow-render-trino"
+    ],
+    "excludedModules": [
+      "internal-diff-runner"
+    ],
+    "mavenRepositoryBundle": {
+      "uri": "https://github.com/monomerhq/metricflow-kotlin/releases/download/v0.2.11/metricflow-monomer-product-0.2.11.zip",
+      "archiveSha256": "sha256:932aadf58f2666cc263f09301ac811ab103dfe2822ebb0d0ca1d913fb068b658",
+      "manifestPath": "maven-repository/.monomer-metricflow-manifest.json",
+      "manifestSha256": "sha256:d9cfb454fc54ee0b461eb7c2bd7996c75f38ccf4df1a18a1e165d6d0dfd6e3cd",
+      "contentType": "application/zip"
+    },
+    "releaseEvidence": {
+      "provenance": {
+        "uri": "https://github.com/monomerhq/metricflow-kotlin/releases/download/v0.2.11/metricflow-monomer-product-0.2.11.provenance.json",
+        "sha256": "sha256:7efc92d75e0942c4ed5b06965a529877d008f42a6e578595f66c99e6e81af3f3"
+      },
+      "sbom": {
+        "uri": "https://github.com/monomerhq/metricflow-kotlin/releases/download/v0.2.11/metricflow-monomer-product-0.2.11.sbom.cyclonedx.json",
+        "sha256": "sha256:f74d20a2b6f72c61c9df8a39d6295dd761ff94c674dea60966d9cb999955e932"
+      }
+    }
+  },
+  "releaseEvidencePolicy": {
+    "statementType": "https://in-toto.io/Statement/v1",
+    "predicateType": "https://slsa.dev/provenance/v1",
+    "provenanceSubjectCoverage": "EXACT_ARTIFACT_SET",
+    "sourceBinding": "EXACT_URI_AND_COMMIT",
+    "sbomFormat": "CycloneDX",
+    "sbomComponentCoverage": "REQUIRED_ARTIFACT_SET"
+  }
+}

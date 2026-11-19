@@ -1,0 +1,27 @@
+# IDE / tools
+.idea/
+.obsidian/
+**/node_modules/
+.pnpm-store/
+**/.gradle/
+**/build/
+**/dist/
+
+# Agent runtime worktrees
+.monomer/
+.worktrees/
+.codex/worktrees/
+
+# OS
+.DS_Store
+**/.DS_Store
+
+# Screenshots
+screenshots/
+
+# Landing recording binaries are supplied outside Git.
+public-site/public/media/*.mp4
+
+# Superpowers brainstorming visual companion (local-only)
+.superpowers/
+__pycache__/

@@ -1,0 +1,43 @@
+// Going back changes only view. selectedCountry is preserved and only the city query consumes it.
+// Switching the analysis axis or time unit also preserves the selected country. Every query is always a ready target.
+export default defineChart({
+  setup({ chart }) {
+    chart.on("click", { seriesId: "sales" }, (event, frame) => {
+      if (frame.variables.analysisAxis === "geography" && frame.variables.view === "country" && typeof event.name === "string") {
+        frame.setVariables({ selectedCountry: event.name, view: "city" });
+      }
+    });
+  },
+  render({ queries, variables, locale }) {
+    let queryName, field, label;
+    if (variables.analysisAxis === "time") {
+      const monthly = variables.timeUnit === "month";
+      queryName = monthly ? "salesByMonth" : "salesByDay";
+      field = monthly ? "metric_time.month" : "metric_time.day";
+      label = monthly ? "Monthly sales" : "Daily sales";
+    } else if (variables.analysisAxis === "channel") {
+      queryName = "salesByChannel"; field = "dimension.orders.channel"; label = "Sales by channel";
+    } else if (variables.view === "city") {
+      queryName = "salesByCity"; field = "dimension.orders.city"; label = variables.selectedCountry + " sales by city";
+    } else {
+      queryName = "salesByCountry"; field = "dimension.orders.country"; label = "Sales by country · Click a bar to see its cities";
+    }
+    const result = queries[queryName];
+    if (!result.columns.some(column => column.name === field)) throw new Error("The selected result has no field: " + field);
+    const rows = result.rows;
+    const amountFormat = new Intl.NumberFormat(locale, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    // AVG and DISTINCT_COUNT show the Semantic result for that grain as is.
+    return {
+      animation: false,
+      title: { text: label, subtext: rows.length ? "Bars: sales · Below: average order / customers" : "No rows to display", left: 16 },
+      grid: { top: 80, left: 64, right: 24, bottom: 90 },
+      xAxis: { type: "category", data: rows.map(row => row[field]), axisLabel: { interval: 0 } },
+      yAxis: { type: "value" },
+      series: [{ id: "sales", type: "bar", barMaxWidth: 100, itemStyle: { color: "#2466c3" },
+        label: { show: true, position: "top" },
+        data: rows.map(row => ({ value: Number(row["metric.sales"]), name: row[field] })) }],
+      graphic: [{ type: "text", left: 16, bottom: 8,
+        style: { text: rows.map(row => String(row[field]) + ": average " + (row["metric.average_order"] === null ? "null" : amountFormat.format(row["metric.average_order"])) + " / customers " + row["metric.customers"]).join("\n"), fill: "#42464a", fontSize: 11, lineHeight: 15 } }],
+    };
+  },
+});

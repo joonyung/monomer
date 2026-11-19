@@ -1,0 +1,365 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "monomer://schema/semantic/query/4",
+  "title": "Semantic Query",
+  "type": "object",
+  "required": ["schemaVersion", "metrics", "groupBys", "metricTimeRange", "filters", "orderBy", "rowLimit"],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": { "const": 4 },
+    "metrics": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/elementName" }
+    },
+    "groupBys": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "oneOf": [
+          { "$ref": "#/$defs/dimensionGroupBy" },
+          { "$ref": "#/$defs/entityGroupBy" },
+          { "$ref": "#/$defs/metricTimeGroupBy" }
+        ]
+      },
+      "contains": { "$ref": "#/$defs/metricTimeGroupBy" },
+      "minContains": 0,
+      "maxContains": 1
+    },
+    "metricTimeRange": {
+      "oneOf": [
+        { "type": "null" },
+        { "$ref": "#/$defs/dateRange" },
+        { "$ref": "#/$defs/timestampRange" }
+      ]
+    },
+    "filters": {
+      "type": "array",
+      "maxItems": 32,
+      "uniqueItems": true,
+      "items": {
+        "oneOf": [
+          { "$ref": "#/$defs/textFilter" },
+          { "$ref": "#/$defs/numberFilter" },
+          { "$ref": "#/$defs/booleanFilter" },
+          { "$ref": "#/$defs/dateFilter" },
+          { "$ref": "#/$defs/timestampFilter" }
+        ]
+      }
+    },
+    "orderBy": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/order" }
+    },
+    "rowLimit": { "type": "integer", "minimum": 1, "maximum": 100000 }
+  },
+  "$defs": {
+    "elementName": {
+      "type": "string",
+      "pattern": "^(?![a-z0-9_]*__)[a-z](?:[a-z0-9_]*[a-z0-9])?$"
+    },
+    "dimensionReference": {
+      "type": "object",
+      "required": ["semanticModelName", "name"],
+      "additionalProperties": false,
+      "properties": {
+        "semanticModelName": { "$ref": "#/$defs/elementName" },
+        "name": { "$ref": "#/$defs/elementName" }
+      }
+    },
+    "semanticNumber": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 40,
+      "pattern": "^(?:0|-?(?:(?:[1-9][0-9]{0,19})(?:\\.[0-9]{0,17}[1-9])?|0\\.[0-9]{0,17}[1-9]))$"
+    },
+    "dimensionGroupBy": {
+      "type": "object",
+      "required": ["kind", "semanticModelName", "name"],
+      "additionalProperties": false,
+      "properties": {
+        "kind": { "const": "DIMENSION" },
+        "semanticModelName": { "$ref": "#/$defs/elementName" },
+        "name": { "$ref": "#/$defs/elementName" },
+        "granularity": { "enum": ["NANOSECOND", "MICROSECOND", "MILLISECOND", "SECOND", "MINUTE", "HOUR", "DAY", "WEEK", "MONTH", "QUARTER", "YEAR"] }
+      }
+    },
+    "entityGroupBy": {
+      "type": "object",
+      "required": ["kind", "semanticModelName", "name"],
+      "additionalProperties": false,
+      "properties": {
+        "kind": { "const": "ENTITY" },
+        "semanticModelName": { "$ref": "#/$defs/elementName" },
+        "name": { "$ref": "#/$defs/elementName" }
+      }
+    },
+    "metricTimeGroupBy": {
+      "type": "object",
+      "required": ["kind", "granularity"],
+      "additionalProperties": false,
+      "properties": {
+        "kind": { "const": "METRIC_TIME" },
+        "granularity": { "enum": ["NANOSECOND", "MICROSECOND", "MILLISECOND", "SECOND", "MINUTE", "HOUR", "DAY", "WEEK", "MONTH", "QUARTER", "YEAR"] }
+      }
+    },
+    "dateEndpoint": {
+      "type": "object",
+      "required": ["kind", "value"],
+      "additionalProperties": false,
+      "properties": {
+        "kind": { "const": "DATE" },
+        "value": { "type": "string", "format": "date" }
+      }
+    },
+    "timestampEndpoint": {
+      "type": "object",
+      "required": ["kind", "value"],
+      "additionalProperties": false,
+      "properties": {
+        "kind": { "const": "TIMESTAMP" },
+        "value": { "type": "string", "format": "date-time" }
+      }
+    },
+    "dateRange": {
+      "type": "object",
+      "required": ["start", "end"],
+      "additionalProperties": false,
+      "properties": {
+        "start": { "$ref": "#/$defs/dateEndpoint" },
+        "end": { "$ref": "#/$defs/dateEndpoint" }
+      }
+    },
+    "timestampRange": {
+      "type": "object",
+      "required": ["start", "end"],
+      "additionalProperties": false,
+      "properties": {
+        "start": { "$ref": "#/$defs/timestampEndpoint" },
+        "end": { "$ref": "#/$defs/timestampEndpoint" }
+      }
+    },
+    "textFilter": {
+      "description": "NOT_EQUALS and NOT_IN include rows with no value. IS_NULL includes NULL and blank text (''); IS_NOT_NULL excludes both.",
+      "oneOf": [
+        {
+          "type": "object",
+          "required": ["kind", "dimension", "operator", "values"],
+          "additionalProperties": false,
+          "allOf": [{ "oneOf": [
+            { "properties": { "operator": { "enum": ["EQUALS", "NOT_EQUALS"] }, "values": { "maxItems": 1 } } },
+            { "properties": { "operator": { "enum": ["IN", "NOT_IN"] } } }
+          ] }],
+          "properties": {
+            "kind": { "const": "TEXT" },
+            "dimension": { "$ref": "#/$defs/dimensionReference" },
+            "operator": { "enum": ["EQUALS", "NOT_EQUALS", "IN", "NOT_IN"] },
+            "values": { "type": "array", "minItems": 1, "maxItems": 100, "uniqueItems": true, "items": { "type": "string", "minLength": 1, "maxLength": 256, "pattern": "^[^\\u0000]*$" } }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["kind", "dimension", "operator", "values"],
+          "additionalProperties": false,
+          "properties": {
+            "kind": { "const": "TEXT" },
+            "dimension": { "$ref": "#/$defs/dimensionReference" },
+            "operator": { "enum": ["IS_NULL", "IS_NOT_NULL"] },
+            "values": { "type": "array", "maxItems": 0, "items": { "type": "string", "minLength": 1, "maxLength": 256, "pattern": "^[^\\u0000]*$" } }
+          }
+        }
+      ]
+    },
+    "numberFilter": {
+      "description": "NOT_EQUALS and NOT_IN include rows with no value.",
+      "oneOf": [
+        {
+          "type": "object",
+          "required": ["kind", "dimension", "operator", "values"],
+          "additionalProperties": false,
+          "allOf": [{ "oneOf": [
+            { "properties": { "operator": { "enum": ["EQUALS", "NOT_EQUALS"] }, "values": { "maxItems": 1 } } },
+            { "properties": { "operator": { "enum": ["IN", "NOT_IN"] } } }
+          ] }],
+          "properties": {
+            "kind": { "const": "NUMBER" },
+            "dimension": { "$ref": "#/$defs/dimensionReference" },
+            "operator": { "enum": ["EQUALS", "NOT_EQUALS", "IN", "NOT_IN"] },
+            "values": { "type": "array", "minItems": 1, "maxItems": 100, "uniqueItems": true, "items": { "$ref": "#/$defs/semanticNumber" } }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["kind", "dimension", "operator", "values"],
+          "additionalProperties": false,
+          "properties": {
+            "kind": { "const": "NUMBER" },
+            "dimension": { "$ref": "#/$defs/dimensionReference" },
+            "operator": { "enum": ["GREATER_THAN", "GREATER_THAN_OR_EQUAL", "LESS_THAN", "LESS_THAN_OR_EQUAL"] },
+            "values": { "type": "array", "minItems": 1, "maxItems": 1, "items": { "$ref": "#/$defs/semanticNumber" } }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["kind", "dimension", "operator", "values"],
+          "additionalProperties": false,
+          "properties": {
+            "kind": { "const": "NUMBER" },
+            "dimension": { "$ref": "#/$defs/dimensionReference" },
+            "operator": { "enum": ["IS_NULL", "IS_NOT_NULL"] },
+            "values": { "type": "array", "maxItems": 0, "items": { "$ref": "#/$defs/semanticNumber" } }
+          }
+        }
+      ]
+    },
+    "booleanFilter": {
+      "description": "NOT_EQUALS includes rows with no value.",
+      "oneOf": [
+        {
+          "type": "object",
+          "required": ["kind", "dimension", "operator", "values"],
+          "additionalProperties": false,
+          "properties": {
+            "kind": { "const": "BOOLEAN" },
+            "dimension": { "$ref": "#/$defs/dimensionReference" },
+            "operator": { "enum": ["EQUALS", "NOT_EQUALS"] },
+            "values": { "type": "array", "minItems": 1, "maxItems": 1, "items": { "type": "boolean" } }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["kind", "dimension", "operator", "values"],
+          "additionalProperties": false,
+          "properties": {
+            "kind": { "const": "BOOLEAN" },
+            "dimension": { "$ref": "#/$defs/dimensionReference" },
+            "operator": { "enum": ["IS_NULL", "IS_NOT_NULL"] },
+            "values": { "type": "array", "maxItems": 0, "items": { "type": "boolean" } }
+          }
+        }
+      ]
+    },
+    "dateFilter": {
+      "description": "Dates compare by calendar day at the dimension's declared grain, using CAST(the grain-resolved dimension AS DATE). NOT_EQUALS and NOT_IN include rows with no value.",
+      "oneOf": [
+        {
+          "type": "object",
+          "required": ["kind", "dimension", "operator", "values"],
+          "additionalProperties": false,
+          "allOf": [{ "oneOf": [
+            { "properties": { "operator": { "enum": ["EQUALS", "NOT_EQUALS"] }, "values": { "maxItems": 1 } } },
+            { "properties": { "operator": { "enum": ["IN", "NOT_IN"] } } }
+          ] }],
+          "properties": {
+            "kind": { "const": "DATE" },
+            "dimension": { "$ref": "#/$defs/dimensionReference" },
+            "operator": { "enum": ["EQUALS", "NOT_EQUALS", "IN", "NOT_IN"] },
+            "values": { "type": "array", "minItems": 1, "maxItems": 100, "uniqueItems": true, "items": { "type": "string", "format": "date" } }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["kind", "dimension", "operator", "values"],
+          "additionalProperties": false,
+          "properties": {
+            "kind": { "const": "DATE" },
+            "dimension": { "$ref": "#/$defs/dimensionReference" },
+            "operator": { "enum": ["GREATER_THAN", "GREATER_THAN_OR_EQUAL", "LESS_THAN", "LESS_THAN_OR_EQUAL"] },
+            "values": { "type": "array", "minItems": 1, "maxItems": 1, "items": { "type": "string", "format": "date" } }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["kind", "dimension", "operator", "values"],
+          "additionalProperties": false,
+          "properties": {
+            "kind": { "const": "DATE" },
+            "dimension": { "$ref": "#/$defs/dimensionReference" },
+            "operator": { "enum": ["IS_NULL", "IS_NOT_NULL"] },
+            "values": { "type": "array", "maxItems": 0, "items": { "type": "string", "format": "date" } }
+          }
+        }
+      ]
+    },
+    "timestampFilter": {
+      "description": "Timestamp filter values preserve up to 6 fractional second digits (microseconds); values with more digits are rejected for every dialect. NOT_EQUALS and NOT_IN include rows with no value.",
+      "oneOf": [
+        {
+          "type": "object",
+          "required": ["kind", "dimension", "operator", "values"],
+          "additionalProperties": false,
+          "allOf": [{ "oneOf": [
+            { "properties": { "operator": { "enum": ["EQUALS", "NOT_EQUALS"] }, "values": { "maxItems": 1 } } },
+            { "properties": { "operator": { "enum": ["IN", "NOT_IN"] } } }
+          ] }],
+          "properties": {
+            "kind": { "const": "TIMESTAMP" },
+            "dimension": { "$ref": "#/$defs/dimensionReference" },
+            "operator": { "enum": ["EQUALS", "NOT_EQUALS", "IN", "NOT_IN"] },
+            "values": { "type": "array", "minItems": 1, "maxItems": 100, "uniqueItems": true, "items": { "type": "string", "format": "date-time", "pattern": "^(?!.*\\.[0-9]{7})" } }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["kind", "dimension", "operator", "values"],
+          "additionalProperties": false,
+          "properties": {
+            "kind": { "const": "TIMESTAMP" },
+            "dimension": { "$ref": "#/$defs/dimensionReference" },
+            "operator": { "enum": ["GREATER_THAN", "GREATER_THAN_OR_EQUAL", "LESS_THAN", "LESS_THAN_OR_EQUAL"] },
+            "values": { "type": "array", "minItems": 1, "maxItems": 1, "items": { "type": "string", "format": "date-time", "pattern": "^(?!.*\\.[0-9]{7})" } }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["kind", "dimension", "operator", "values"],
+          "additionalProperties": false,
+          "properties": {
+            "kind": { "const": "TIMESTAMP" },
+            "dimension": { "$ref": "#/$defs/dimensionReference" },
+            "operator": { "enum": ["IS_NULL", "IS_NOT_NULL"] },
+            "values": { "type": "array", "maxItems": 0, "items": { "type": "string", "format": "date-time", "pattern": "^(?!.*\\.[0-9]{7})" } }
+          }
+        }
+      ]
+    },
+    "order": {
+      "type": "object",
+      "required": ["target", "direction"],
+      "additionalProperties": false,
+      "properties": {
+        "target": {
+          "oneOf": [
+            {
+              "type": "object",
+              "required": ["kind", "metricName"],
+              "additionalProperties": false,
+              "properties": {
+                "kind": { "const": "METRIC" },
+                "metricName": { "$ref": "#/$defs/elementName" }
+              }
+            },
+            {
+              "type": "object",
+              "required": ["kind", "groupBy"],
+              "additionalProperties": false,
+              "properties": {
+                "kind": { "const": "GROUP_BY" },
+                "groupBy": {
+                  "oneOf": [
+                    { "$ref": "#/$defs/dimensionGroupBy" },
+                    { "$ref": "#/$defs/entityGroupBy" },
+                    { "$ref": "#/$defs/metricTimeGroupBy" }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "direction": { "enum": ["ASC", "DESC"] }
+      }
+    }
+  }
+}

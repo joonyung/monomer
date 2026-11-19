@@ -1,0 +1,21 @@
+# This is a Gradle generated file for dependency locking.
+# Manual edits can break the build and are not advised.
+# This file is expected to be part of source control.
+cc.monomer.metricflow:metricflow-core:0.2.11=metricflowArtifactSet,metricflowRuntimePurity
+cc.monomer.metricflow:metricflow-engine:0.2.11=metricflowArtifactSet,metricflowRuntimePurity
+cc.monomer.metricflow:metricflow-render-bigquery:0.2.11=metricflowArtifactSet,metricflowRuntimePurity
+cc.monomer.metricflow:metricflow-render-databricks:0.2.11=metricflowArtifactSet,metricflowRuntimePurity
+cc.monomer.metricflow:metricflow-render-duckdb:0.2.11=metricflowArtifactSet,metricflowRuntimePurity
+cc.monomer.metricflow:metricflow-render-postgres:0.2.11=metricflowArtifactSet,metricflowRuntimePurity
+cc.monomer.metricflow:metricflow-render-redshift:0.2.11=metricflowArtifactSet,metricflowRuntimePurity
+cc.monomer.metricflow:metricflow-render-snowflake:0.2.11=metricflowArtifactSet,metricflowRuntimePurity
+cc.monomer.metricflow:metricflow-render-trino:0.2.11=metricflowArtifactSet,metricflowRuntimePurity
+org.jetbrains.kotlin:kotlin-stdlib:2.3.20=metricflowRuntimePurity
+org.jetbrains.kotlinx:kotlinx-serialization-bom:1.8.0=metricflowRuntimePurity
+org.jetbrains.kotlinx:kotlinx-serialization-core-jvm:1.8.0=metricflowRuntimePurity
+org.jetbrains.kotlinx:kotlinx-serialization-core:1.8.0=metricflowRuntimePurity
+org.jetbrains.kotlinx:kotlinx-serialization-json-jvm:1.8.0=metricflowRuntimePurity
+org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.0=metricflowRuntimePurity
+org.jetbrains:annotations:13.0=metricflowRuntimePurity
+org.slf4j:slf4j-api:2.0.16=metricflowRuntimePurity
+empty=

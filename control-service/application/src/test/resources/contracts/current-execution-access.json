@@ -1,0 +1,41 @@
+{
+  "request": {
+    "variables": {
+      "input": {
+        "workspaceId": "01900000-0000-7000-8000-000000000010",
+        "authorityRefs": [
+          {
+            "kind": "catalog_table",
+            "id": "01900000-0000-7000-8000-000000000011"
+          },
+          {
+            "kind": "metric",
+            "id": "01900000-0000-7000-8000-000000000012"
+          }
+        ]
+      }
+    }
+  },
+  "response": {
+    "data": {
+      "currentExecutionAccess": {
+        "verdicts": [
+          {
+            "resource": {
+              "kind": "catalog_table",
+              "id": "01900000-0000-7000-8000-000000000011"
+            },
+            "state": "NO_ACCESS"
+          },
+          {
+            "resource": {
+              "kind": "metric",
+              "id": "01900000-0000-7000-8000-000000000012"
+            },
+            "state": "ALLOWED"
+          }
+        ]
+      }
+    }
+  }
+}

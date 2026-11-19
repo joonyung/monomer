@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 3,
+  "name": "chart_e2e_20260907",
+  "sourceRelations": [
+    {
+      "connectorId": "01a03926-65a2-76d4-ba29-cc4fac3ab404",
+      "schema": "analytics",
+      "relation": "orders"
+    }
+  ],
+  "entities": [
+    {
+      "name": "order_id",
+      "type": "primary",
+      "expression": "order_id"
+    }
+  ],
+  "dimensions": [
+    {
+      "name": "country",
+      "type": "categorical",
+      "expression": "CASE WHEN order_id IN (1,2,3) THEN 'KR' WHEN order_id=4 THEN 'PREVIOUS' WHEN order_id=5 THEN 'US' WHEN order_id=6 THEN 'JP' ELSE 'EXCLUDED' END",
+      "isPartition": false
+    },
+    {
+      "name": "city",
+      "type": "categorical",
+      "expression": "CASE WHEN order_id IN (1,2) THEN 'Seoul' WHEN order_id=3 THEN 'Busan' WHEN order_id=5 THEN 'New York' ELSE 'Tokyo' END",
+      "isPartition": false
+    },
+    {
+      "name": "ordered_at",
+      "type": "time",
+      "expression": "DATE '2026-09-01' + ((order_id-1)%3)::int",
+      "granularity": "day",
+      "isPartition": false
+    }
+  ],
+  "measures": [
+    {
+      "name": "sales",
+      "expression": "CASE order_id WHEN 1 THEN 20000.00 WHEN 2 THEN 24000.00 WHEN 3 THEN 30520.00 WHEN 4 THEN 65000.00 WHEN 5 THEN 100000.00 WHEN 6 THEN 30000.00 ELSE 0.00 END",
+      "aggregation": "sum",
+      "aggregationTimeDimension": "ordered_at"
+    }
+  ],
+  "aggregationTimeDimension": "ordered_at",
+  "description": "Chart E2E dedicated read-only projection over existing Northstar orders 1..6; no warehouse mutation"
+}

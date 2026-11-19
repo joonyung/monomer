@@ -1,0 +1,14 @@
+[data-change-id] {
+  position: relative;
+  isolation: isolate;
+}
+
+.change-highlight-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  border-radius: inherit;
+  background: var(--selection-tint);
+  opacity: 0;
+}

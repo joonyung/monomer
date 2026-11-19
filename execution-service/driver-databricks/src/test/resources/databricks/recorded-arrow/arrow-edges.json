@@ -1,0 +1,229 @@
+{
+  "status": {
+    "state": "SUCCEEDED"
+  },
+  "manifest": {
+    "format": "ARROW_STREAM",
+    "schema": {
+      "column_count": 31,
+      "columns": [
+        {
+          "name": "session_zone",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 0
+        },
+        {
+          "name": "ts_dst_gap",
+          "type_text": "TIMESTAMP",
+          "type_name": "TIMESTAMP",
+          "position": 1
+        },
+        {
+          "name": "ts_after_gap",
+          "type_text": "TIMESTAMP",
+          "type_name": "TIMESTAMP",
+          "position": 2
+        },
+        {
+          "name": "ts_negative",
+          "type_text": "TIMESTAMP",
+          "type_name": "TIMESTAMP",
+          "position": 3
+        },
+        {
+          "name": "ts_calendar_gap",
+          "type_text": "TIMESTAMP",
+          "type_name": "TIMESTAMP",
+          "position": 4
+        },
+        {
+          "name": "ts_year_zero",
+          "type_text": "TIMESTAMP",
+          "type_name": "TIMESTAMP",
+          "position": 5
+        },
+        {
+          "name": "ts_upper",
+          "type_text": "TIMESTAMP",
+          "type_name": "TIMESTAMP",
+          "position": 6
+        },
+        {
+          "name": "ts_lower",
+          "type_text": "TIMESTAMP",
+          "type_name": "TIMESTAMP",
+          "position": 7
+        },
+        {
+          "name": "ntz_dst_gap",
+          "type_text": "TIMESTAMP_NTZ",
+          "type_name": "TIMESTAMP_NTZ",
+          "position": 8
+        },
+        {
+          "name": "ntz_after_gap",
+          "type_text": "TIMESTAMP_NTZ",
+          "type_name": "TIMESTAMP_NTZ",
+          "position": 9
+        },
+        {
+          "name": "ntz_calendar_gap",
+          "type_text": "TIMESTAMP_NTZ",
+          "type_name": "TIMESTAMP_NTZ",
+          "position": 10
+        },
+        {
+          "name": "ntz_year_zero",
+          "type_text": "TIMESTAMP_NTZ",
+          "type_name": "TIMESTAMP_NTZ",
+          "position": 11
+        },
+        {
+          "name": "ntz_upper",
+          "type_text": "TIMESTAMP_NTZ",
+          "type_name": "TIMESTAMP_NTZ",
+          "position": 12
+        },
+        {
+          "name": "ntz_lower",
+          "type_text": "TIMESTAMP_NTZ",
+          "type_name": "TIMESTAMP_NTZ",
+          "position": 13
+        },
+        {
+          "name": "date_pre_cutover",
+          "type_text": "DATE",
+          "type_name": "DATE",
+          "position": 14
+        },
+        {
+          "name": "date_calendar_gap",
+          "type_text": "DATE",
+          "type_name": "DATE",
+          "position": 15
+        },
+        {
+          "name": "date_alias",
+          "type_text": "DATE",
+          "type_name": "DATE",
+          "position": 16
+        },
+        {
+          "name": "date_year_zero",
+          "type_text": "DATE",
+          "type_name": "DATE",
+          "position": 17
+        },
+        {
+          "name": "date_bce",
+          "type_text": "DATE",
+          "type_name": "DATE",
+          "position": 18
+        },
+        {
+          "name": "date_lower",
+          "type_text": "DATE",
+          "type_name": "DATE",
+          "position": 19
+        },
+        {
+          "name": "date_upper",
+          "type_text": "DATE",
+          "type_name": "DATE",
+          "position": 20
+        },
+        {
+          "name": "decimal_small",
+          "type_text": "DECIMAL(3,2)",
+          "type_name": "DECIMAL",
+          "position": 21,
+          "type_precision": 3,
+          "type_scale": 2
+        },
+        {
+          "name": "decimal_upper",
+          "type_text": "DECIMAL(38,18)",
+          "type_name": "DECIMAL",
+          "position": 22,
+          "type_precision": 38,
+          "type_scale": 18
+        },
+        {
+          "name": "decimal_lower",
+          "type_text": "DECIMAL(38,18)",
+          "type_name": "DECIMAL",
+          "position": 23,
+          "type_precision": 38,
+          "type_scale": 18
+        },
+        {
+          "name": "decimal_tiny",
+          "type_text": "DECIMAL(38,18)",
+          "type_name": "DECIMAL",
+          "position": 24,
+          "type_precision": 38,
+          "type_scale": 18
+        },
+        {
+          "name": "ts_dst_server_micros",
+          "type_text": "BIGINT",
+          "type_name": "LONG",
+          "position": 25
+        },
+        {
+          "name": "ts_negative_server_micros",
+          "type_text": "BIGINT",
+          "type_name": "LONG",
+          "position": 26
+        },
+        {
+          "name": "ts_gap_server_micros",
+          "type_text": "BIGINT",
+          "type_name": "LONG",
+          "position": 27
+        },
+        {
+          "name": "ts_zero_server_micros",
+          "type_text": "BIGINT",
+          "type_name": "LONG",
+          "position": 28
+        },
+        {
+          "name": "ts_upper_server_micros",
+          "type_text": "BIGINT",
+          "type_name": "LONG",
+          "position": 29
+        },
+        {
+          "name": "ts_lower_server_micros",
+          "type_text": "BIGINT",
+          "type_name": "LONG",
+          "position": 30
+        }
+      ]
+    },
+    "total_chunk_count": 1,
+    "chunks": [
+      {
+        "chunk_index": 0,
+        "row_offset": 0,
+        "row_count": 1,
+        "byte_count": 4424
+      }
+    ],
+    "total_row_count": 1,
+    "total_byte_count": 4424,
+    "truncated": false
+  },
+  "result": {
+    "external_links": [
+      {
+        "chunk_index": 0,
+        "row_offset": 0,
+        "row_count": 1,
+        "byte_count": 4424
+      }
+    ]
+  }
+}

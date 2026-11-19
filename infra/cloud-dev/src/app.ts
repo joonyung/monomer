@@ -1,0 +1,20 @@
+import { cloudEnvironment } from './environment';
+import { StaticHostingStack } from './static-hosting-stack';
+import { ServicesStack } from './services-stack';
+import { ComputeStack } from './compute-stack';
+import { App } from 'aws-cdk-lib';
+import { StorageStack } from './storage-stack';
+import { NetworkStack } from './network-stack';
+import { CertificateStack } from './certificate-stack';
+import { MailStack } from './mail-stack';
+
+const app = new App();
+const environment = cloudEnvironment(app.node.tryGetContext('environment'));
+const network = new NetworkStack(app, `${environment.stackPrefix}Network`, environment);
+const storage = new StorageStack(app, `${environment.stackPrefix}Storage`, network.vpc, environment);
+const compute = new ComputeStack(app, `${environment.stackPrefix}Compute`, network.vpc, storage, environment);
+const certificate = new CertificateStack(app, `${environment.stackPrefix}Certificate`, environment);
+new ServicesStack(app, `${environment.stackPrefix}Services`, network.vpc, compute.cluster, storage, certificate.certificate, environment);
+new MailStack(app, `${environment.stackPrefix}Mail`, environment);
+new StaticHostingStack(app, `${environment.stackPrefix}StaticHosting`, certificate.certificate, certificate.publicSiteCertificate, environment);
+app.synth();

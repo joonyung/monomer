@@ -1,0 +1,52 @@
+{
+  "columns": [
+    "day",
+    "country",
+    "city",
+    "channel",
+    "customer",
+    "amount"
+  ],
+  "rows": [
+    [
+      "2026-01-01",
+      "KR",
+      "Seoul",
+      "Online",
+      "A",
+      100
+    ],
+    [
+      "2026-01-02",
+      "KR",
+      "Seoul",
+      "Store",
+      "B",
+      200
+    ],
+    [
+      "2026-01-02",
+      "KR",
+      "Busan",
+      "Online",
+      "A",
+      300
+    ],
+    [
+      "2026-01-02",
+      "US",
+      "Boston",
+      "Store",
+      "C",
+      400
+    ],
+    [
+      "2026-02-01",
+      "US",
+      "Austin",
+      "Online",
+      "C",
+      500
+    ]
+  ]
+}

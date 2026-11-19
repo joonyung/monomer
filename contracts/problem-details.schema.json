@@ -1,0 +1,296 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://monomer.cc/schemas/problem-details/v1",
+  "title": "Monomer Problem Details",
+  "description": "RFC 9457 problem details with the closed Monomer public extensions.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "type",
+    "title",
+    "status",
+    "detail",
+    "instance",
+    "code",
+    "requestId",
+    "traceId",
+    "retryable"
+  ],
+  "properties": {
+    "type": {
+      "type": "string",
+      "format": "uri",
+      "pattern": "^[A-Za-z][A-Za-z0-9+.-]*:"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "status": {
+      "type": "integer",
+      "minimum": 100,
+      "maximum": 599
+    },
+    "detail": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096
+    },
+    "instance": {
+      "type": "string",
+      "format": "uri-reference"
+    },
+    "code": {
+      "type": "string",
+      "pattern": "^[A-Z][A-Z0-9_]{0,127}$"
+    },
+    "requestId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200,
+      "pattern": "^[A-Za-z0-9._:-]+$"
+    },
+    "traceId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "retryable": {
+      "type": "boolean"
+    },
+    "violations": {
+      "type": "array",
+      "maxItems": 100,
+      "items": {
+        "$ref": "#/$defs/Violation"
+      }
+    },
+    "current": {
+      "$ref": "#/$defs/SafeCurrent"
+    },
+    "hints": {
+      "type": "array",
+      "maxItems": 20,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 512
+      }
+    },
+    "nextActions": {
+      "type": "array",
+      "maxItems": 50,
+      "items": {
+        "$ref": "https://monomer.cc/schemas/agent-workspace/v1#/$defs/AgentAvailableOperation"
+      }
+    },
+    "requiredRole": {
+      "description": "ROLE_REQUIRED only: the Workspace role (VIEWER, EXPLORER, EDITOR, OWNER) or Organization role (ADMIN) the accessible target needs.",
+      "$ref": "#/$defs/Role"
+    },
+    "currentRole": {
+      "description": "ROLE_REQUIRED only: the role the caller holds in the same Workspace or Organization.",
+      "$ref": "#/$defs/Role"
+    },
+    "askOwners": {
+      "description": "ROLE_REQUIRED only: display names of the Workspace Owners the caller can already see. Empty for Organization actions, whose Admin roster is visible only to Admins.",
+      "type": "array",
+      "maxItems": 20,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 200
+      }
+    },
+    "partitionFilters": {
+      "type": "array",
+      "maxItems": 16,
+      "items": {
+        "$ref": "#/$defs/PartitionFilter"
+      }
+    }
+  },
+  "$defs": {
+    "Role": {
+      "enum": [
+        "VIEWER",
+        "EXPLORER",
+        "EDITOR",
+        "OWNER",
+        "MEMBER",
+        "ADMIN"
+      ]
+    },
+    "Violation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "field",
+        "code",
+        "message"
+      ],
+      "properties": {
+        "field": {
+          "description": "Owner-confirmed repair field or the narrowest known validation scope; a scope does not identify an exact faulty child.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512
+        },
+        "code": {
+          "type": "string",
+          "pattern": "^[A-Z][A-Z0-9_]{0,127}$"
+        },
+        "message": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512
+        },
+        "operationIndex": {
+          "description": "Zero-based patch operation index, only when the failing operation is known.",
+          "type": "integer",
+          "minimum": 0
+        },
+        "path": {
+          "description": "Confirmed safe patch JSON Pointer; omitted when a precise safe location is unavailable.",
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 2048
+        }
+      }
+    },
+    "SafeCurrent": {
+      "$ref": "#/$defs/CurrentRevision"
+    },
+    "CurrentRevision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "revision"
+      ],
+      "properties": {
+        "revision": {
+          "$ref": "#/$defs/RevisionString"
+        }
+      }
+    },
+    "RevisionString": {
+      "type": "string",
+      "pattern": "^(?:0|[1-9][0-9]{0,18})$",
+      "maxLength": 19
+    },
+    "PartitionRelation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "catalog",
+        "schema",
+        "name"
+      ],
+      "properties": {
+        "catalog": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1,
+          "maxLength": 1024
+        },
+        "schema": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1024
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1024
+        }
+      }
+    },
+    "PartitionFilter": {
+      "type": "object",
+      "allOf": [
+        {
+          "type": "object",
+          "required": [
+            "kind",
+            "connectorId",
+            "relation",
+            "partitionKeys"
+          ],
+          "properties": {
+            "kind": {
+              "enum": [
+                "SEMANTIC_MODEL",
+                "TIME_SPINE"
+              ]
+            },
+            "connectorId": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "relation": {
+              "$ref": "#/$defs/PartitionRelation"
+            },
+            "partitionKeys": {
+              "type": "array",
+              "maxItems": 10000,
+              "items": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1024
+              }
+            }
+          }
+        },
+        {
+          "oneOf": [
+            {
+              "type": "object",
+              "required": [
+                "semanticModelName",
+                "dimensions",
+                "timeRangeApplies",
+                "kind"
+              ],
+              "properties": {
+                "kind": {
+                  "const": "SEMANTIC_MODEL"
+                },
+                "semanticModelName": {
+                  "type": "string",
+                  "pattern": "^(?![a-z0-9_]*__)[a-z](?:[a-z0-9_]*[a-z0-9])?$"
+                },
+                "dimensions": {
+                  "type": "array",
+                  "maxItems": 10000,
+                  "items": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 1024
+                  }
+                },
+                "timeRangeApplies": {
+                  "type": "boolean"
+                }
+              }
+            },
+            {
+              "type": "object",
+              "required": [
+                "kind"
+              ],
+              "properties": {
+                "kind": {
+                  "const": "TIME_SPINE"
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "unevaluatedProperties": false
+    }
+  }
+}

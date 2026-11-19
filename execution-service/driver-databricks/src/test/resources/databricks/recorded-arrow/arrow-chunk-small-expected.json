@@ -1,0 +1,15 @@
+{
+  "sha256": "2deaadbd813e81f1aa5f2a0c87d6e80b18d68ac20681d2a188207d16bd0f1c7c",
+  "columns": [
+    {
+      "name": "n",
+      "type": "Int(32, true)",
+      "nullable": false,
+      "values": [
+        "1",
+        "2",
+        "3"
+      ]
+    }
+  ]
+}

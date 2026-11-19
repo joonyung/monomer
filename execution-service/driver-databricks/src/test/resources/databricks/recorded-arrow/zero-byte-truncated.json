@@ -1,0 +1,23 @@
+{
+  "status": {
+    "state": "SUCCEEDED"
+  },
+  "manifest": {
+    "format": "JSON_ARRAY",
+    "schema": {
+      "column_count": 1,
+      "columns": [
+        {
+          "name": "n",
+          "type_text": "INT",
+          "type_name": "INT",
+          "position": 0
+        }
+      ]
+    },
+    "total_chunk_count": 0,
+    "total_row_count": 0,
+    "truncated": true
+  },
+  "result": {}
+}

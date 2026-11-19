@@ -1,0 +1,44 @@
+{
+  "$schema": "./ci-required-checks.schema.json",
+  "schemaVersion": 1,
+  "workflowName": "CI",
+  "completionCheck": "ci / required",
+  "requiredChecks": [
+    {
+      "jobId": "ci-contracts",
+      "checkName": "ci-contracts"
+    },
+    {
+      "jobId": "ci-execution",
+      "checkName": "ci-execution"
+    },
+    {
+      "jobId": "ci-control",
+      "checkName": "ci-control"
+    },
+    {
+      "jobId": "ci-web",
+      "checkName": "ci-web"
+    }
+  ],
+  "unavailableChecks": [],
+  "scopes": [
+    "contracts",
+    "control",
+    "execution",
+    "web",
+    "cloud_infra",
+    "public_site"
+  ],
+  "fanOutRoots": [
+    "contracts/",
+    "protos/"
+  ],
+  "ciInfrastructureRoots": [
+    ".github/workflows/ci.yml",
+    "contracts/ci-required-checks.json",
+    "contracts/ci-required-checks.schema.json",
+    "scripts/README.md",
+    "scripts/ci/"
+  ]
+}

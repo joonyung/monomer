@@ -1,0 +1,942 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "monomer://schema/connector/1",
+  "$defs": {
+    "PostgresqlSslMode": {
+      "type": "string",
+      "enum": [
+        "DISABLE",
+        "REQUIRE",
+        "VERIFY_CA",
+        "VERIFY_FULL"
+      ]
+    },
+    "RedshiftSslMode": {
+      "type": "string",
+      "enum": [
+        "DISABLE",
+        "ALLOW",
+        "PREFER",
+        "REQUIRE",
+        "VERIFY_CA",
+        "VERIFY_FULL"
+      ]
+    },
+    "TrinoSslVerification": {
+      "type": "string",
+      "enum": [
+        "FULL",
+        "CA",
+        "NONE"
+      ]
+    },
+    "SampleDatasetAccessCredential": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "SAMPLE_DATASET_ACCESS"
+        },
+        "dataset": {
+          "type": "string",
+          "minLength": 1,
+          "writeOnly": true,
+          "enum": [
+            "acme-cloud@1",
+            "acme-cloud@2",
+            "acme-cloud@3"
+          ]
+        }
+      },
+      "required": [
+        "kind",
+        "dataset"
+      ],
+      "additionalProperties": false,
+      "writeOnly": true
+    },
+    "UsernamePasswordCredential": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "USERNAME_PASSWORD"
+        },
+        "username": {
+          "type": "string",
+          "minLength": 1,
+          "writeOnly": true
+        },
+        "password": {
+          "type": "string",
+          "minLength": 1,
+          "writeOnly": true
+        }
+      },
+      "required": [
+        "kind",
+        "username",
+        "password"
+      ],
+      "additionalProperties": false,
+      "writeOnly": true
+    },
+    "ServiceAccountJsonCredential": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "SERVICE_ACCOUNT_JSON"
+        },
+        "serviceAccountJson": {
+          "type": "string",
+          "minLength": 1,
+          "writeOnly": true
+        }
+      },
+      "required": [
+        "kind",
+        "serviceAccountJson"
+      ],
+      "additionalProperties": false,
+      "writeOnly": true
+    },
+    "UsernamePrivateKeyCredential": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "USERNAME_PRIVATE_KEY"
+        },
+        "username": {
+          "type": "string",
+          "minLength": 1,
+          "writeOnly": true
+        },
+        "privateKey": {
+          "type": "string",
+          "minLength": 1,
+          "writeOnly": true
+        },
+        "privateKeyPassphrase": {
+          "type": "string",
+          "minLength": 1,
+          "writeOnly": true
+        }
+      },
+      "required": [
+        "kind",
+        "username",
+        "privateKey"
+      ],
+      "additionalProperties": false,
+      "writeOnly": true
+    },
+    "AwsIamCredential": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "AWS_IAM"
+        },
+        "awsAccessKeyId": {
+          "type": "string",
+          "minLength": 1,
+          "writeOnly": true
+        },
+        "awsSecretAccessKey": {
+          "type": "string",
+          "minLength": 1,
+          "writeOnly": true
+        },
+        "awsRegion": {
+          "type": "string",
+          "minLength": 1,
+          "writeOnly": true
+        },
+        "clusterId": {
+          "type": "string",
+          "minLength": 1,
+          "writeOnly": true
+        },
+        "dbUser": {
+          "type": "string",
+          "minLength": 1,
+          "writeOnly": true
+        }
+      },
+      "required": [
+        "kind",
+        "awsAccessKeyId",
+        "awsSecretAccessKey",
+        "awsRegion",
+        "clusterId",
+        "dbUser"
+      ],
+      "additionalProperties": false,
+      "writeOnly": true
+    },
+    "AccessTokenCredential": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "ACCESS_TOKEN"
+        },
+        "accessToken": {
+          "type": "string",
+          "minLength": 1,
+          "writeOnly": true
+        }
+      },
+      "required": [
+        "kind",
+        "accessToken"
+      ],
+      "additionalProperties": false,
+      "writeOnly": true
+    },
+    "OauthClientCredential": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "OAUTH_CLIENT"
+        },
+        "oauthClientId": {
+          "type": "string",
+          "minLength": 1,
+          "writeOnly": true
+        },
+        "oauthClientSecret": {
+          "type": "string",
+          "minLength": 1,
+          "writeOnly": true
+        }
+      },
+      "required": [
+        "kind",
+        "oauthClientId",
+        "oauthClientSecret"
+      ],
+      "additionalProperties": false,
+      "writeOnly": true
+    },
+    "ConnectorCredential": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/UsernamePasswordCredential"
+        },
+        {
+          "$ref": "#/$defs/ServiceAccountJsonCredential"
+        },
+        {
+          "$ref": "#/$defs/UsernamePrivateKeyCredential"
+        },
+        {
+          "$ref": "#/$defs/AwsIamCredential"
+        },
+        {
+          "$ref": "#/$defs/AccessTokenCredential"
+        },
+        {
+          "$ref": "#/$defs/OauthClientCredential"
+        }
+      ],
+      "writeOnly": true
+    },
+    "DuckdbProperties": {
+      "type": "object",
+      "properties": {
+        "sampleDataset": {
+          "type": "string",
+          "minLength": 1,
+          "enum": [
+            "acme-cloud@1",
+            "acme-cloud@2",
+            "acme-cloud@3"
+          ]
+        }
+      },
+      "required": [
+        "sampleDataset"
+      ],
+      "additionalProperties": false
+    },
+    "DuckdbRead": {
+      "type": "object",
+      "properties": {
+        "connectorType": {
+          "const": "DUCKDB"
+        },
+        "displayName": {
+          "type": "string",
+          "minLength": 1
+        },
+        "properties": {
+          "$ref": "#/$defs/DuckdbProperties"
+        },
+        "sample": {
+          "type": "object",
+          "properties": {
+            "dataset": {
+              "enum": [
+                "acme-cloud@1",
+                "acme-cloud@2",
+                "acme-cloud@3"
+              ]
+            },
+            "label": {
+              "const": "Acme Cloud"
+            }
+          },
+          "required": [
+            "dataset",
+            "label"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "connectorType",
+        "displayName",
+        "properties",
+        "sample"
+      ],
+      "additionalProperties": false
+    },
+    "PostgresqlProperties": {
+      "type": "object",
+      "properties": {
+        "host": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?:[A-Za-z0-9](?:[A-Za-z0-9.-]{0,251}[A-Za-z0-9])?|\\[[0-9A-Fa-f:]+\\])$",
+          "not": {
+            "pattern": "\\.\\."
+          }
+        },
+        "port": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 65535
+        },
+        "database": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_][A-Za-z0-9_.-]{0,127}$"
+        },
+        "schema": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z_][A-Za-z0-9_$]{0,127}$"
+        },
+        "sslMode": {
+          "$ref": "#/$defs/PostgresqlSslMode"
+        }
+      },
+      "required": [
+        "host",
+        "port",
+        "database"
+      ],
+      "additionalProperties": false
+    },
+    "PostgresqlRead": {
+      "type": "object",
+      "properties": {
+        "connectorType": {
+          "const": "POSTGRESQL"
+        },
+        "displayName": {
+          "type": "string",
+          "minLength": 1
+        },
+        "properties": {
+          "$ref": "#/$defs/PostgresqlProperties"
+        },
+        "sample": {
+          "type": "null"
+        }
+      },
+      "required": [
+        "connectorType",
+        "displayName",
+        "properties"
+      ],
+      "additionalProperties": false
+    },
+    "PostgresqlCreate": {
+      "type": "object",
+      "properties": {
+        "connectorType": {
+          "const": "POSTGRESQL"
+        },
+        "displayName": {
+          "type": "string",
+          "minLength": 1
+        },
+        "properties": {
+          "$ref": "#/$defs/PostgresqlProperties"
+        },
+        "sample": {
+          "type": "null"
+        },
+        "credential": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/UsernamePasswordCredential"
+            }
+          ]
+        }
+      },
+      "required": [
+        "connectorType",
+        "displayName",
+        "properties",
+        "credential"
+      ],
+      "additionalProperties": false
+    },
+    "BigqueryProperties": {
+      "type": "object",
+      "properties": {
+        "projectId": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9-]{4,28}[a-z0-9]$"
+        },
+        "location": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?![A-Za-z0-9-]*--)[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?$"
+        }
+      },
+      "required": [
+        "projectId",
+        "location"
+      ],
+      "additionalProperties": false
+    },
+    "BigqueryRead": {
+      "type": "object",
+      "properties": {
+        "connectorType": {
+          "const": "BIGQUERY"
+        },
+        "displayName": {
+          "type": "string",
+          "minLength": 1
+        },
+        "properties": {
+          "$ref": "#/$defs/BigqueryProperties"
+        },
+        "sample": {
+          "type": "null"
+        }
+      },
+      "required": [
+        "connectorType",
+        "displayName",
+        "properties"
+      ],
+      "additionalProperties": false
+    },
+    "BigqueryCreate": {
+      "type": "object",
+      "properties": {
+        "connectorType": {
+          "const": "BIGQUERY"
+        },
+        "displayName": {
+          "type": "string",
+          "minLength": 1
+        },
+        "properties": {
+          "$ref": "#/$defs/BigqueryProperties"
+        },
+        "sample": {
+          "type": "null"
+        },
+        "credential": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/ServiceAccountJsonCredential"
+            }
+          ]
+        }
+      },
+      "required": [
+        "connectorType",
+        "displayName",
+        "properties",
+        "credential"
+      ],
+      "additionalProperties": false
+    },
+    "SnowflakeProperties": {
+      "type": "object",
+      "properties": {
+        "account": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?!.*(?:^|\\.)[Pp][Rr][Ii][Vv][Aa][Tt][Ee][Ll][Ii][Nn][Kk](?:\\.|$))[A-Za-z](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?(?:\\.[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?(?:\\.(?:[Aa][Ww][Ss]|[Aa][Zz][Uu][Rr][Ee]|[Gg][Cc][Pp]))?)?(?![\\s\\S])",
+          "not": {
+            "pattern": "\\.\\."
+          }
+        },
+        "warehouse": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z_][A-Za-z0-9_$]{0,127}$"
+        },
+        "database": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z_][A-Za-z0-9_$]{0,127}$"
+        },
+        "schema": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z_][A-Za-z0-9_$]{0,127}$"
+        },
+        "role": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z_][A-Za-z0-9_$]{0,127}$"
+        }
+      },
+      "required": [
+        "account",
+        "warehouse",
+        "database"
+      ],
+      "additionalProperties": false
+    },
+    "SnowflakeRead": {
+      "type": "object",
+      "properties": {
+        "connectorType": {
+          "const": "SNOWFLAKE"
+        },
+        "displayName": {
+          "type": "string",
+          "minLength": 1
+        },
+        "properties": {
+          "$ref": "#/$defs/SnowflakeProperties"
+        },
+        "sample": {
+          "type": "null"
+        }
+      },
+      "required": [
+        "connectorType",
+        "displayName",
+        "properties"
+      ],
+      "additionalProperties": false
+    },
+    "SnowflakeCreate": {
+      "type": "object",
+      "properties": {
+        "connectorType": {
+          "const": "SNOWFLAKE"
+        },
+        "displayName": {
+          "type": "string",
+          "minLength": 1
+        },
+        "properties": {
+          "$ref": "#/$defs/SnowflakeProperties"
+        },
+        "sample": {
+          "type": "null"
+        },
+        "credential": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/UsernamePasswordCredential"
+            },
+            {
+              "$ref": "#/$defs/UsernamePrivateKeyCredential"
+            }
+          ]
+        }
+      },
+      "required": [
+        "connectorType",
+        "displayName",
+        "properties",
+        "credential"
+      ],
+      "additionalProperties": false
+    },
+    "TrinoProperties": {
+      "type": "object",
+      "properties": {
+        "host": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?:[A-Za-z0-9](?:[A-Za-z0-9.-]{0,251}[A-Za-z0-9])?|\\[[0-9A-Fa-f:]+\\])$",
+          "not": {
+            "pattern": "\\.\\."
+          }
+        },
+        "port": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 65535
+        },
+        "catalog": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z_][A-Za-z0-9_$]{0,127}$"
+        },
+        "schema": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z_][A-Za-z0-9_$]{0,127}$"
+        },
+        "ssl": {
+          "type": "boolean"
+        },
+        "sslVerification": {
+          "$ref": "#/$defs/TrinoSslVerification"
+        }
+      },
+      "required": [
+        "host",
+        "port",
+        "catalog"
+      ],
+      "additionalProperties": false
+    },
+    "TrinoRead": {
+      "type": "object",
+      "properties": {
+        "connectorType": {
+          "const": "TRINO"
+        },
+        "displayName": {
+          "type": "string",
+          "minLength": 1
+        },
+        "properties": {
+          "$ref": "#/$defs/TrinoProperties"
+        },
+        "sample": {
+          "type": "null"
+        }
+      },
+      "required": [
+        "connectorType",
+        "displayName",
+        "properties"
+      ],
+      "additionalProperties": false
+    },
+    "TrinoCreate": {
+      "type": "object",
+      "properties": {
+        "connectorType": {
+          "const": "TRINO"
+        },
+        "displayName": {
+          "type": "string",
+          "minLength": 1
+        },
+        "properties": {
+          "$ref": "#/$defs/TrinoProperties"
+        },
+        "sample": {
+          "type": "null"
+        },
+        "credential": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/UsernamePasswordCredential"
+            }
+          ]
+        }
+      },
+      "required": [
+        "connectorType",
+        "displayName",
+        "properties",
+        "credential"
+      ],
+      "additionalProperties": false
+    },
+    "RedshiftProperties": {
+      "type": "object",
+      "properties": {
+        "host": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?:[A-Za-z0-9](?:[A-Za-z0-9.-]{0,251}[A-Za-z0-9])?|\\[[0-9A-Fa-f:]+\\])$",
+          "not": {
+            "pattern": "\\.\\."
+          }
+        },
+        "port": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 65535
+        },
+        "database": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_][A-Za-z0-9_.-]{0,127}$"
+        },
+        "schema": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z_][A-Za-z0-9_$]{0,127}$"
+        },
+        "sslMode": {
+          "$ref": "#/$defs/RedshiftSslMode"
+        }
+      },
+      "required": [
+        "host",
+        "port",
+        "database"
+      ],
+      "additionalProperties": false
+    },
+    "RedshiftRead": {
+      "type": "object",
+      "properties": {
+        "connectorType": {
+          "const": "REDSHIFT"
+        },
+        "displayName": {
+          "type": "string",
+          "minLength": 1
+        },
+        "properties": {
+          "$ref": "#/$defs/RedshiftProperties"
+        },
+        "sample": {
+          "type": "null"
+        }
+      },
+      "required": [
+        "connectorType",
+        "displayName",
+        "properties"
+      ],
+      "additionalProperties": false
+    },
+    "RedshiftCreate": {
+      "type": "object",
+      "properties": {
+        "connectorType": {
+          "const": "REDSHIFT"
+        },
+        "displayName": {
+          "type": "string",
+          "minLength": 1
+        },
+        "properties": {
+          "$ref": "#/$defs/RedshiftProperties"
+        },
+        "sample": {
+          "type": "null"
+        },
+        "credential": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/UsernamePasswordCredential"
+            },
+            {
+              "$ref": "#/$defs/AwsIamCredential"
+            }
+          ]
+        }
+      },
+      "required": [
+        "connectorType",
+        "displayName",
+        "properties",
+        "credential"
+      ],
+      "additionalProperties": false
+    },
+    "DatabricksProperties": {
+      "type": "object",
+      "properties": {
+        "host": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?=.{1,253}$)(?![Aa][Cc][Cc][Oo][Uu][Nn][Tt][Ss]\\.)(?![Pp][Rr][Ii][Vv][Aa][Tt][Ee][Ll][Ii][Nn][Kk]\\.)(?:[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?\\.[Cc][Ll][Oo][Uu][Dd]\\.[Dd][Aa][Tt][Aa][Bb][Rr][Ii][Cc][Kk][Ss]\\.[Cc][Oo][Mm]|[Aa][Dd][Bb]-[0-9]{1,59}\\.[0-9]{1,63}\\.[Aa][Zz][Uu][Rr][Ee][Dd][Aa][Tt][Aa][Bb][Rr][Ii][Cc][Kk][Ss]\\.[Nn][Ee][Tt]|[0-9]{1,63}\\.[0-9]{1,63}\\.[Gg][Cc][Pp]\\.[Dd][Aa][Tt][Aa][Bb][Rr][Ii][Cc][Kk][Ss]\\.[Cc][Oo][Mm])(?![\\s\\S])",
+          "not": {
+            "pattern": "\\.\\."
+          }
+        },
+        "warehouseId": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9]{1,128}(?![\\s\\S])"
+        },
+        "catalog": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z_][A-Za-z0-9_$]{0,127}$"
+        },
+        "schema": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z_][A-Za-z0-9_$]{0,127}$"
+        }
+      },
+      "required": [
+        "host",
+        "warehouseId"
+      ],
+      "additionalProperties": false
+    },
+    "DatabricksRead": {
+      "type": "object",
+      "properties": {
+        "connectorType": {
+          "const": "DATABRICKS"
+        },
+        "displayName": {
+          "type": "string",
+          "minLength": 1
+        },
+        "properties": {
+          "$ref": "#/$defs/DatabricksProperties"
+        },
+        "sample": {
+          "type": "null"
+        }
+      },
+      "required": [
+        "connectorType",
+        "displayName",
+        "properties"
+      ],
+      "additionalProperties": false
+    },
+    "DatabricksCreate": {
+      "type": "object",
+      "properties": {
+        "connectorType": {
+          "const": "DATABRICKS"
+        },
+        "displayName": {
+          "type": "string",
+          "minLength": 1
+        },
+        "properties": {
+          "$ref": "#/$defs/DatabricksProperties"
+        },
+        "sample": {
+          "type": "null"
+        },
+        "credential": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/AccessTokenCredential"
+            },
+            {
+              "$ref": "#/$defs/OauthClientCredential"
+            }
+          ]
+        }
+      },
+      "required": [
+        "connectorType",
+        "displayName",
+        "properties",
+        "credential"
+      ],
+      "additionalProperties": false
+    },
+    "ConnectorProperties": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/DuckdbProperties"
+        },
+        {
+          "$ref": "#/$defs/PostgresqlProperties"
+        },
+        {
+          "$ref": "#/$defs/BigqueryProperties"
+        },
+        {
+          "$ref": "#/$defs/SnowflakeProperties"
+        },
+        {
+          "$ref": "#/$defs/TrinoProperties"
+        },
+        {
+          "$ref": "#/$defs/RedshiftProperties"
+        },
+        {
+          "$ref": "#/$defs/DatabricksProperties"
+        }
+      ]
+    },
+    "ConnectorCreate": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/PostgresqlCreate"
+        },
+        {
+          "$ref": "#/$defs/BigqueryCreate"
+        },
+        {
+          "$ref": "#/$defs/SnowflakeCreate"
+        },
+        {
+          "$ref": "#/$defs/TrinoCreate"
+        },
+        {
+          "$ref": "#/$defs/RedshiftCreate"
+        },
+        {
+          "$ref": "#/$defs/DatabricksCreate"
+        }
+      ]
+    },
+    "ConnectorRead": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/DuckdbRead"
+        },
+        {
+          "$ref": "#/$defs/PostgresqlRead"
+        },
+        {
+          "$ref": "#/$defs/BigqueryRead"
+        },
+        {
+          "$ref": "#/$defs/SnowflakeRead"
+        },
+        {
+          "$ref": "#/$defs/TrinoRead"
+        },
+        {
+          "$ref": "#/$defs/RedshiftRead"
+        },
+        {
+          "$ref": "#/$defs/DatabricksRead"
+        }
+      ]
+    },
+    "ConnectorSettings": {
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "minLength": 1
+        },
+        "properties": {
+          "$ref": "#/$defs/ConnectorProperties"
+        }
+      },
+      "required": [
+        "displayName",
+        "properties"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

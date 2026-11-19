@@ -1,0 +1,213 @@
+{
+  "schemaVersion": 1,
+  "controlBuild": "control-service",
+  "applicationModule": ":application",
+  "executionProtocolImportRules": [
+    {
+      "gradlePath": ":modules:execution-runtime",
+      "sourcePaths": [
+        "src/main/kotlin/cc/monomer/execution/adapter/inbound/grpc/",
+        "src/main/kotlin/cc/monomer/execution/adapter/outbound/grpc/",
+        "src/test/kotlin/cc/monomer/execution/adapter/inbound/grpc/ProtoRawSqlRunSpecFactoryTest.kt",
+        "src/test/kotlin/cc/monomer/execution/adapter/inbound/grpc/ExecutionRunSqlHistoryTest.kt",
+        "src/test/kotlin/cc/monomer/execution/adapter/outbound/grpc/GrpcExecutionRunClientRollingTest.kt"
+      ]
+    }
+  ],
+  "canonicalApplyOrder": [
+    "identity-access",
+    "resource-authority",
+    "execution-runtime",
+    "connector",
+    "catalog",
+    "semantic",
+    "explore",
+    "dashboard",
+    "pages",
+    "agent-workspace",
+    "search"
+  ],
+  "modules": [
+    {
+      "id": "identity-access",
+      "gradlePath": ":modules:identity-access",
+      "package": "cc.monomer.identity",
+      "publicPackage": "cc.monomer.identity.api",
+      "schemas": [
+        "identity_runtime"
+      ],
+      "allowedDependencies": []
+    },
+    {
+      "id": "resource-authority",
+      "gradlePath": ":modules:resource-authority",
+      "package": "cc.monomer.authority",
+      "publicPackage": "cc.monomer.authority.api",
+      "schemas": [],
+      "allowedDependencies": [
+        "identity-access"
+      ]
+    },
+    {
+      "id": "execution-runtime",
+      "gradlePath": ":modules:execution-runtime",
+      "package": "cc.monomer.execution",
+      "publicPackage": "cc.monomer.execution.api",
+      "schemas": [
+        "execution_run"
+      ],
+      "allowedDependencies": [
+        "identity-access"
+      ]
+    },
+    {
+      "id": "connector",
+      "gradlePath": ":modules:connector",
+      "package": "cc.monomer.connector",
+      "publicPackage": "cc.monomer.connector.api",
+      "schemas": [
+        "connector"
+      ],
+      "allowedDependencies": [
+        "identity-access",
+        "execution-runtime"
+      ]
+    },
+    {
+      "id": "catalog",
+      "gradlePath": ":modules:catalog",
+      "package": "cc.monomer.catalog",
+      "publicPackage": "cc.monomer.catalog.api",
+      "schemas": [
+        "catalog"
+      ],
+      "allowedDependencies": [
+        "identity-access",
+        "connector",
+        "execution-runtime"
+      ]
+    },
+    {
+      "id": "semantic",
+      "gradlePath": ":modules:semantic",
+      "package": "cc.monomer.semantic",
+      "publicPackage": "cc.monomer.semantic.api",
+      "schemas": [
+        "semantic"
+      ],
+      "allowedDependencies": [
+        "identity-access",
+        "connector",
+        "catalog"
+      ]
+    },
+    {
+      "id": "explore",
+      "gradlePath": ":modules:explore",
+      "package": "cc.monomer.explore",
+      "publicPackage": "cc.monomer.explore.api",
+      "schemas": [
+        "explore"
+      ],
+      "allowedDependencies": [
+        "identity-access",
+        "connector",
+        "execution-runtime",
+        "semantic"
+      ]
+    },
+    {
+      "id": "dashboard",
+      "gradlePath": ":modules:dashboard",
+      "package": "cc.monomer.dashboard",
+      "publicPackage": "cc.monomer.dashboard.api",
+      "schemas": [
+        "dashboard"
+      ],
+      "allowedDependencies": [
+        "identity-access",
+        "connector",
+        "semantic",
+        "execution-runtime"
+      ]
+    },
+    {
+      "id": "pages",
+      "gradlePath": ":modules:pages",
+      "package": "cc.monomer.pages",
+      "publicPackage": "cc.monomer.pages.api",
+      "schemas": [
+        "pages_relocation"
+      ],
+      "allowedDependencies": []
+    },
+    {
+      "id": "agent-workspace",
+      "gradlePath": ":modules:agent-workspace",
+      "package": "cc.monomer.agent",
+      "publicPackage": "cc.monomer.agent.api",
+      "schemas": [
+        "agent_workspace"
+      ],
+      "allowedDependencies": [
+        "identity-access",
+        "connector"
+      ],
+      "compositionRootRoutesNamedOwnerPorts": true
+    },
+    {
+      "id": "search",
+      "gradlePath": ":modules:search",
+      "package": "cc.monomer.search",
+      "publicPackage": "cc.monomer.search.api",
+      "schemas": [
+        "search"
+      ],
+      "allowedDependencies": []
+    }
+  ],
+  "auxiliaryRuntimes": [],
+  "executionBuild": {
+    "directory": "execution-service",
+    "durableStores": [],
+    "allowedCrossBuildInputs": [
+      "protos/execution_plane.proto",
+      "testkit/data/duckdb/acme-cloud/GenerateDataset.java",
+      "testkit/data/duckdb/acme-cloud/generate.sql",
+      "testkit/data/duckdb/acme-cloud/versions/1/generate.sql",
+      "testkit/data/duckdb/acme-cloud/versions/2/generate.sql"
+    ],
+    "forbidden": [
+      "Product Control persistence client, schema, or migration",
+      "DDL",
+      "migration tool",
+      "Control domain dependency",
+      "public product API"
+    ]
+  },
+  "compositionRootOwnerReads": [
+    {
+      "consumer": "lineage",
+      "ownerModule": "dashboard",
+      "ownerApi": "cc.monomer.dashboard.api.DashboardOwnerPort.readCurrentSemanticReferences",
+      "adapter": "control-service/application/src/main/kotlin/cc/monomer/control/lineage/LineageGraphQueryService.kt",
+      "purpose": "Current Dashboard usage for a Resource Authority focus cone, after Explorer admission in the same consistent snapshot."
+    }
+  ],
+  "compositionRootCoordinators": [
+    {
+      "consumer": "sample-workspace",
+      "adapter": "control-service/application/src/main/kotlin/cc/monomer/control/sample/SampleWorkspaceProvisioning.kt",
+      "ownerApis": [
+        "cc.monomer.identity.api.SampleWorkspaceProvisioningUseCase",
+        "cc.monomer.connector.api.SampleConnectorUseCase",
+        "cc.monomer.catalog.api.CatalogProvisioningUseCase",
+        "cc.monomer.semantic.api.SemanticSeedDefinitionUseCase",
+        "cc.monomer.semantic.api.SemanticCurrentReadUseCase",
+        "cc.monomer.semantic.api.SemanticTimeSpineUseCase",
+        "cc.monomer.dashboard.api.DashboardSeedDefinitionUseCase"
+      ],
+      "purpose": "Explicit resumable sample setup with existing owner transactions and immutable marker initiator."
+    }
+  ]
+}

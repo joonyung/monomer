@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "local": {
+    "controlIssuer": "urn:monomer:control:local",
+    "executionAudience": "urn:monomer:execution:local",
+    "agentResource": "http://127.0.0.1:11077/v2/workspaces",
+    "loginNamespace": "monomer-local-dev",
+    "loginSubjectUrnPrefix": "urn:monomer:auth:dev",
+    "cookieName": "monomer_session",
+    "cookieHostOnly": true,
+    "mcpResource": "http://127.0.0.1:11077/mcp",
+    "oauthIssuer": "http://127.0.0.1:11077",
+    "operationsResource": "http://127.0.0.1:11077/ops/v1"
+  },
+  "public": {
+    "controlIssuer": "https://api.monomer.cc",
+    "executionAudience": "urn:monomer:execution",
+    "agentResource": "https://api.monomer.cc/v2/workspaces",
+    "oauthRedirect": "https://app.monomer.cc/auth/callback",
+    "activation": "REQUIRES_PUBLIC_NAMESPACE_APPROVAL",
+    "mcpResource": "https://api.monomer.cc/mcp",
+    "oauthIssuer": "https://api.monomer.cc",
+    "operationsResource": "https://api.monomer.cc/ops/v1"
+  },
+  "secrets": {
+    "plaintextPersistenceAllowed": false,
+    "plaintextLoggingAllowed": false,
+    "manifestValuesAllowed": false,
+    "allowedReferences": [
+      "opaqueLocator",
+      "opaqueVersion"
+    ]
+  },
+  "dev": {
+    "controlIssuer": "https://api.dev.monomer.cc",
+    "executionAudience": "urn:monomer:execution:dev",
+    "agentResource": "https://api.dev.monomer.cc/v2/workspaces",
+    "loginNamespace": "monomer-cloud-dev",
+    "loginSubjectUrnPrefix": "urn:monomer:auth:cloud-dev",
+    "cookieName": "monomer_session",
+    "cookieHostOnly": true,
+    "mcpResource": "https://api.dev.monomer.cc/mcp",
+    "oauthIssuer": "https://api.dev.monomer.cc",
+    "oauthRedirect": "https://app.dev.monomer.cc/auth/callback",
+    "operationsResource": "https://api.dev.monomer.cc/ops/v1"
+  },
+  "operations": {
+    "clientId": "monomer-operations-local",
+    "scope": "ops.read",
+    "accessTokenLifetimeSeconds": 3600,
+    "authorizationCodeLifetimeSeconds": 300,
+    "refreshTokens": false
+  }
+}

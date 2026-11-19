@@ -1,0 +1,63 @@
+{
+  "status": {
+    "state": "SUCCEEDED"
+  },
+  "manifest": {
+    "format": "ARROW_STREAM",
+    "schema": {
+      "column_count": 4,
+      "columns": [
+        {
+          "name": "d",
+          "type_text": "DECIMAL(2,2)",
+          "type_name": "DECIMAL",
+          "position": 0,
+          "type_precision": 2,
+          "type_scale": 2
+        },
+        {
+          "name": "tiny",
+          "type_text": "DECIMAL(18,18)",
+          "type_name": "DECIMAL",
+          "position": 1,
+          "type_precision": 18,
+          "type_scale": 18
+        },
+        {
+          "name": "ts",
+          "type_text": "TIMESTAMP",
+          "type_name": "TIMESTAMP",
+          "position": 2
+        },
+        {
+          "name": "ntz",
+          "type_text": "TIMESTAMP_NTZ",
+          "type_name": "TIMESTAMP_NTZ",
+          "position": 3
+        }
+      ]
+    },
+    "total_chunk_count": 1,
+    "chunks": [
+      {
+        "chunk_index": 0,
+        "row_offset": 0,
+        "row_count": 1,
+        "byte_count": 720
+      }
+    ],
+    "total_row_count": 1,
+    "total_byte_count": 720,
+    "truncated": false
+  },
+  "result": {
+    "external_links": [
+      {
+        "chunk_index": 0,
+        "row_offset": 0,
+        "row_count": 1,
+        "byte_count": 720
+      }
+    ]
+  }
+}

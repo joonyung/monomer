@@ -1,0 +1,157 @@
+server:
+  address: ${MONOMER_CONTROL_HTTP_ADDRESS:127.0.0.1}
+  port: ${MONOMER_CONTROL_HTTP_PORT:11077}
+
+spring:
+  reactor:
+    context-propagation: auto
+  graphql:
+    http:
+      path: /v2/graphql
+    schema:
+      printer:
+        enabled: true
+      introspection:
+        enabled: true
+
+monomer:
+  mcp:
+    dashboard-view-file: ${MONOMER_MCP_DASHBOARD_VIEW_FILE:}
+  credentials:
+    aes-gcm:
+      key: ${MONOMER_CREDENTIALS_AES_GCM_KEY:}
+      key-file: ${MONOMER_CREDENTIALS_AES_GCM_KEY_FILE:}
+      key-ref: ${MONOMER_CREDENTIALS_AES_GCM_KEY_REF:}
+  control:
+    docs-origin: ${MONOMER_CONTROL_DOCS_ORIGIN:https://monomer.cc}
+    object-storage:
+      endpoint: ${MONOMER_CONTROL_OBJECT_STORAGE_ENDPOINT:http://127.0.0.1:9000}
+      region: ${MONOMER_CONTROL_OBJECT_STORAGE_REGION:us-east-1}
+      credential-mode: ${MONOMER_CONTROL_OBJECT_STORAGE_CREDENTIAL_MODE:WORKLOAD}
+      access-key: ${MONOMER_CONTROL_OBJECT_STORAGE_ACCESS_KEY:}
+      secret-key: ${MONOMER_CONTROL_OBJECT_STORAGE_SECRET_KEY:}
+      page-content:
+        bucket: ${MONOMER_CONTROL_PAGE_CONTENT_BUCKET:monomer-page-content}
+        root-directory: ${MONOMER_CONTROL_PAGE_CONTENT_ROOT_DIRECTORY:page-content}
+    grpc:
+      address: ${MONOMER_CONTROL_GRPC_ADDRESS:127.0.0.1}
+      port: ${MONOMER_CONTROL_GRPC_PORT:11078}
+      maximum-inbound-message-bytes: ${MONOMER_CONTROL_GRPC_MAXIMUM_INBOUND_MESSAGE_BYTES:17825792}
+      shutdown-grace: ${MONOMER_CONTROL_GRPC_SHUTDOWN_GRACE:5s}
+    admission:
+      mode: OPERATOR_BOOTSTRAP
+      public-writes: CLOSED
+    public-api:
+      web-origin: ${MONOMER_CONTROL_WEB_ORIGIN:http://127.0.0.1:3000}
+    product-authority:
+      postgres:
+        jdbc-url: ${MONOMER_CONTROL_POSTGRES_JDBC_URL:jdbc:postgresql://127.0.0.1:5433/monomer}
+        username: ${MONOMER_CONTROL_POSTGRES_USERNAME:monomer}
+        password: ${MONOMER_CONTROL_POSTGRES_PASSWORD:monomer}
+        maximum-pool-size: ${MONOMER_CONTROL_POSTGRES_MAXIMUM_POOL_SIZE:16}
+        connection-timeout: ${MONOMER_CONTROL_POSTGRES_CONNECTION_TIMEOUT:5s}
+        validation-timeout: ${MONOMER_CONTROL_POSTGRES_VALIDATION_TIMEOUT:3s}
+      transaction:
+        transaction-timeout: ${MONOMER_CONTROL_TRANSACTION_TIMEOUT:5s}
+        statement-timeout: ${MONOMER_CONTROL_STATEMENT_TIMEOUT:4s}
+        lock-timeout: ${MONOMER_CONTROL_LOCK_TIMEOUT:1s}
+    execution-runtime:
+      execution-target: ${MONOMER_CONTROL_EXECUTION_TARGET:http://127.0.0.1:11099}
+      artifact-store:
+        endpoint: ${MONOMER_CONTROL_EXECUTION_ARTIFACT_STORE_ENDPOINT:${MONOMER_CONTROL_OBJECT_STORAGE_ENDPOINT:http://127.0.0.1:9000}}
+        region: ${MONOMER_CONTROL_EXECUTION_ARTIFACT_STORE_REGION:${MONOMER_CONTROL_OBJECT_STORAGE_REGION:us-east-1}}
+        bucket: ${MONOMER_CONTROL_EXECUTION_ARTIFACT_STORE_BUCKET:monomer-execution-artifacts}
+        object-prefix: ${MONOMER_CONTROL_EXECUTION_ARTIFACT_STORE_OBJECT_PREFIX:artifacts/}
+        path-style-access-enabled: ${MONOMER_CONTROL_EXECUTION_ARTIFACT_STORE_PATH_STYLE_ACCESS_ENABLED:true}
+        credential-mode: ${MONOMER_CONTROL_EXECUTION_ARTIFACT_STORE_CREDENTIAL_MODE:WORKLOAD}
+        local-test-access-key: ${MONOMER_CONTROL_EXECUTION_ARTIFACT_STORE_ACCESS_KEY:}
+        local-test-secret-key: ${MONOMER_CONTROL_EXECUTION_ARTIFACT_STORE_SECRET_KEY:}
+        allow-local-test-static-credentials: ${MONOMER_CONTROL_EXECUTION_ARTIFACT_STORE_ALLOW_LOCAL_TEST_STATIC_CREDENTIALS:false}
+      credential-vault:
+        active-key-version: ${MONOMER_CONTROL_EXECUTION_CREDENTIAL_VAULT_ACTIVE_KEY_VERSION:local-primary}
+        keys-base64:
+          local-primary: ${MONOMER_CONTROL_EXECUTION_CREDENTIAL_VAULT_KEY_BASE64:}
+        maximum-document-bytes: ${MONOMER_CONTROL_EXECUTION_CREDENTIAL_VAULT_MAXIMUM_DOCUMENT_BYTES:61440}
+        maximum-fields: ${MONOMER_CONTROL_EXECUTION_CREDENTIAL_VAULT_MAXIMUM_FIELDS:64}
+        maximum-field-name-bytes: ${MONOMER_CONTROL_EXECUTION_CREDENTIAL_VAULT_MAXIMUM_FIELD_NAME_BYTES:64}
+        maximum-field-value-bytes: ${MONOMER_CONTROL_EXECUTION_CREDENTIAL_VAULT_MAXIMUM_FIELD_VALUE_BYTES:61440}
+      limits:
+        maximum-run-frame-bytes: ${MONOMER_CONTROL_EXECUTION_MAXIMUM_RUN_FRAME_BYTES:2097152}
+        maximum-non-terminal-runs-per-workspace: ${MONOMER_CONTROL_EXECUTION_MAXIMUM_NON_TERMINAL_RUNS_PER_WORKSPACE:256}
+        explore-result-retention: ${MONOMER_CONTROL_EXECUTION_EXPLORE_RESULT_RETENTION:3d}
+        recovery-interval: ${MONOMER_CONTROL_EXECUTION_RECOVERY_INTERVAL:30s}
+        orphan-timeout: ${MONOMER_CONTROL_EXECUTION_ORPHAN_TIMEOUT:90s}
+        maximum-orphan-runs-per-cycle: ${MONOMER_CONTROL_EXECUTION_MAXIMUM_ORPHAN_RUNS_PER_CYCLE:100}
+        maximum-owner-settlement-runs-per-cycle: ${MONOMER_CONTROL_EXECUTION_MAXIMUM_OWNER_SETTLEMENT_RUNS_PER_CYCLE:100}
+        maximum-explore-result-read-transaction-attempts: ${MONOMER_CONTROL_EXECUTION_MAXIMUM_EXPLORE_RESULT_READ_TRANSACTION_ATTEMPTS:3}
+        dispatch-reservation-duration: ${MONOMER_CONTROL_EXECUTION_DISPATCH_RESERVATION_DURATION:1h}
+        execution-deadline-duration: ${MONOMER_CONTROL_EXECUTION_DEADLINE_DURATION:1h}
+    oauth:
+      issuer: ${MONOMER_CONTROL_OAUTH_ISSUER:http://127.0.0.1:11077}
+      mcp-resource: ${MONOMER_CONTROL_OAUTH_MCP_RESOURCE:http://127.0.0.1:11077/mcp}
+    security:
+      issuer: ${MONOMER_CONTROL_SECURITY_ISSUER:urn:monomer:control:local}
+      agent-resource: ${MONOMER_CONTROL_SECURITY_AGENT_RESOURCE:http://127.0.0.1:11077/v2/workspaces}
+      login-namespace: ${MONOMER_CONTROL_SECURITY_LOGIN_NAMESPACE:monomer-local-dev}
+      login-subject-urn-prefix: ${MONOMER_CONTROL_SECURITY_LOGIN_SUBJECT_URN_PREFIX:urn:monomer:auth:dev}
+      session-cookie-name: ${MONOMER_CONTROL_SECURITY_SESSION_COOKIE_NAME:monomer_session}
+      session-cookie-host-only: ${MONOMER_CONTROL_SECURITY_SESSION_COOKIE_HOST_ONLY:true}
+
+auth:
+  developer-access:
+    mode: ${MONOMER_CONTROL_DEVELOPER_ACCESS_MODE:OPEN}
+    allowed-emails: ${MONOMER_CONTROL_DEVELOPER_ALLOWED_EMAILS:}
+  invitation:
+    delivery-mode: ${MONOMER_INVITATION_DELIVERY_MODE:local}
+    ses:
+      region: ${MONOMER_INVITATION_SES_REGION:}
+      from-address: ${MONOMER_INVITATION_SES_FROM_ADDRESS:}
+      reply-to-address: ${MONOMER_INVITATION_SES_REPLY_TO_ADDRESS:}
+      feedback-forwarding-email-address: ${MONOMER_INVITATION_SES_FEEDBACK_FORWARDING_EMAIL_ADDRESS:}
+      timeout: ${MONOMER_INVITATION_SES_TIMEOUT:10s}
+  cors:
+    allowed-origins: ${MONOMER_CONTROL_AUTH_CORS_ALLOWED_ORIGINS:http://localhost:3000,http://127.0.0.1:3000,http://localhost:3001,http://127.0.0.1:3001}
+  jwt:
+    issuer: monomer-auth
+    audience: monomer-internal
+    access-token-ttl-seconds: 900
+    refresh-token-ttl-seconds: 604800
+    private-key-pem: ${MONOMER_CONTROL_AUTH_JWT_PRIVATE_KEY_PEM:}
+    private-key-path: ${MONOMER_CONTROL_AUTH_JWT_PRIVATE_KEY_PATH:}
+  oauth:
+    frontend-callback-url: ${MONOMER_CONTROL_AUTH_FRONTEND_CALLBACK_URL:http://localhost:3000/auth/callback}
+  google-oauth:
+    enabled: ${MONOMER_CONTROL_GOOGLE_OAUTH_ENABLED:false}
+    client-id: ${MONOMER_CONTROL_GOOGLE_OAUTH_CLIENT_ID:}
+    client-secret: ${MONOMER_CONTROL_GOOGLE_OAUTH_CLIENT_SECRET:}
+    redirect-uri: "${MONOMER_CONTROL_GOOGLE_OAUTH_REDIRECT_URI:{baseUrl}/login/oauth2/code/{registrationId}}"
+    scopes: "${MONOMER_CONTROL_GOOGLE_OAUTH_SCOPES:openid,email,profile}"
+  refresh-cookie:
+    secure: ${MONOMER_CONTROL_AUTH_REFRESH_COOKIE_SECURE:false}
+  local-login:
+    enabled: ${MONOMER_CONTROL_AUTH_LOCAL_LOGIN_ENABLED:false}
+    subject: ${MONOMER_CONTROL_AUTH_LOCAL_LOGIN_SUBJECT:monomer-local-dev}
+    email: ${MONOMER_CONTROL_AUTH_LOCAL_LOGIN_EMAIL:dev@local.monomer}
+    display-name: ${MONOMER_CONTROL_AUTH_LOCAL_LOGIN_DISPLAY_NAME:Monomer Dev}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-details: ${MONOMER_CONTROL_HEALTH_SHOW_DETAILS:never}
+
+logging:
+  structured:
+    json:
+      exclude: error.message
+      stacktrace:
+        printer: cc.monomer.control.observability.MessageFreeStackTracePrinter
+  level:
+    org.springframework.web.server.adapter.HttpWebHandlerAdapter: "OFF"
+    reactor.netty.http.server.HttpServerOperations: "OFF"
+    org.springframework.graphql.execution.ExceptionResolversExceptionHandler: "OFF"
+  pattern:
+    console: "%d{yyyy-MM-dd'T'HH:mm:ss.SSSXXX} %5p [request_id=%X{request_id}] [run_id=%X{run_id}] [%thread] %logger{40} : %msg %kvp%n%safeEx"

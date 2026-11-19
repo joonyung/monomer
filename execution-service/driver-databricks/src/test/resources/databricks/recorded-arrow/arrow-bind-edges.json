@@ -1,0 +1,155 @@
+{
+  "status": {
+    "state": "SUCCEEDED"
+  },
+  "manifest": {
+    "format": "ARROW_STREAM",
+    "schema": {
+      "column_count": 18,
+      "columns": [
+        {
+          "name": "session_zone",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 0
+        },
+        {
+          "name": "z",
+          "type_text": "TIMESTAMP",
+          "type_name": "TIMESTAMP",
+          "position": 1
+        },
+        {
+          "name": "off",
+          "type_text": "TIMESTAMP",
+          "type_name": "TIMESTAMP",
+          "position": 2
+        },
+        {
+          "name": "micro",
+          "type_text": "TIMESTAMP",
+          "type_name": "TIMESTAMP",
+          "position": 3
+        },
+        {
+          "name": "neg",
+          "type_text": "TIMESTAMP",
+          "type_name": "TIMESTAMP",
+          "position": 4
+        },
+        {
+          "name": "gap",
+          "type_text": "DATE",
+          "type_name": "DATE",
+          "position": 5
+        },
+        {
+          "name": "zero",
+          "type_text": "DATE",
+          "type_name": "DATE",
+          "position": 6
+        },
+        {
+          "name": "bce",
+          "type_text": "DATE",
+          "type_name": "DATE",
+          "position": 7
+        },
+        {
+          "name": "ntz",
+          "type_text": "TIMESTAMP_NTZ",
+          "type_name": "TIMESTAMP_NTZ",
+          "position": 8
+        },
+        {
+          "name": "small",
+          "type_text": "DECIMAL(2,2)",
+          "type_name": "DECIMAL",
+          "position": 9,
+          "type_precision": 2,
+          "type_scale": 2
+        },
+        {
+          "name": "upper",
+          "type_text": "DECIMAL(38,18)",
+          "type_name": "DECIMAL",
+          "position": 10,
+          "type_precision": 38,
+          "type_scale": 18
+        },
+        {
+          "name": "lower",
+          "type_text": "DECIMAL(38,18)",
+          "type_name": "DECIMAL",
+          "position": 11,
+          "type_precision": 38,
+          "type_scale": 18
+        },
+        {
+          "name": "tiny",
+          "type_text": "DECIMAL(18,18)",
+          "type_name": "DECIMAL",
+          "position": 12,
+          "type_precision": 18,
+          "type_scale": 18
+        },
+        {
+          "name": "trailing",
+          "type_text": "DECIMAL(4,4)",
+          "type_name": "DECIMAL",
+          "position": 13,
+          "type_precision": 4,
+          "type_scale": 4
+        },
+        {
+          "name": "null_ts",
+          "type_text": "TIMESTAMP",
+          "type_name": "TIMESTAMP",
+          "position": 14
+        },
+        {
+          "name": "null_ntz",
+          "type_text": "TIMESTAMP_NTZ",
+          "type_name": "TIMESTAMP_NTZ",
+          "position": 15
+        },
+        {
+          "name": "null_date",
+          "type_text": "DATE",
+          "type_name": "DATE",
+          "position": 16
+        },
+        {
+          "name": "null_decimal",
+          "type_text": "DECIMAL(38,18)",
+          "type_name": "DECIMAL",
+          "position": 17,
+          "type_precision": 38,
+          "type_scale": 18
+        }
+      ]
+    },
+    "total_chunk_count": 1,
+    "chunks": [
+      {
+        "chunk_index": 0,
+        "row_offset": 0,
+        "row_count": 1,
+        "byte_count": 2568
+      }
+    ],
+    "total_row_count": 1,
+    "total_byte_count": 2568,
+    "truncated": false
+  },
+  "result": {
+    "external_links": [
+      {
+        "chunk_index": 0,
+        "row_offset": 0,
+        "row_count": 1,
+        "byte_count": 2568
+      }
+    ]
+  }
+}

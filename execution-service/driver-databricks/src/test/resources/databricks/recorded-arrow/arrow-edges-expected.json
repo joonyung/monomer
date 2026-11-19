@@ -1,0 +1,253 @@
+{
+  "sha256": "bb8a95a301e54c7a1c0ec7eb8a4f1846f118b4c38d4fa8e74ca55f1c295a5491",
+  "columns": [
+    {
+      "name": "session_zone",
+      "type": "Utf8",
+      "nullable": false,
+      "values": [
+        "Etc/UTC"
+      ]
+    },
+    {
+      "name": "ts_dst_gap",
+      "type": "Timestamp(MICROSECOND, Etc/UTC)",
+      "nullable": false,
+      "values": [
+        "1710037800123456"
+      ]
+    },
+    {
+      "name": "ts_after_gap",
+      "type": "Timestamp(MICROSECOND, Etc/UTC)",
+      "nullable": false,
+      "values": [
+        "1710041400123456"
+      ]
+    },
+    {
+      "name": "ts_negative",
+      "type": "Timestamp(MICROSECOND, Etc/UTC)",
+      "nullable": false,
+      "values": [
+        "-1"
+      ]
+    },
+    {
+      "name": "ts_calendar_gap",
+      "type": "Timestamp(MICROSECOND, Etc/UTC)",
+      "nullable": false,
+      "values": [
+        "-12219721076876544"
+      ]
+    },
+    {
+      "name": "ts_year_zero",
+      "type": "Timestamp(MICROSECOND, Etc/UTC)",
+      "nullable": false,
+      "values": [
+        "-62167219199876544"
+      ]
+    },
+    {
+      "name": "ts_upper",
+      "type": "Timestamp(MICROSECOND, Etc/UTC)",
+      "nullable": false,
+      "values": [
+        "9223372036854775807"
+      ]
+    },
+    {
+      "name": "ts_lower",
+      "type": "Timestamp(MICROSECOND, Etc/UTC)",
+      "nullable": false,
+      "values": [
+        "-9223372036854000000"
+      ]
+    },
+    {
+      "name": "ntz_dst_gap",
+      "type": "Timestamp(MICROSECOND, null)",
+      "nullable": false,
+      "values": [
+        "1710037800123456"
+      ]
+    },
+    {
+      "name": "ntz_after_gap",
+      "type": "Timestamp(MICROSECOND, null)",
+      "nullable": false,
+      "values": [
+        "1710041400123456"
+      ]
+    },
+    {
+      "name": "ntz_calendar_gap",
+      "type": "Timestamp(MICROSECOND, null)",
+      "nullable": false,
+      "values": [
+        "-12219721076876544"
+      ]
+    },
+    {
+      "name": "ntz_year_zero",
+      "type": "Timestamp(MICROSECOND, null)",
+      "nullable": false,
+      "values": [
+        "-62167219199876544"
+      ]
+    },
+    {
+      "name": "ntz_upper",
+      "type": "Timestamp(MICROSECOND, null)",
+      "nullable": false,
+      "values": [
+        "9223372036854775807"
+      ]
+    },
+    {
+      "name": "ntz_lower",
+      "type": "Timestamp(MICROSECOND, null)",
+      "nullable": false,
+      "values": [
+        "-9223372036854000000"
+      ]
+    },
+    {
+      "name": "date_pre_cutover",
+      "type": "Date(DAY)",
+      "nullable": false,
+      "values": [
+        "-171664"
+      ]
+    },
+    {
+      "name": "date_calendar_gap",
+      "type": "Date(DAY)",
+      "nullable": false,
+      "values": [
+        "-141432"
+      ]
+    },
+    {
+      "name": "date_alias",
+      "type": "Date(DAY)",
+      "nullable": false,
+      "values": [
+        "-141422"
+      ]
+    },
+    {
+      "name": "date_year_zero",
+      "type": "Date(DAY)",
+      "nullable": false,
+      "values": [
+        "-719528"
+      ]
+    },
+    {
+      "name": "date_bce",
+      "type": "Date(DAY)",
+      "nullable": false,
+      "values": [
+        "-1458413"
+      ]
+    },
+    {
+      "name": "date_lower",
+      "type": "Date(DAY)",
+      "nullable": false,
+      "values": [
+        "-2147483648"
+      ]
+    },
+    {
+      "name": "date_upper",
+      "type": "Date(DAY)",
+      "nullable": false,
+      "values": [
+        "2147483647"
+      ]
+    },
+    {
+      "name": "decimal_small",
+      "type": "Decimal(3, 2, 128)",
+      "nullable": false,
+      "values": [
+        "0.05"
+      ]
+    },
+    {
+      "name": "decimal_upper",
+      "type": "Decimal(38, 18, 128)",
+      "nullable": false,
+      "values": [
+        "99999999999999999999.999999999999999999"
+      ]
+    },
+    {
+      "name": "decimal_lower",
+      "type": "Decimal(38, 18, 128)",
+      "nullable": false,
+      "values": [
+        "-99999999999999999999.999999999999999999"
+      ]
+    },
+    {
+      "name": "decimal_tiny",
+      "type": "Decimal(38, 18, 128)",
+      "nullable": false,
+      "values": [
+        "0.000000000000000001"
+      ]
+    },
+    {
+      "name": "ts_dst_server_micros",
+      "type": "Int(64, true)",
+      "nullable": false,
+      "values": [
+        "1710037800123456"
+      ]
+    },
+    {
+      "name": "ts_negative_server_micros",
+      "type": "Int(64, true)",
+      "nullable": false,
+      "values": [
+        "-1"
+      ]
+    },
+    {
+      "name": "ts_gap_server_micros",
+      "type": "Int(64, true)",
+      "nullable": false,
+      "values": [
+        "-12219721076876544"
+      ]
+    },
+    {
+      "name": "ts_zero_server_micros",
+      "type": "Int(64, true)",
+      "nullable": false,
+      "values": [
+        "-62167219199876544"
+      ]
+    },
+    {
+      "name": "ts_upper_server_micros",
+      "type": "Int(64, true)",
+      "nullable": false,
+      "values": [
+        "9223372036854775807"
+      ]
+    },
+    {
+      "name": "ts_lower_server_micros",
+      "type": "Int(64, true)",
+      "nullable": false,
+      "values": [
+        "-9223372036854000000"
+      ]
+    }
+  ]
+}

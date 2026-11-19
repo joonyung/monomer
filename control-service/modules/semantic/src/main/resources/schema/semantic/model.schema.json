@@ -1,0 +1,242 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "monomer://schema/semantic/model/3",
+  "title": "Semantic Model Definition",
+  "type": "object",
+  "required": ["schemaVersion", "name", "sourceRelations", "entities", "dimensions", "measures"],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": { "const": 3 },
+    "name": { "$ref": "#/$defs/elementName" },
+    "label": { "$ref": "#/$defs/optionalText" },
+    "description": { "$ref": "#/$defs/optionalText" },
+    "sourceRelations": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/sourceRelation" }
+    },
+    "aggregationTimeDimension": { "$ref": "#/$defs/elementName" },
+    "entities": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/entity" },
+      "contains": { "type": "object", "required": ["type"], "properties": { "type": { "const": "primary" } } },
+      "minContains": 1,
+      "maxContains": 1
+    },
+    "dimensions": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/dimension" }
+    },
+    "measures": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/measure" }
+    }
+  },
+  "$defs": {
+    "elementName": {
+      "type": "string",
+      "pattern": "^(?![a-z0-9_]*__)[a-z](?:[a-z0-9_]*[a-z0-9])?$"
+    },
+    "optionalText": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[^\\u0000]*$"
+    },
+    "addressPart": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1024,
+      "pattern": "^[^\\u0000]*$"
+    },
+    "uuidV7": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+    },
+    "sourceRelation": {
+      "type": "object",
+      "required": ["connectorId", "schema", "relation"],
+      "additionalProperties": false,
+      "properties": {
+        "connectorId": { "$ref": "#/$defs/uuidV7" },
+        "catalog": { "$ref": "#/$defs/addressPart" },
+        "schema": { "$ref": "#/$defs/addressPart" },
+        "relation": { "$ref": "#/$defs/addressPart" }
+      }
+    },
+    "entity": {
+      "type": "object",
+      "required": ["name", "type", "expression"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "$ref": "#/$defs/elementName" },
+        "type": { "enum": ["primary", "unique", "foreign", "natural"] },
+        "expression": { "type": "string", "minLength": 1, "pattern": "^[^\\u0000]*$" },
+        "label": { "$ref": "#/$defs/optionalText" },
+        "description": { "$ref": "#/$defs/optionalText" }
+      }
+    },
+    "dimension": {
+      "type": "object",
+      "required": [
+        "name",
+        "type",
+        "expression",
+        "isPartition"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "$ref": "#/$defs/elementName"
+        },
+        "type": {
+          "enum": [
+            "categorical",
+            "time"
+          ]
+        },
+        "granularity": {
+          "enum": [
+            "nanosecond",
+            "microsecond",
+            "millisecond",
+            "second",
+            "minute",
+            "hour",
+            "day",
+            "week",
+            "month",
+            "quarter",
+            "year"
+          ]
+        },
+        "expression": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[^\\u0000]*$"
+        },
+        "label": {
+          "$ref": "#/$defs/optionalText"
+        },
+        "description": {
+          "$ref": "#/$defs/optionalText"
+        },
+        "isPartition": {
+          "type": "boolean",
+          "description": "Snapshot partition joins include this dimension. Independent of warehouse partition metadata."
+        },
+        "timeKind": {
+          "enum": [
+            "date",
+            "local",
+            "instant"
+          ],
+          "description": "Time dimensions only. What the values mean: date is a calendar date, local is a wall-clock time already in the Workspace Reporting time zone, and instant is an absolute moment. Omit it when the expression is a plain column whose Catalog type is known: date columns are date; timestamp without time zone, DATETIME, TIMESTAMP_NTZ, and DuckDB TIMESTAMP columns are local; timestamp with time zone, BigQuery and Databricks TIMESTAMP, and Snowflake TIMESTAMP_LTZ and TIMESTAMP_TZ columns are instant. Declare it for any other expression; without it the dimension renders as local and Check warns. A declaration must agree with a known Catalog type of a plain column, or Check reports an error and queries fail. instant on a plain column without a time zone means the column stores UTC times. instant on any other expression requires the expression to return a type with a time zone, for example (expr) AT TIME ZONE 'UTC' on PostgreSQL and Redshift, TIMESTAMP(expr, 'UTC') on BigQuery, or with_timezone(expr, 'UTC') on Trino. Queries convert instant values to the Reporting time zone: dimensions defined at day or coarser grain become dates there, and finer grains become its local wall-clock times."
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "time"
+              }
+            },
+            "required": [
+              "type"
+            ]
+          },
+          "then": {
+            "required": [
+              "granularity"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "categorical"
+              }
+            },
+            "required": [
+              "type"
+            ]
+          },
+          "then": {
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "granularity"
+                  ]
+                },
+                {
+                  "required": [
+                    "timeKind"
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "nonAdditiveDimension": {
+      "type": "object",
+      "required": ["name", "windowChoice"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "$ref": "#/$defs/elementName" },
+        "windowChoice": { "enum": ["min", "max"] },
+        "windowGroupings": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/elementName" },
+          "uniqueItems": true
+        }
+      }
+    },
+    "measure": {
+      "type": "object",
+      "required": ["name", "aggregation", "expression"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "$ref": "#/$defs/elementName" },
+        "aggregation": { "enum": ["sum", "count", "count_distinct", "average", "min", "max", "median", "sum_boolean"] },
+        "expression": { "type": "string", "minLength": 1, "pattern": "^[^\\u0000]*$" },
+        "aggregationTimeDimension": { "$ref": "#/$defs/elementName" },
+        "nonAdditiveDimension": { "$ref": "#/$defs/nonAdditiveDimension" },
+        "label": { "$ref": "#/$defs/optionalText" },
+        "description": { "$ref": "#/$defs/optionalText" }
+      }
+    },
+    "aggregateMetric": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "measure",
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "$ref": "monomer://schema/semantic/metric/3#/$defs/common/properties/name"
+        },
+        "label": {
+          "$ref": "monomer://schema/semantic/metric/3#/$defs/common/properties/label"
+        },
+        "description": {
+          "$ref": "monomer://schema/semantic/metric/3#/$defs/common/properties/description"
+        },
+        "timeGranularity": {
+          "$ref": "monomer://schema/semantic/metric/3#/$defs/common/properties/timeGranularity"
+        },
+        "filters": {
+          "$ref": "monomer://schema/semantic/metric/3#/$defs/common/properties/filters"
+        },
+        "measure": {
+          "$ref": "#/$defs/elementName"
+        }
+      }
+    }
+  }
+}

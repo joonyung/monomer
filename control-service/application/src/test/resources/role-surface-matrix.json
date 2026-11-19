@@ -1,0 +1,3275 @@
+{
+  "workspace": [
+    {
+      "operation": "read",
+      "body": {
+        "path": "workspace"
+      },
+      "allowedRoles": [
+        "VIEWER",
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "MEMBERSHIP",
+      "section": 5,
+      "schemaDefinition": "CanonicalResourcePath"
+    },
+    {
+      "operation": "list",
+      "body": {
+        "path": "workspace",
+        "limit": 20
+      },
+      "allowedRoles": [
+        "VIEWER",
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "MEMBERSHIP",
+      "section": 5,
+      "schemaDefinition": null
+    },
+    {
+      "operation": "read",
+      "body": {
+        "path": "workspace/access"
+      },
+      "allowedRoles": [
+        "VIEWER",
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "PAGE_READER",
+      "section": 5,
+      "schemaDefinition": "WorkspaceAccessPath"
+    },
+    {
+      "operation": "read",
+      "body": {
+        "path": "workspace/pages/tree"
+      },
+      "allowedRoles": [
+        "VIEWER",
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "PAGE_READER",
+      "section": 5,
+      "schemaDefinition": "PagesTreeResourcePath"
+    },
+    {
+      "operation": "read",
+      "body": {
+        "path": "workspace/pages/01942b04-6e00-7000-8000-000000000010"
+      },
+      "allowedRoles": [
+        "VIEWER",
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "PAGE_READER",
+      "section": 5,
+      "schemaDefinition": "PageResourcePath"
+    },
+    {
+      "operation": "read",
+      "body": {
+        "path": "workspace/pages/01942b04-6e00-7000-8000-000000000010/content"
+      },
+      "allowedRoles": [
+        "VIEWER",
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "PAGE_READER",
+      "section": 5,
+      "schemaDefinition": "PageContentResourcePath"
+    },
+    {
+      "operation": "read",
+      "body": {
+        "path": "workspace/pages/01942b04-6e00-7000-8000-000000000010/sessions/01942b04-6e00-7000-8000-000000000010"
+      },
+      "allowedRoles": [
+        "VIEWER",
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "PAGE_READER",
+      "section": 5,
+      "schemaDefinition": "PageSessionResourcePath"
+    },
+    {
+      "operation": "read",
+      "body": {
+        "path": "workspace/pages/01942b04-6e00-7000-8000-000000000010/sessions/01942b04-6e00-7000-8000-000000000010/query-runs/01942b04-6e00-7000-8000-000000000010"
+      },
+      "allowedRoles": [
+        "VIEWER",
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "PAGE_READER",
+      "section": 5,
+      "schemaDefinition": "PageRunResourcePath"
+    },
+    {
+      "operation": "read",
+      "body": {
+        "path": "workspace/pages/01942b04-6e00-7000-8000-000000000010/sessions/01942b04-6e00-7000-8000-000000000010/query-runs/01942b04-6e00-7000-8000-000000000010/result"
+      },
+      "allowedRoles": [
+        "VIEWER",
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "PAGE_READER",
+      "section": 5,
+      "schemaDefinition": "PageResultResourcePath"
+    },
+    {
+      "operation": "list",
+      "body": {
+        "path": "workspace/pages/01942b04-6e00-7000-8000-000000000010/sessions",
+        "limit": 20
+      },
+      "allowedRoles": [
+        "VIEWER",
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "PAGE_READER",
+      "section": 5,
+      "schemaDefinition": "PageSessionCollectionPath"
+    },
+    {
+      "operation": "list",
+      "body": {
+        "path": "workspace/pages/01942b04-6e00-7000-8000-000000000010/sessions/01942b04-6e00-7000-8000-000000000010/query-runs",
+        "limit": 20
+      },
+      "allowedRoles": [
+        "VIEWER",
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "PAGE_READER",
+      "section": 5,
+      "schemaDefinition": "PageRunCollectionPath"
+    },
+    {
+      "operation": "list",
+      "body": {
+        "path": "workspace/connectors",
+        "limit": 20
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "CATALOG_READ",
+      "section": 8,
+      "schemaDefinition": "WorkspaceInstalledCollectionPath"
+    },
+    {
+      "operation": "list",
+      "body": {
+        "path": "workspace/dashboards",
+        "limit": 20
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "CATALOG_READ",
+      "section": 8,
+      "schemaDefinition": "WorkspaceInstalledCollectionPath"
+    },
+    {
+      "operation": "list",
+      "body": {
+        "path": "workspace/explore/runs",
+        "limit": 20
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "CATALOG_READ",
+      "section": 8,
+      "schemaDefinition": "WorkspaceInstalledCollectionPath"
+    },
+    {
+      "operation": "list",
+      "body": {
+        "path": "workspace/metrics",
+        "limit": 20
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "CATALOG_READ",
+      "section": 8,
+      "schemaDefinition": "WorkspaceInstalledCollectionPath"
+    },
+    {
+      "operation": "list",
+      "body": {
+        "path": "workspace/semantic-models",
+        "limit": 20
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "CATALOG_READ",
+      "section": 8,
+      "schemaDefinition": "WorkspaceInstalledCollectionPath"
+    },
+    {
+      "operation": "list",
+      "body": {
+        "path": "workspace/pages",
+        "limit": 20
+      },
+      "allowedRoles": [
+        "VIEWER",
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "PAGE_READER",
+      "section": 5,
+      "schemaDefinition": "WorkspaceInstalledCollectionPath"
+    },
+    {
+      "operation": "read",
+      "body": {
+        "path": "workspace/explore/runs/01942b04-6e00-7000-8000-000000000010"
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "EXPLORE_READ",
+      "section": 1,
+      "schemaDefinition": "ExploreRunResourcePath"
+    },
+    {
+      "operation": "read",
+      "body": {
+        "path": "workspace/explore/runs/01942b04-6e00-7000-8000-000000000010/result"
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "EXPLORE_READ",
+      "section": 1,
+      "schemaDefinition": "ExploreResultResourcePath"
+    },
+    {
+      "operation": "read",
+      "body": {
+        "path": "workspace/explore/runs/01942b04-6e00-7000-8000-000000000010/result",
+        "download": "arrow"
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "EXPLORE_READ",
+      "section": 1,
+      "schemaDefinition": null
+    },
+    {
+      "operation": "read",
+      "body": {
+        "path": "workspace/semantic-models/orders"
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "SEMANTIC_READ",
+      "section": 8,
+      "schemaDefinition": "SemanticModelResourcePath"
+    },
+    {
+      "operation": "read",
+      "body": {
+        "path": "workspace/metrics/revenue"
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "SEMANTIC_READ",
+      "section": 8,
+      "schemaDefinition": "MetricResourcePath"
+    },
+    {
+      "operation": "read",
+      "body": {
+        "path": "workspace/connectors/01942b04-6e00-7000-8000-000000000010"
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "CATALOG_READ",
+      "section": 8,
+      "schemaDefinition": "ConnectorResourcePath"
+    },
+    {
+      "operation": "read",
+      "body": {
+        "path": "workspace/dashboards/01942b04-6e00-7000-8000-000000000010"
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "DASHBOARD_READ",
+      "section": 6,
+      "schemaDefinition": "DashboardResourcePath"
+    },
+    {
+      "operation": "read",
+      "body": {
+        "path": "workspace/dashboards/01942b04-6e00-7000-8000-000000000010/draft"
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "DASHBOARD_READ",
+      "section": 6,
+      "schemaDefinition": "DashboardDraftResourcePath"
+    },
+    {
+      "operation": "read",
+      "body": {
+        "path": "workspace/dashboards/01942b04-6e00-7000-8000-000000000010/draft/status"
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "DASHBOARD_READ",
+      "section": 6,
+      "schemaDefinition": "DashboardDraftStatusResourcePath"
+    },
+    {
+      "operation": "read",
+      "body": {
+        "path": "workspace/dashboards/01942b04-6e00-7000-8000-000000000010/sessions/01942b04-6e00-7000-8000-000000000010"
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "DASHBOARD_READ",
+      "section": 6,
+      "schemaDefinition": "DashboardSessionResourcePath"
+    },
+    {
+      "operation": "read",
+      "body": {
+        "path": "workspace/dashboards/01942b04-6e00-7000-8000-000000000010/draft/query-runs/01942b04-6e00-7000-8000-000000000010"
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "DASHBOARD_READ",
+      "section": 6,
+      "schemaDefinition": "DashboardQueryRunResourcePath"
+    },
+    {
+      "operation": "read",
+      "body": {
+        "path": "workspace/dashboards/01942b04-6e00-7000-8000-000000000010/draft/query-runs/01942b04-6e00-7000-8000-000000000010/result"
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "DASHBOARD_READ",
+      "section": 6,
+      "schemaDefinition": "DashboardDraftQueryResultResourcePath"
+    },
+    {
+      "operation": "read",
+      "body": {
+        "path": "workspace/dashboards/01942b04-6e00-7000-8000-000000000010/sessions/01942b04-6e00-7000-8000-000000000010/query-runs/01942b04-6e00-7000-8000-000000000010"
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "DASHBOARD_READ",
+      "section": 6,
+      "schemaDefinition": "DashboardSessionQueryRunResourcePath"
+    },
+    {
+      "operation": "read",
+      "body": {
+        "path": "workspace/dashboards/01942b04-6e00-7000-8000-000000000010/sessions/01942b04-6e00-7000-8000-000000000010/query-runs/01942b04-6e00-7000-8000-000000000010/result"
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "DASHBOARD_READ",
+      "section": 6,
+      "schemaDefinition": "DashboardSessionQueryResultResourcePath"
+    },
+    {
+      "operation": "read",
+      "body": {
+        "path": "workspace/dashboards/01942b04-6e00-7000-8000-000000000010/occurrences/daily/2026-09-30T00:00:00Z"
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "DASHBOARD_READ",
+      "section": 6,
+      "schemaDefinition": "DashboardOccurrenceResourcePath"
+    },
+    {
+      "operation": "read",
+      "body": {
+        "path": "workspace/dashboards/01942b04-6e00-7000-8000-000000000010/schedules"
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "DASHBOARD_READ",
+      "section": 6,
+      "schemaDefinition": "DashboardSchedulesResourcePath"
+    },
+    {
+      "operation": "read",
+      "body": {
+        "path": "workspace/dashboards/01942b04-6e00-7000-8000-000000000010/draft/schedules"
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "DASHBOARD_READ",
+      "section": 6,
+      "schemaDefinition": "DashboardSchedulesResourcePath"
+    },
+    {
+      "operation": "list",
+      "body": {
+        "path": "workspace/dashboards/01942b04-6e00-7000-8000-000000000010/sessions",
+        "limit": 20
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "DASHBOARD_READ",
+      "section": 6,
+      "schemaDefinition": "DashboardSessionCollectionPath"
+    },
+    {
+      "operation": "list",
+      "body": {
+        "path": "workspace/dashboards/01942b04-6e00-7000-8000-000000000010/draft/query-runs",
+        "limit": 20
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "DASHBOARD_READ",
+      "section": 6,
+      "schemaDefinition": "DashboardDraftQueryRunCollectionPath"
+    },
+    {
+      "operation": "list",
+      "body": {
+        "path": "workspace/dashboards/01942b04-6e00-7000-8000-000000000010/sessions/01942b04-6e00-7000-8000-000000000010/query-runs",
+        "limit": 20
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "DASHBOARD_READ",
+      "section": 6,
+      "schemaDefinition": "DashboardSessionQueryRunCollectionPath"
+    },
+    {
+      "operation": "list",
+      "body": {
+        "path": "workspace/dashboards/01942b04-6e00-7000-8000-000000000010/occurrences",
+        "limit": 20
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "DASHBOARD_READ",
+      "section": 6,
+      "schemaDefinition": "DashboardOccurrenceCollectionPath"
+    },
+    {
+      "operation": "list",
+      "body": {
+        "path": "workspace/pages/01942b04-6e00-7000-8000-000000000010/versions",
+        "limit": 20
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "PAGE_EDIT",
+      "section": 6,
+      "schemaDefinition": "PageVersionCollectionPath"
+    },
+    {
+      "operation": "read",
+      "body": {
+        "path": "workspace/pages/01942b04-6e00-7000-8000-000000000010/versions/1"
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "PAGE_EDIT",
+      "section": 6,
+      "schemaDefinition": "PageVersionResourcePath"
+    },
+    {
+      "operation": "read",
+      "body": {
+        "path": "workspace/connectors/01942b04-6e00-7000-8000-000000000010/catalog"
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "CATALOG_READ",
+      "section": 8,
+      "schemaDefinition": "CatalogRootResourcePath"
+    },
+    {
+      "operation": "read",
+      "body": {
+        "path": "workspace/connectors/01942b04-6e00-7000-8000-000000000010/catalog/catalogs/warehouse"
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "CATALOG_READ",
+      "section": 8,
+      "schemaDefinition": "CatalogEntryResourcePath"
+    },
+    {
+      "operation": "read",
+      "body": {
+        "path": "workspace/connectors/01942b04-6e00-7000-8000-000000000010/catalog/catalog-selection"
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "CATALOG_READ",
+      "section": 8,
+      "schemaDefinition": "ConnectorCatalogSelectionResourcePath"
+    },
+    {
+      "operation": "read",
+      "body": {
+        "path": "workspace/connectors/01942b04-6e00-7000-8000-000000000010/catalog/schemas/analytics"
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "CATALOG_READ",
+      "section": 8,
+      "schemaDefinition": "CatalogSchemaResourcePath"
+    },
+    {
+      "operation": "read",
+      "body": {
+        "path": "workspace/connectors/01942b04-6e00-7000-8000-000000000010/catalog/schemas/analytics/relations/orders"
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "CATALOG_READ",
+      "section": 8,
+      "schemaDefinition": "CatalogRelationResourcePath"
+    },
+    {
+      "operation": "read",
+      "body": {
+        "path": "workspace/connectors/01942b04-6e00-7000-8000-000000000010/catalog/selection"
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "CATALOG_READ",
+      "section": 8,
+      "schemaDefinition": "CatalogSelectionResourcePath"
+    },
+    {
+      "operation": "read",
+      "body": {
+        "path": "workspace/connectors/01942b04-6e00-7000-8000-000000000010/catalog/ingestions/01942b04-6e00-7000-8000-000000000010"
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "CATALOG_READ",
+      "section": 8,
+      "schemaDefinition": "CatalogIngestionResourcePath"
+    },
+    {
+      "operation": "read",
+      "body": {
+        "path": "workspace/connectors/01942b04-6e00-7000-8000-000000000010/catalog/ingestions/01942b04-6e00-7000-8000-000000000010/failures/01942b04-6e00-7000-8000-000000000010"
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "CATALOG_READ",
+      "section": 8,
+      "schemaDefinition": "CatalogIngestionFailureResourcePath"
+    },
+    {
+      "operation": "list",
+      "body": {
+        "path": "workspace/connectors/01942b04-6e00-7000-8000-000000000010/catalog/schemas",
+        "limit": 20
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "CATALOG_READ",
+      "section": 8,
+      "schemaDefinition": "CatalogCollectionPath"
+    },
+    {
+      "operation": "list",
+      "body": {
+        "path": "workspace/connectors/01942b04-6e00-7000-8000-000000000010/catalog/schemas/analytics/relations",
+        "limit": 20
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "CATALOG_READ",
+      "section": 8,
+      "schemaDefinition": "CatalogCollectionPath"
+    },
+    {
+      "operation": "list",
+      "body": {
+        "path": "workspace/connectors/01942b04-6e00-7000-8000-000000000010/catalog/ingestions",
+        "limit": 20
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "CATALOG_READ",
+      "section": 8,
+      "schemaDefinition": "CatalogCollectionPath"
+    },
+    {
+      "operation": "list",
+      "body": {
+        "path": "workspace/connectors/01942b04-6e00-7000-8000-000000000010/catalog/ingestions/01942b04-6e00-7000-8000-000000000010/failures",
+        "limit": 20
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "CATALOG_READ",
+      "section": 8,
+      "schemaDefinition": "CatalogCollectionPath"
+    },
+    {
+      "operation": "read",
+      "body": {
+        "path": "workspace/connectors/01942b04-6e00-7000-8000-000000000010/catalog/catalogs/warehouse/schemas/analytics"
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "CATALOG_READ",
+      "section": 8,
+      "schemaDefinition": "CatalogSchemaResourcePath"
+    },
+    {
+      "operation": "read",
+      "body": {
+        "path": "workspace/connectors/01942b04-6e00-7000-8000-000000000010/catalog/catalogs/warehouse/schemas/analytics/relations/orders"
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "CATALOG_READ",
+      "section": 8,
+      "schemaDefinition": "CatalogRelationResourcePath"
+    },
+    {
+      "operation": "read",
+      "body": {
+        "path": "workspace/connectors/01942b04-6e00-7000-8000-000000000010/catalog/catalogs/warehouse/selection"
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "CATALOG_READ",
+      "section": 8,
+      "schemaDefinition": "CatalogSelectionResourcePath"
+    },
+    {
+      "operation": "read",
+      "body": {
+        "path": "workspace/connectors/01942b04-6e00-7000-8000-000000000010/catalog/catalogs/warehouse/ingestions/01942b04-6e00-7000-8000-000000000010"
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "CATALOG_READ",
+      "section": 8,
+      "schemaDefinition": "CatalogIngestionResourcePath"
+    },
+    {
+      "operation": "read",
+      "body": {
+        "path": "workspace/connectors/01942b04-6e00-7000-8000-000000000010/catalog/catalogs/warehouse/ingestions/01942b04-6e00-7000-8000-000000000010/failures/01942b04-6e00-7000-8000-000000000010"
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "CATALOG_READ",
+      "section": 8,
+      "schemaDefinition": "CatalogIngestionFailureResourcePath"
+    },
+    {
+      "operation": "list",
+      "body": {
+        "path": "workspace/connectors/01942b04-6e00-7000-8000-000000000010/catalog/catalogs/warehouse/schemas",
+        "limit": 20
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "CATALOG_READ",
+      "section": 8,
+      "schemaDefinition": "CatalogCollectionPath"
+    },
+    {
+      "operation": "list",
+      "body": {
+        "path": "workspace/connectors/01942b04-6e00-7000-8000-000000000010/catalog/catalogs/warehouse/schemas/analytics/relations",
+        "limit": 20
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "CATALOG_READ",
+      "section": 8,
+      "schemaDefinition": "CatalogCollectionPath"
+    },
+    {
+      "operation": "list",
+      "body": {
+        "path": "workspace/connectors/01942b04-6e00-7000-8000-000000000010/catalog/catalogs/warehouse/ingestions",
+        "limit": 20
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "CATALOG_READ",
+      "section": 8,
+      "schemaDefinition": "CatalogCollectionPath"
+    },
+    {
+      "operation": "list",
+      "body": {
+        "path": "workspace/connectors/01942b04-6e00-7000-8000-000000000010/catalog/catalogs/warehouse/ingestions/01942b04-6e00-7000-8000-000000000010/failures",
+        "limit": 20
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "CATALOG_READ",
+      "section": 8,
+      "schemaDefinition": "CatalogCollectionPath"
+    },
+    {
+      "operation": "list",
+      "body": {
+        "path": "workspace/connectors/01942b04-6e00-7000-8000-000000000010/catalog/catalogs",
+        "limit": 20
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "CATALOG_READ",
+      "section": 8,
+      "schemaDefinition": "CatalogCollectionPath"
+    },
+    {
+      "operation": "list",
+      "body": {
+        "path": "workspace/connectors/01942b04-6e00-7000-8000-000000000010/catalog/catalog-selection/options/catalogs",
+        "limit": 20
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "CATALOG_READ",
+      "section": 8,
+      "schemaDefinition": "CatalogOptionCollectionPath"
+    },
+    {
+      "operation": "read",
+      "body": {
+        "path": "workspace/connectors/01942b04-6e00-7000-8000-000000000010/catalog/catalog-selection/options/catalogs/orders"
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "CATALOG_READ",
+      "section": 8,
+      "schemaDefinition": "CatalogOptionResourcePath"
+    },
+    {
+      "operation": "list",
+      "body": {
+        "path": "workspace/connectors/01942b04-6e00-7000-8000-000000000010/catalog/catalog-selection/option-refreshes/catalogs",
+        "limit": 20
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "CATALOG_READ",
+      "section": 8,
+      "schemaDefinition": "CatalogOptionRefreshCollectionPath"
+    },
+    {
+      "operation": "read",
+      "body": {
+        "path": "workspace/connectors/01942b04-6e00-7000-8000-000000000010/catalog/catalog-selection/option-refreshes/catalogs/01942b04-6e00-7000-8000-000000000010"
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "CATALOG_READ",
+      "section": 8,
+      "schemaDefinition": "CatalogOptionRefreshResourcePath"
+    },
+    {
+      "operation": "list",
+      "body": {
+        "path": "workspace/connectors/01942b04-6e00-7000-8000-000000000010/catalog/selection/options/schemas",
+        "limit": 20
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "CATALOG_READ",
+      "section": 8,
+      "schemaDefinition": "CatalogOptionCollectionPath"
+    },
+    {
+      "operation": "read",
+      "body": {
+        "path": "workspace/connectors/01942b04-6e00-7000-8000-000000000010/catalog/selection/options/schemas/orders"
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "CATALOG_READ",
+      "section": 8,
+      "schemaDefinition": "CatalogOptionResourcePath"
+    },
+    {
+      "operation": "list",
+      "body": {
+        "path": "workspace/connectors/01942b04-6e00-7000-8000-000000000010/catalog/selection/option-refreshes/schemas",
+        "limit": 20
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "CATALOG_READ",
+      "section": 8,
+      "schemaDefinition": "CatalogOptionRefreshCollectionPath"
+    },
+    {
+      "operation": "read",
+      "body": {
+        "path": "workspace/connectors/01942b04-6e00-7000-8000-000000000010/catalog/selection/option-refreshes/schemas/01942b04-6e00-7000-8000-000000000010"
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "CATALOG_READ",
+      "section": 8,
+      "schemaDefinition": "CatalogOptionRefreshResourcePath"
+    },
+    {
+      "operation": "list",
+      "body": {
+        "path": "workspace/connectors/01942b04-6e00-7000-8000-000000000010/catalog/selection/options/schemas/analytics/relations",
+        "limit": 20
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "CATALOG_READ",
+      "section": 8,
+      "schemaDefinition": "CatalogOptionCollectionPath"
+    },
+    {
+      "operation": "read",
+      "body": {
+        "path": "workspace/connectors/01942b04-6e00-7000-8000-000000000010/catalog/selection/options/schemas/analytics/relations/orders"
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "CATALOG_READ",
+      "section": 8,
+      "schemaDefinition": "CatalogOptionResourcePath"
+    },
+    {
+      "operation": "list",
+      "body": {
+        "path": "workspace/connectors/01942b04-6e00-7000-8000-000000000010/catalog/selection/option-refreshes/schemas/analytics/relations",
+        "limit": 20
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "CATALOG_READ",
+      "section": 8,
+      "schemaDefinition": "CatalogOptionRefreshCollectionPath"
+    },
+    {
+      "operation": "read",
+      "body": {
+        "path": "workspace/connectors/01942b04-6e00-7000-8000-000000000010/catalog/selection/option-refreshes/schemas/analytics/relations/01942b04-6e00-7000-8000-000000000010"
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "CATALOG_READ",
+      "section": 8,
+      "schemaDefinition": "CatalogOptionRefreshResourcePath"
+    },
+    {
+      "operation": "list",
+      "body": {
+        "path": "workspace/connectors/01942b04-6e00-7000-8000-000000000010/catalog/catalogs/warehouse/selection/options/schemas",
+        "limit": 20
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "CATALOG_READ",
+      "section": 8,
+      "schemaDefinition": "CatalogOptionCollectionPath"
+    },
+    {
+      "operation": "read",
+      "body": {
+        "path": "workspace/connectors/01942b04-6e00-7000-8000-000000000010/catalog/catalogs/warehouse/selection/options/schemas/orders"
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "CATALOG_READ",
+      "section": 8,
+      "schemaDefinition": "CatalogOptionResourcePath"
+    },
+    {
+      "operation": "list",
+      "body": {
+        "path": "workspace/connectors/01942b04-6e00-7000-8000-000000000010/catalog/catalogs/warehouse/selection/option-refreshes/schemas",
+        "limit": 20
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "CATALOG_READ",
+      "section": 8,
+      "schemaDefinition": "CatalogOptionRefreshCollectionPath"
+    },
+    {
+      "operation": "read",
+      "body": {
+        "path": "workspace/connectors/01942b04-6e00-7000-8000-000000000010/catalog/catalogs/warehouse/selection/option-refreshes/schemas/01942b04-6e00-7000-8000-000000000010"
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "CATALOG_READ",
+      "section": 8,
+      "schemaDefinition": "CatalogOptionRefreshResourcePath"
+    },
+    {
+      "operation": "list",
+      "body": {
+        "path": "workspace/connectors/01942b04-6e00-7000-8000-000000000010/catalog/catalogs/warehouse/selection/options/schemas/analytics/relations",
+        "limit": 20
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "CATALOG_READ",
+      "section": 8,
+      "schemaDefinition": "CatalogOptionCollectionPath"
+    },
+    {
+      "operation": "read",
+      "body": {
+        "path": "workspace/connectors/01942b04-6e00-7000-8000-000000000010/catalog/catalogs/warehouse/selection/options/schemas/analytics/relations/orders"
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "CATALOG_READ",
+      "section": 8,
+      "schemaDefinition": "CatalogOptionResourcePath"
+    },
+    {
+      "operation": "list",
+      "body": {
+        "path": "workspace/connectors/01942b04-6e00-7000-8000-000000000010/catalog/catalogs/warehouse/selection/option-refreshes/schemas/analytics/relations",
+        "limit": 20
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "CATALOG_READ",
+      "section": 8,
+      "schemaDefinition": "CatalogOptionRefreshCollectionPath"
+    },
+    {
+      "operation": "read",
+      "body": {
+        "path": "workspace/connectors/01942b04-6e00-7000-8000-000000000010/catalog/catalogs/warehouse/selection/option-refreshes/schemas/analytics/relations/01942b04-6e00-7000-8000-000000000010"
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "CATALOG_READ",
+      "section": 8,
+      "schemaDefinition": "CatalogOptionRefreshResourcePath"
+    },
+    {
+      "operation": "list",
+      "body": {
+        "path": "workspace/lineage/relations",
+        "limit": 20
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "SEMANTIC_READ",
+      "section": 8,
+      "schemaDefinition": "WorkspaceManagementCollectionPath"
+    },
+    {
+      "operation": "read",
+      "body": {
+        "path": "workspace/lineage/relations/01942b04-6e00-7000-8000-000000000010"
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "SEMANTIC_READ",
+      "section": 8,
+      "schemaDefinition": "LineageResourcePath"
+    },
+    {
+      "operation": "list",
+      "body": {
+        "path": "workspace/lineage/semantic-models",
+        "limit": 20
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "SEMANTIC_READ",
+      "section": 8,
+      "schemaDefinition": "WorkspaceManagementCollectionPath"
+    },
+    {
+      "operation": "read",
+      "body": {
+        "path": "workspace/lineage/semantic-models/01942b04-6e00-7000-8000-000000000010"
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "SEMANTIC_READ",
+      "section": 8,
+      "schemaDefinition": "LineageResourcePath"
+    },
+    {
+      "operation": "list",
+      "body": {
+        "path": "workspace/lineage/metrics",
+        "limit": 20
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "SEMANTIC_READ",
+      "section": 8,
+      "schemaDefinition": "WorkspaceManagementCollectionPath"
+    },
+    {
+      "operation": "read",
+      "body": {
+        "path": "workspace/lineage/metrics/01942b04-6e00-7000-8000-000000000010"
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "SEMANTIC_READ",
+      "section": 8,
+      "schemaDefinition": "LineageResourcePath"
+    },
+    {
+      "operation": "read",
+      "body": {
+        "path": "workspace/members/01942b04-6e00-7000-8000-000000000010"
+      },
+      "allowedRoles": [
+        "OWNER"
+      ],
+      "webGate": "WORKSPACE_OWNER",
+      "section": 9,
+      "schemaDefinition": "WorkspaceMemberPath"
+    },
+    {
+      "operation": "read",
+      "body": {
+        "path": "workspace/member-candidates/01942b04-6e00-7000-8000-000000000010"
+      },
+      "allowedRoles": [
+        "OWNER"
+      ],
+      "webGate": "WORKSPACE_OWNER",
+      "section": 9,
+      "schemaDefinition": "WorkspaceMemberCandidatePath"
+    },
+    {
+      "operation": "read",
+      "body": {
+        "path": "workspace/authorization"
+      },
+      "allowedRoles": [
+        "OWNER"
+      ],
+      "webGate": "WORKSPACE_OWNER",
+      "section": 9,
+      "schemaDefinition": "WorkspaceAuthorizationPath"
+    },
+    {
+      "operation": "list",
+      "body": {
+        "path": "workspace/members",
+        "limit": 20
+      },
+      "allowedRoles": [
+        "OWNER"
+      ],
+      "webGate": "WORKSPACE_OWNER",
+      "section": 9,
+      "schemaDefinition": "WorkspaceManagementCollectionPath"
+    },
+    {
+      "operation": "list",
+      "body": {
+        "path": "workspace/member-candidates",
+        "limit": 20
+      },
+      "allowedRoles": [
+        "OWNER"
+      ],
+      "webGate": "WORKSPACE_OWNER",
+      "section": 9,
+      "schemaDefinition": "WorkspaceManagementCollectionPath"
+    },
+    {
+      "operation": "search",
+      "body": {
+        "path": "workspace",
+        "queries": [
+          "orders"
+        ],
+        "limitPerQuery": 20
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "SEMANTIC_READ",
+      "section": 7,
+      "schemaDefinition": null
+    },
+    {
+      "operation": "search",
+      "body": {
+        "path": "workspace/connectors",
+        "queries": [
+          "orders"
+        ],
+        "limitPerQuery": 20
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "SEMANTIC_READ",
+      "section": 7,
+      "schemaDefinition": null
+    },
+    {
+      "operation": "search",
+      "body": {
+        "path": "workspace/dashboards",
+        "queries": [
+          "orders"
+        ],
+        "limitPerQuery": 20
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "SEMANTIC_READ",
+      "section": 7,
+      "schemaDefinition": null
+    },
+    {
+      "operation": "search",
+      "body": {
+        "path": "workspace/semantic-models",
+        "queries": [
+          "orders"
+        ],
+        "limitPerQuery": 20
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "SEMANTIC_READ",
+      "section": 7,
+      "schemaDefinition": null
+    },
+    {
+      "operation": "search",
+      "body": {
+        "path": "workspace/metrics",
+        "queries": [
+          "orders"
+        ],
+        "limitPerQuery": 20
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "SEMANTIC_READ",
+      "section": 7,
+      "schemaDefinition": null
+    },
+    {
+      "operation": "search",
+      "body": {
+        "path": "workspace/connectors/01942b04-6e00-7000-8000-000000000010",
+        "queries": [
+          "orders"
+        ],
+        "limitPerQuery": 20
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "SEMANTIC_READ",
+      "section": 7,
+      "schemaDefinition": null
+    },
+    {
+      "operation": "search",
+      "body": {
+        "path": "workspace/connectors/01942b04-6e00-7000-8000-000000000010/catalog",
+        "queries": [
+          "orders"
+        ],
+        "limitPerQuery": 20
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "SEMANTIC_READ",
+      "section": 7,
+      "schemaDefinition": null
+    },
+    {
+      "operation": "search",
+      "body": {
+        "path": "workspace/connectors/01942b04-6e00-7000-8000-000000000010/catalog/catalogs",
+        "queries": [
+          "orders"
+        ],
+        "limitPerQuery": 20
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "SEMANTIC_READ",
+      "section": 7,
+      "schemaDefinition": null
+    },
+    {
+      "operation": "search",
+      "body": {
+        "path": "workspace/connectors/01942b04-6e00-7000-8000-000000000010/catalog/catalogs/warehouse",
+        "queries": [
+          "orders"
+        ],
+        "limitPerQuery": 20
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "SEMANTIC_READ",
+      "section": 7,
+      "schemaDefinition": null
+    },
+    {
+      "operation": "search",
+      "body": {
+        "path": "workspace/connectors/01942b04-6e00-7000-8000-000000000010/catalog/schemas",
+        "queries": [
+          "orders"
+        ],
+        "limitPerQuery": 20
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "SEMANTIC_READ",
+      "section": 7,
+      "schemaDefinition": null
+    },
+    {
+      "operation": "search",
+      "body": {
+        "path": "workspace/connectors/01942b04-6e00-7000-8000-000000000010/catalog/schemas/analytics",
+        "queries": [
+          "orders"
+        ],
+        "limitPerQuery": 20
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "SEMANTIC_READ",
+      "section": 7,
+      "schemaDefinition": null
+    },
+    {
+      "operation": "search",
+      "body": {
+        "path": "workspace/connectors/01942b04-6e00-7000-8000-000000000010/catalog/schemas/analytics/relations",
+        "queries": [
+          "orders"
+        ],
+        "limitPerQuery": 20
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "SEMANTIC_READ",
+      "section": 7,
+      "schemaDefinition": null
+    },
+    {
+      "operation": "search",
+      "body": {
+        "path": "workspace/connectors/01942b04-6e00-7000-8000-000000000010/catalog/catalogs/warehouse/schemas",
+        "queries": [
+          "orders"
+        ],
+        "limitPerQuery": 20
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "SEMANTIC_READ",
+      "section": 7,
+      "schemaDefinition": null
+    },
+    {
+      "operation": "search",
+      "body": {
+        "path": "workspace/connectors/01942b04-6e00-7000-8000-000000000010/catalog/catalogs/warehouse/schemas/analytics",
+        "queries": [
+          "orders"
+        ],
+        "limitPerQuery": 20
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "SEMANTIC_READ",
+      "section": 7,
+      "schemaDefinition": null
+    },
+    {
+      "operation": "search",
+      "body": {
+        "path": "workspace/connectors/01942b04-6e00-7000-8000-000000000010/catalog/catalogs/warehouse/schemas/analytics/relations",
+        "queries": [
+          "orders"
+        ],
+        "limitPerQuery": 20
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "SEMANTIC_READ",
+      "section": 7,
+      "schemaDefinition": null
+    },
+    {
+      "operation": "create",
+      "body": {
+        "path": "workspace/semantic-models",
+        "input": {
+          "kind": "SEMANTIC_MODEL_DEFINITION",
+          "aggregateMetrics": [],
+          "definition": {
+            "schemaVersion": 3,
+            "name": "orders",
+            "sourceRelations": [
+              {
+                "connectorId": "01942b04-6e00-7000-8000-000000000010",
+                "schema": "analytics",
+                "relation": "orders"
+              }
+            ],
+            "entities": [
+              {
+                "name": "id",
+                "type": "primary",
+                "expression": "id"
+              }
+            ],
+            "dimensions": [],
+            "measures": []
+          }
+        }
+      },
+      "allowedRoles": [
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "SEMANTIC_MODEL_CREATE",
+      "section": 4,
+      "schemaDefinition": "SemanticModelCreateRequest"
+    },
+    {
+      "operation": "create",
+      "body": {
+        "path": "workspace/metrics",
+        "input": {
+          "kind": "METRIC_DEFINITION",
+          "definition": {
+            "schemaVersion": 3,
+            "name": "revenue",
+            "type": "simple",
+            "semanticModelName": "orders",
+            "measure": "amount"
+          }
+        }
+      },
+      "allowedRoles": [
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "METRIC_CREATE",
+      "section": 4,
+      "schemaDefinition": "MetricCreateRequest"
+    },
+    {
+      "operation": "create",
+      "body": {
+        "path": "workspace/dashboards",
+        "input": {
+          "kind": "DASHBOARD_DEFINITION",
+          "definition": {
+            "schemaVersion": 1,
+            "meta": {
+              "title": "Orders"
+            },
+            "parameters": {},
+            "variables": {},
+            "queries": {},
+            "widgets": {},
+            "layout": {
+              "sections": []
+            }
+          }
+        }
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "DASHBOARD_EDIT",
+      "section": 3,
+      "schemaDefinition": "DashboardCreateRequest"
+    },
+    {
+      "operation": "create",
+      "body": {
+        "path": "workspace/connectors",
+        "input": {
+          "kind": "CONNECTOR_CREATE",
+          "connectorType": "POSTGRESQL",
+          "displayName": "Warehouse",
+          "properties": {
+            "host": "db.example.com",
+            "port": 5432,
+            "database": "warehouse"
+          },
+          "credential": {
+            "kind": "USERNAME_PASSWORD",
+            "username": "reader",
+            "password": "fixture-only"
+          }
+        }
+      },
+      "allowedRoles": [
+        "OWNER"
+      ],
+      "webGate": "CONNECTOR_CREATE",
+      "section": 9,
+      "schemaDefinition": "ConnectorCreateRequest"
+    },
+    {
+      "operation": "create",
+      "body": {
+        "path": "workspace/pages",
+        "input": {
+          "kind": "FOLDER_PAGE",
+          "title": "Folder",
+          "baseRevision": "0",
+          "commandId": "01942b04-6e00-7000-8000-000000000010"
+        }
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "PAGE_EDIT",
+      "section": 3,
+      "schemaDefinition": "FolderPageCreateRequest"
+    },
+    {
+      "operation": "create",
+      "body": {
+        "path": "workspace/pages",
+        "input": {
+          "kind": "DOCUMENT_PAGE",
+          "title": "Document",
+          "baseRevision": "0",
+          "commandId": "01942b04-6e00-7000-8000-000000000010",
+          "uploadRef": "01942b04-6e00-7000-8000-000000000010"
+        }
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "PAGE_EDIT",
+      "section": 3,
+      "schemaDefinition": "DocumentPageCreateRequest"
+    },
+    {
+      "operation": "create",
+      "body": {
+        "path": "workspace/pages",
+        "input": {
+          "kind": "DASHBOARD_PAGE",
+          "title": "Dashboard",
+          "baseRevision": "0",
+          "commandId": "01942b04-6e00-7000-8000-000000000010",
+          "dashboardId": "01942b04-6e00-7000-8000-000000000010"
+        }
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "PAGE_EDIT",
+      "section": 3,
+      "schemaDefinition": "DashboardPageCreateRequest"
+    },
+    {
+      "operation": "create",
+      "body": {
+        "path": "workspace/pages/01942b04-6e00-7000-8000-000000000010/versions",
+        "input": {
+          "kind": "PAGE_VERSION",
+          "commandId": "01942b04-6e00-7000-8000-000000000010",
+          "uploadRef": "01942b04-6e00-7000-8000-000000000010"
+        }
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "PAGE_EDIT",
+      "section": 3,
+      "schemaDefinition": "PageVersionCreateRequest"
+    },
+    {
+      "operation": "create",
+      "body": {
+        "path": "workspace/page-content-uploads",
+        "input": {
+          "kind": "PAGE_CONTENT_UPLOAD",
+          "format": "MARKDOWN",
+          "byteSize": 1,
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "PAGE_EDIT",
+      "section": 3,
+      "schemaDefinition": "PageUploadCreateRequest"
+    },
+    {
+      "operation": "edit",
+      "body": {
+        "path": "workspace/semantic-models/orders",
+        "aggregateMetrics": [],
+        "patch": [
+          {
+            "op": "replace",
+            "path": "/sourceRelations/0/relation",
+            "value": "orders_v2"
+          }
+        ]
+      },
+      "allowedRoles": [
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "SEMANTIC_MODEL_UPDATE",
+      "section": 4,
+      "schemaDefinition": "SemanticModelEditRequest"
+    },
+    {
+      "operation": "edit",
+      "body": {
+        "path": "workspace/metrics/revenue",
+        "patch": [
+          {
+            "op": "remove",
+            "path": "/measure"
+          },
+          {
+            "op": "add",
+            "path": "/measure",
+            "value": "net_revenue"
+          }
+        ]
+      },
+      "allowedRoles": [
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "METRIC_UPDATE",
+      "section": 4,
+      "schemaDefinition": "MetricEditRequest"
+    },
+    {
+      "operation": "edit",
+      "body": {
+        "path": "workspace/dashboards/0198ef28-2000-7000-8000-000000000001/draft",
+        "revision": "3",
+        "patch": [
+          {
+            "op": "replace",
+            "path": "/definition/meta/title",
+            "value": "매출 현황"
+          }
+        ]
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "DASHBOARD_EDIT",
+      "section": 3,
+      "schemaDefinition": "DashboardDraftEditRequest"
+    },
+    {
+      "operation": "edit",
+      "body": {
+        "path": "workspace/connectors/0198ef28-1000-7000-8000-000000000001/catalog/catalog-selection",
+        "patch": [
+          {
+            "op": "replace",
+            "path": "",
+            "value": {
+              "selectedCatalogNames": []
+            }
+          }
+        ]
+      },
+      "allowedRoles": [
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "CATALOG_SELECTION_UPDATE",
+      "section": 4,
+      "schemaDefinition": "ConnectorCatalogSelectionEditRequest"
+    },
+    {
+      "operation": "edit",
+      "body": {
+        "path": "workspace/connectors/0198ef28-1000-7000-8000-000000000001/catalog/selection",
+        "patch": [
+          {
+            "op": "replace",
+            "path": "",
+            "value": {
+              "selectedSchemas": []
+            }
+          }
+        ]
+      },
+      "allowedRoles": [
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "CATALOG_SELECTION_UPDATE",
+      "section": 4,
+      "schemaDefinition": "CatalogSelectionEditRequest"
+    },
+    {
+      "operation": "edit",
+      "body": {
+        "path": "workspace/connectors/01942b04-6e00-7000-8000-000000000001",
+        "patch": [
+          {
+            "op": "replace",
+            "path": "/displayName",
+            "value": "Warehouse"
+          }
+        ]
+      },
+      "allowedRoles": [
+        "OWNER"
+      ],
+      "webGate": "CONNECTOR_UPDATE",
+      "section": 9,
+      "schemaDefinition": "ConnectorEditRequest"
+    },
+    {
+      "operation": "edit",
+      "body": {
+        "path": "workspace/pages/0198ef28-2000-7000-8000-000000000001",
+        "revision": "0",
+        "commandId": "rename-page",
+        "patch": [
+          {
+            "op": "replace",
+            "path": "/title",
+            "value": "Weekly revenue"
+          },
+          {
+            "op": "replace",
+            "path": "/description",
+            "value": null
+          }
+        ]
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "PAGE_EDIT",
+      "section": 3,
+      "schemaDefinition": "PageMetadataEditRequest"
+    },
+    {
+      "operation": "edit",
+      "body": {
+        "path": "workspace/pages/tree",
+        "revision": "0",
+        "commandId": "reorder-pages",
+        "patch": [
+          {
+            "op": "replace",
+            "path": "/placements",
+            "value": []
+          }
+        ]
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "PAGE_EDIT",
+      "section": 3,
+      "schemaDefinition": "PagesTreeEditRequest"
+    },
+    {
+      "operation": "invoke",
+      "body": {
+        "path": "workspace/explore/runs",
+        "action": "run",
+        "input": {
+          "kind": "SQL_EXPLORE_RUN",
+          "connectorId": "01942b04-6e00-7000-8000-000000000010",
+          "sql": "SELECT 1"
+        }
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "EXPLORE_EXECUTE",
+      "section": 1,
+      "schemaDefinition": "ExploreRunInvokeRequest"
+    },
+    {
+      "operation": "invoke",
+      "body": {
+        "path": "workspace/explore/runs/01942b04-6e00-7000-8000-000000000010",
+        "action": "cancel"
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "EXPLORE_READ",
+      "section": 1,
+      "schemaDefinition": "ExploreRunCancelInvokeRequest"
+    },
+    {
+      "operation": "invoke",
+      "body": {
+        "path": "workspace/dashboards/01942b04-6e00-7000-8000-000000000010/draft",
+        "action": "start",
+        "input": {
+          "kind": "DASHBOARD_DRAFT_START",
+          "parameterBindings": {}
+        }
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "DASHBOARD_EDIT",
+      "section": 3,
+      "schemaDefinition": "DashboardDraftStartInvokeRequest"
+    },
+    {
+      "operation": "invoke",
+      "body": {
+        "path": "workspace/dashboards/01942b04-6e00-7000-8000-000000000010/draft",
+        "action": "apply",
+        "input": {
+          "kind": "DASHBOARD_DRAFT_APPLY",
+          "expectedRevision": "1"
+        }
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "DASHBOARD_EDIT",
+      "section": 3,
+      "schemaDefinition": "DashboardDraftApplyInvokeRequest"
+    },
+    {
+      "operation": "invoke",
+      "body": {
+        "path": "workspace/dashboards/01942b04-6e00-7000-8000-000000000010/draft",
+        "action": "discard",
+        "input": {
+          "kind": "DASHBOARD_DRAFT_DISCARD",
+          "expectedRevision": "1"
+        }
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "DASHBOARD_EDIT",
+      "section": 3,
+      "schemaDefinition": "DashboardDraftDiscardInvokeRequest"
+    },
+    {
+      "operation": "invoke",
+      "body": {
+        "path": "workspace/dashboards/01942b04-6e00-7000-8000-000000000010/draft",
+        "action": "refresh",
+        "input": {
+          "kind": "DASHBOARD_QUERY_REFRESH",
+          "queryNames": [
+            "orders"
+          ]
+        }
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "DASHBOARD_EDIT",
+      "section": 3,
+      "schemaDefinition": "DashboardQueryRefreshInvokeRequest"
+    },
+    {
+      "operation": "invoke",
+      "body": {
+        "path": "workspace/dashboards/01942b04-6e00-7000-8000-000000000010/draft/query-runs/01942b04-6e00-7000-8000-000000000010",
+        "action": "cancel"
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "DASHBOARD_EDIT",
+      "section": 3,
+      "schemaDefinition": "DashboardDraftRunCancelInvokeRequest"
+    },
+    {
+      "operation": "invoke",
+      "body": {
+        "path": "workspace/dashboards/01942b04-6e00-7000-8000-000000000010/sessions",
+        "action": "open",
+        "input": {
+          "kind": "DASHBOARD_SESSION_OPEN",
+          "parameterBindings": {}
+        }
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "DASHBOARD_READ",
+      "section": 6,
+      "schemaDefinition": "DashboardSessionOpenInvokeRequest"
+    },
+    {
+      "operation": "invoke",
+      "body": {
+        "path": "workspace/dashboards/01942b04-6e00-7000-8000-000000000010/sessions/01942b04-6e00-7000-8000-000000000010",
+        "action": "refresh",
+        "input": {
+          "kind": "DASHBOARD_SESSION_REFRESH",
+          "variables": {},
+          "queryNames": [
+            "orders"
+          ]
+        }
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "DASHBOARD_READ",
+      "section": 6,
+      "schemaDefinition": "DashboardSessionRefreshInvokeRequest"
+    },
+    {
+      "operation": "invoke",
+      "body": {
+        "path": "workspace/dashboards/01942b04-6e00-7000-8000-000000000010/sessions/01942b04-6e00-7000-8000-000000000010",
+        "action": "resolve",
+        "input": {
+          "kind": "DASHBOARD_SESSION_RESOLVE",
+          "variables": {}
+        }
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "DASHBOARD_READ",
+      "section": 6,
+      "schemaDefinition": "DashboardSessionResolveInvokeRequest"
+    },
+    {
+      "operation": "invoke",
+      "body": {
+        "path": "workspace/connectors/01942b04-6e00-7000-8000-000000000010/catalog",
+        "action": "ingest"
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "CATALOG_EXECUTE",
+      "section": 3,
+      "schemaDefinition": "CatalogIngestInvokeRequest"
+    },
+    {
+      "operation": "invoke",
+      "body": {
+        "path": "workspace/connectors/01942b04-6e00-7000-8000-000000000010/catalog/selection/options/schemas",
+        "action": "refresh"
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "CATALOG_EXECUTE",
+      "section": 3,
+      "schemaDefinition": "CatalogOptionRefreshInvokeRequest"
+    },
+    {
+      "operation": "invoke",
+      "body": {
+        "path": "workspace/connectors/01942b04-6e00-7000-8000-000000000010/catalog/ingestions/01942b04-6e00-7000-8000-000000000010",
+        "action": "cancel"
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "CATALOG_EXECUTE",
+      "section": 3,
+      "schemaDefinition": "CatalogJobCancelInvokeRequest"
+    },
+    {
+      "operation": "invoke",
+      "body": {
+        "path": "workspace/semantic-models",
+        "action": "check",
+        "input": {
+          "kind": "SEMANTIC_MODEL_CHECK",
+          "definition": {
+            "schemaVersion": 3,
+            "name": "orders",
+            "sourceRelations": [
+              {
+                "connectorId": "01942b04-6e00-7000-8000-000000000010",
+                "schema": "analytics",
+                "relation": "orders"
+              }
+            ],
+            "entities": [
+              {
+                "name": "order_id",
+                "type": "primary",
+                "expression": "order_id"
+              }
+            ],
+            "dimensions": [],
+            "measures": []
+          }
+        }
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "SEMANTIC_READ",
+      "section": 4,
+      "schemaDefinition": "SemanticModelCheckInvokeRequest"
+    },
+    {
+      "operation": "invoke",
+      "body": {
+        "path": "workspace/metrics/revenue",
+        "action": "check",
+        "input": {
+          "kind": "METRIC_CHECK",
+          "definition": {
+            "schemaVersion": 3,
+            "name": "revenue",
+            "type": "simple",
+            "semanticModelName": "orders",
+            "measure": "amount"
+          }
+        }
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "SEMANTIC_READ",
+      "section": 4,
+      "schemaDefinition": "MetricCheckInvokeRequest"
+    },
+    {
+      "operation": "invoke",
+      "body": {
+        "path": "workspace/connectors/01942b04-6e00-7000-8000-000000000010",
+        "action": "rotate-credentials",
+        "input": {
+          "kind": "CONNECTOR_CREDENTIAL_ROTATE",
+          "credential": {
+            "kind": "USERNAME_PASSWORD",
+            "username": "reader",
+            "password": "fixture-only"
+          }
+        }
+      },
+      "allowedRoles": [
+        "OWNER"
+      ],
+      "webGate": "CONNECTOR_UPDATE",
+      "section": 9,
+      "schemaDefinition": "ConnectorCredentialRotateInvokeRequest"
+    },
+    {
+      "operation": "invoke",
+      "body": {
+        "path": "workspace/connectors/01942b04-6e00-7000-8000-000000000010",
+        "action": "delete"
+      },
+      "allowedRoles": [
+        "OWNER"
+      ],
+      "webGate": "CONNECTOR_DELETE",
+      "section": 9,
+      "schemaDefinition": "ConnectorDeleteInvokeRequest"
+    },
+    {
+      "operation": "invoke",
+      "body": {
+        "path": "workspace/pages/01942b04-6e00-7000-8000-000000000010",
+        "action": "delete",
+        "input": {
+          "kind": "PAGE_DELETE",
+          "baseRevision": "0",
+          "commandId": "01942b04-6e00-7000-8000-000000000010"
+        }
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "PAGE_EDIT",
+      "section": 3,
+      "schemaDefinition": "PageDeleteInvokeRequest"
+    },
+    {
+      "operation": "invoke",
+      "body": {
+        "path": "workspace/page-content-uploads/01942b04-6e00-7000-8000-000000000010",
+        "action": "complete",
+        "input": {
+          "kind": "PAGE_CONTENT_UPLOAD_COMPLETE",
+          "parts": [
+            {
+              "partNumber": 1,
+              "eTag": "fixture"
+            }
+          ]
+        }
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "PAGE_EDIT",
+      "section": 3,
+      "schemaDefinition": "PageUploadCompleteInvokeRequest"
+    },
+    {
+      "operation": "invoke",
+      "body": {
+        "path": "workspace/page-content-uploads/01942b04-6e00-7000-8000-000000000010",
+        "action": "abort"
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "PAGE_EDIT",
+      "section": 3,
+      "schemaDefinition": "PageUploadAbortInvokeRequest"
+    },
+    {
+      "operation": "invoke",
+      "body": {
+        "path": "workspace/members",
+        "action": "add-member",
+        "input": {
+          "kind": "WORKSPACE_MEMBER_ADD",
+          "userId": "01942b04-6e00-7000-8000-000000000010",
+          "role": "EXPLORER"
+        }
+      },
+      "allowedRoles": [
+        "OWNER"
+      ],
+      "webGate": "WORKSPACE_OWNER",
+      "section": 9,
+      "schemaDefinition": "WorkspaceMemberAddInvokeRequest"
+    },
+    {
+      "operation": "invoke",
+      "body": {
+        "path": "workspace/members/01942b04-6e00-7000-8000-000000000010",
+        "action": "remove-member"
+      },
+      "allowedRoles": [
+        "OWNER"
+      ],
+      "webGate": "WORKSPACE_OWNER",
+      "section": 9,
+      "schemaDefinition": "WorkspaceMemberRemoveInvokeRequest"
+    },
+    {
+      "operation": "invoke",
+      "body": {
+        "path": "workspace/members/01942b04-6e00-7000-8000-000000000010",
+        "action": "set-role",
+        "input": {
+          "kind": "WORKSPACE_MEMBER_ROLE",
+          "role": "EXPLORER"
+        }
+      },
+      "allowedRoles": [
+        "OWNER"
+      ],
+      "webGate": "WORKSPACE_OWNER",
+      "section": 9,
+      "schemaDefinition": "WorkspaceMemberRoleInvokeRequest"
+    },
+    {
+      "operation": "invoke",
+      "body": {
+        "path": "workspace/pages/01942b04-6e00-7000-8000-000000000010/sessions/01942b04-6e00-7000-8000-000000000010",
+        "action": "resolve",
+        "input": {
+          "kind": "DASHBOARD_SESSION_RESOLVE",
+          "variables": {}
+        }
+      },
+      "allowedRoles": [
+        "VIEWER",
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "PAGE_READER",
+      "section": 5,
+      "schemaDefinition": "PageSessionResolveInvokeRequest"
+    },
+    {
+      "operation": "invoke",
+      "body": {
+        "path": "workspace/explore/runs",
+        "action": "run",
+        "input": {
+          "kind": "SEMANTIC_EXPLORE_RUN",
+          "connectorId": "01942b04-6e00-7000-8000-000000000010",
+          "query": {
+            "schemaVersion": 4,
+            "metrics": [
+              "revenue"
+            ],
+            "groupBys": [],
+            "metricTimeRange": null,
+            "filters": [],
+            "orderBy": [],
+            "rowLimit": 10
+          }
+        }
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "EXPLORE_EXECUTE",
+      "section": 1,
+      "schemaDefinition": null
+    },
+    {
+      "operation": "list",
+      "body": {
+        "path": "workspace/semantic-models/orders/history/01942b04-6e00-7000-8000-000000000010",
+        "limit": 20
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "SEMANTIC_READ",
+      "section": 8,
+      "schemaDefinition": "SemanticModelHistoryPath"
+    },
+    {
+      "operation": "read",
+      "body": {
+        "path": "workspace/semantic-models/orders/history/01942b04-6e00-7000-8000-000000000010/01942b04-6e00-7000-8000-000000000010"
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "SEMANTIC_READ",
+      "section": 8,
+      "schemaDefinition": "SemanticModelVersionPath"
+    },
+    {
+      "operation": "invoke",
+      "body": {
+        "path": "workspace/semantic-models/orders",
+        "action": "delete"
+      },
+      "allowedRoles": [
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "SEMANTIC_MODEL_DELETE",
+      "section": 8,
+      "schemaDefinition": "SemanticModelDeleteInvokeRequest"
+    },
+    {
+      "operation": "invoke",
+      "body": {
+        "path": "workspace/semantic-models/orders/history/01942b04-6e00-7000-8000-000000000010/01942b04-6e00-7000-8000-000000000010",
+        "action": "restore"
+      },
+      "allowedRoles": [
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "SEMANTIC_MODEL_UPDATE",
+      "section": 8,
+      "schemaDefinition": "SemanticModelRestoreInvokeRequest"
+    },
+    {
+      "operation": "list",
+      "body": {
+        "path": "workspace/metrics/revenue/history/01942b04-6e00-7000-8000-000000000010",
+        "limit": 20
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "SEMANTIC_READ",
+      "section": 8,
+      "schemaDefinition": "MetricHistoryPath"
+    },
+    {
+      "operation": "read",
+      "body": {
+        "path": "workspace/metrics/revenue/history/01942b04-6e00-7000-8000-000000000010/01942b04-6e00-7000-8000-000000000010"
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "SEMANTIC_READ",
+      "section": 8,
+      "schemaDefinition": "MetricVersionPath"
+    },
+    {
+      "operation": "invoke",
+      "body": {
+        "path": "workspace/metrics/revenue",
+        "action": "delete"
+      },
+      "allowedRoles": [
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "METRIC_DELETE",
+      "section": 8,
+      "schemaDefinition": "MetricDeleteInvokeRequest"
+    },
+    {
+      "operation": "invoke",
+      "body": {
+        "path": "workspace/metrics/revenue/history/01942b04-6e00-7000-8000-000000000010/01942b04-6e00-7000-8000-000000000010",
+        "action": "restore"
+      },
+      "allowedRoles": [
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "METRIC_UPDATE",
+      "section": 8,
+      "schemaDefinition": "MetricRestoreInvokeRequest"
+    },
+    {
+      "operation": "list",
+      "body": {
+        "path": "workspace/dashboards/01942b04-6e00-7000-8000-000000000010/history",
+        "limit": 20
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "DASHBOARD_HISTORY",
+      "section": 9,
+      "schemaDefinition": "DashboardHistoryPath"
+    },
+    {
+      "operation": "read",
+      "body": {
+        "path": "workspace/dashboards/01942b04-6e00-7000-8000-000000000010/history/01942b04-6e00-7000-8000-000000000010"
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "DASHBOARD_HISTORY",
+      "section": 9,
+      "schemaDefinition": "DashboardVersionPath"
+    },
+    {
+      "operation": "invoke",
+      "body": {
+        "path": "workspace/dashboards/01942b04-6e00-7000-8000-000000000010",
+        "action": "delete"
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "DASHBOARD_DELETE",
+      "section": 9,
+      "schemaDefinition": "DashboardDeleteInvokeRequest"
+    },
+    {
+      "operation": "invoke",
+      "body": {
+        "path": "workspace/dashboards/01942b04-6e00-7000-8000-000000000010/history/01942b04-6e00-7000-8000-000000000010",
+        "action": "restore"
+      },
+      "allowedRoles": [
+        "EXPLORER",
+        "EDITOR",
+        "OWNER"
+      ],
+      "webGate": "DASHBOARD_RESTORE",
+      "section": 9,
+      "schemaDefinition": "DashboardRestoreInvokeRequest"
+    }
+  ],
+  "organizationPaths": [
+    {
+      "schemaDefinition": "OrganizationResourcePath",
+      "path": "organization"
+    },
+    {
+      "schemaDefinition": "OrganizationCollectionPath",
+      "path": "organization/members"
+    },
+    {
+      "schemaDefinition": "OrganizationCollectionPath",
+      "path": "organization/invitations"
+    },
+    {
+      "schemaDefinition": "OrganizationCollectionPath",
+      "path": "organization/workspaces"
+    },
+    {
+      "schemaDefinition": "OrganizationCollectionPath",
+      "path": "organization/workspaces/01942b04-6e00-7000-8000-000000000010/members"
+    },
+    {
+      "schemaDefinition": "OrganizationMemberPath",
+      "path": "organization/members/01942b04-6e00-7000-8000-000000000010"
+    },
+    {
+      "schemaDefinition": "OrganizationInvitationPath",
+      "path": "organization/invitations/01942b04-6e00-7000-8000-000000000010"
+    },
+    {
+      "schemaDefinition": "OrganizationWorkspaceMemberPath",
+      "path": "organization/workspaces/01942b04-6e00-7000-8000-000000000010/members/01942b04-6e00-7000-8000-000000000010"
+    }
+  ],
+  "organizationMutationDefinitions": [
+    "OrganizationInvitationCreateRequest",
+    "OrganizationInvitationResendInvokeRequest",
+    "OrganizationInvitationCancelInvokeRequest"
+  ],
+  "pathDefinitions": [
+    "CanonicalResourcePath",
+    "DashboardResourcePath",
+    "ExploreRunResourcePath",
+    "DashboardDraftResourcePath",
+    "DashboardDraftStatusResourcePath",
+    "DashboardSessionCollectionPath",
+    "DashboardSessionResourcePath",
+    "DashboardQueryRunResourcePath",
+    "DashboardDraftQueryRunCollectionPath",
+    "DashboardDraftQueryResultResourcePath",
+    "DashboardSessionQueryRunCollectionPath",
+    "DashboardSessionQueryRunResourcePath",
+    "DashboardSessionQueryResultResourcePath",
+    "SemanticModelResourcePath",
+    "MetricResourcePath",
+    "ExploreResultResourcePath",
+    "CatalogRootResourcePath",
+    "CatalogEntryResourcePath",
+    "CatalogSchemaResourcePath",
+    "CatalogRelationResourcePath",
+    "ConnectorCatalogSelectionResourcePath",
+    "CatalogSelectionResourcePath",
+    "CatalogOptionCollectionPath",
+    "CatalogOptionResourcePath",
+    "CatalogOptionRefreshCollectionPath",
+    "CatalogOptionRefreshResourcePath",
+    "CatalogIngestionResourcePath",
+    "CatalogIngestionFailureResourcePath",
+    "CatalogCollectionPath",
+    "WorkspaceInstalledCollectionPath",
+    "ConnectorResourcePath",
+    "PageResourcePath",
+    "PageVersionCollectionPath",
+    "PageVersionResourcePath",
+    "PageUploadResourcePath",
+    "PagesTreeResourcePath",
+    "OrganizationCollectionPath",
+    "OrganizationResourcePath",
+    "OrganizationMemberPath",
+    "OrganizationInvitationPath",
+    "WorkspaceManagementCollectionPath",
+    "WorkspaceMemberPath",
+    "WorkspaceMemberCandidatePath",
+    "WorkspaceAccessPath",
+    "WorkspaceAuthorizationPath",
+    "LineageResourcePath",
+    "DashboardSchedulesResourcePath",
+    "DashboardOccurrenceCollectionPath",
+    "DashboardOccurrenceResourcePath",
+    "PageContentResourcePath",
+    "PageSessionCollectionPath",
+    "PageSessionResourcePath",
+    "PageRunCollectionPath",
+    "PageRunResourcePath",
+    "PageResultResourcePath",
+    "OrganizationWorkspaceMemberPath",
+    "SemanticModelHistoryPath",
+    "SemanticModelVersionPath",
+    "MetricHistoryPath",
+    "MetricVersionPath",
+    "DashboardHistoryPath",
+    "DashboardVersionPath"
+  ],
+  "pathContracts": {
+    "CanonicalResourcePath": {
+      "type": "string",
+      "minLength": 7,
+      "maxLength": 6257,
+      "pattern": "^(?:workspace|organization)(?:/[^\\u0000-\\u001F\\u007F-\\u009F]*[^/\\u0000-\\u001F\\u007F-\\u009F])?(?![\\s\\S])$",
+      "not": {
+        "pattern": "~(?![01])|//"
+      },
+      "description": "Relative resource address rooted at workspace or the explicitly targeted Organization. UUID identity segments use canonical lowercase hyphenated UUIDs. Names use ~0 for ~ and ~1 for /. Empty segments and trailing slash are forbidden."
+    },
+    "DashboardResourcePath": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/CanonicalResourcePath"
+        },
+        {
+          "type": "string",
+          "pattern": "^workspace/dashboards/[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+        }
+      ]
+    },
+    "ExploreRunResourcePath": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/CanonicalResourcePath"
+        },
+        {
+          "type": "string",
+          "pattern": "^workspace/explore/runs/[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+        }
+      ]
+    },
+    "DashboardDraftResourcePath": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/CanonicalResourcePath"
+        },
+        {
+          "type": "string",
+          "pattern": "^workspace/dashboards/[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}/draft$"
+        }
+      ]
+    },
+    "DashboardDraftStatusResourcePath": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/CanonicalResourcePath"
+        },
+        {
+          "type": "string",
+          "pattern": "^workspace/dashboards/[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}/draft/status$"
+        }
+      ]
+    },
+    "DashboardSessionCollectionPath": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/CanonicalResourcePath"
+        },
+        {
+          "type": "string",
+          "pattern": "^workspace/dashboards/[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}/sessions$"
+        }
+      ]
+    },
+    "DashboardSessionResourcePath": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/CanonicalResourcePath"
+        },
+        {
+          "type": "string",
+          "pattern": "^workspace/dashboards/[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}/sessions/[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+        }
+      ]
+    },
+    "DashboardQueryRunResourcePath": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/CanonicalResourcePath"
+        },
+        {
+          "type": "string",
+          "pattern": "^workspace/dashboards/[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}/draft/query-runs/[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+        }
+      ]
+    },
+    "DashboardDraftQueryRunCollectionPath": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/CanonicalResourcePath"
+        },
+        {
+          "type": "string",
+          "pattern": "^workspace/dashboards/[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}/draft/query-runs$"
+        }
+      ]
+    },
+    "DashboardDraftQueryResultResourcePath": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/CanonicalResourcePath"
+        },
+        {
+          "type": "string",
+          "pattern": "^workspace/dashboards/[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}/draft/query-runs/[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}/result$"
+        }
+      ]
+    },
+    "DashboardSessionQueryRunCollectionPath": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/CanonicalResourcePath"
+        },
+        {
+          "type": "string",
+          "pattern": "^workspace/dashboards/[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}/sessions/[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}/query-runs$"
+        }
+      ]
+    },
+    "DashboardSessionQueryRunResourcePath": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/CanonicalResourcePath"
+        },
+        {
+          "type": "string",
+          "pattern": "^workspace/dashboards/[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}/sessions/[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}/query-runs/[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+        }
+      ]
+    },
+    "DashboardSessionQueryResultResourcePath": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/CanonicalResourcePath"
+        },
+        {
+          "type": "string",
+          "pattern": "^workspace/dashboards/[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}/sessions/[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}/query-runs/[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}/result$"
+        }
+      ]
+    },
+    "SemanticModelResourcePath": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/CanonicalResourcePath"
+        },
+        {
+          "type": "string",
+          "pattern": "^workspace/semantic-models/(?![a-z0-9_]*__)[a-z](?:[a-z0-9_]*[a-z0-9])?$"
+        }
+      ]
+    },
+    "MetricResourcePath": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/CanonicalResourcePath"
+        },
+        {
+          "type": "string",
+          "pattern": "^workspace/metrics/(?![a-z0-9_]*__)[a-z](?:[a-z0-9_]*[a-z0-9])?$"
+        }
+      ]
+    },
+    "ExploreResultResourcePath": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/CanonicalResourcePath"
+        },
+        {
+          "type": "string",
+          "pattern": "^workspace/explore/runs/[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}/result$"
+        }
+      ]
+    },
+    "CatalogRootResourcePath": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/CanonicalResourcePath"
+        },
+        {
+          "type": "string",
+          "pattern": "^workspace/connectors/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[89ab][0-9a-f]{3}-[0-9a-f]{12}/catalog$"
+        }
+      ]
+    },
+    "CatalogEntryResourcePath": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/CanonicalResourcePath"
+        },
+        {
+          "type": "string",
+          "pattern": "^workspace/connectors/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[89ab][0-9a-f]{3}-[0-9a-f]{12}/catalog/catalogs/[^/\\u0000-\\u001F\\u007F-\\u009F]+$"
+        }
+      ]
+    },
+    "CatalogSchemaResourcePath": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/CanonicalResourcePath"
+        },
+        {
+          "type": "string",
+          "pattern": "^workspace/connectors/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[89ab][0-9a-f]{3}-[0-9a-f]{12}/catalog(?:/catalogs/[^/\\u0000-\\u001F\\u007F-\\u009F]+)?/schemas/[^/\\u0000-\\u001F\\u007F-\\u009F]+$"
+        }
+      ]
+    },
+    "CatalogRelationResourcePath": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/CanonicalResourcePath"
+        },
+        {
+          "type": "string",
+          "pattern": "^workspace/connectors/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[89ab][0-9a-f]{3}-[0-9a-f]{12}/catalog(?:/catalogs/[^/\\u0000-\\u001F\\u007F-\\u009F]+)?/schemas/[^/\\u0000-\\u001F\\u007F-\\u009F]+/relations/[^/\\u0000-\\u001F\\u007F-\\u009F]+$"
+        }
+      ]
+    },
+    "ConnectorCatalogSelectionResourcePath": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/CanonicalResourcePath"
+        },
+        {
+          "type": "string",
+          "pattern": "^workspace/connectors/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[89ab][0-9a-f]{3}-[0-9a-f]{12}/catalog/catalog-selection$"
+        }
+      ]
+    },
+    "CatalogSelectionResourcePath": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/CanonicalResourcePath"
+        },
+        {
+          "type": "string",
+          "pattern": "^workspace/connectors/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[89ab][0-9a-f]{3}-[0-9a-f]{12}/catalog(?:/catalogs/[^/\\u0000-\\u001F\\u007F-\\u009F]+)?/selection$"
+        }
+      ]
+    },
+    "CatalogOptionCollectionPath": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/CanonicalResourcePath"
+        },
+        {
+          "type": "string",
+          "pattern": "^workspace/connectors/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[89ab][0-9a-f]{3}-[0-9a-f]{12}/catalog/(?:catalog-selection/options/catalogs|(?:catalogs/[^/\\u0000-\\u001F\\u007F-\\u009F]+/)?selection/options/schemas(?:/[^/\\u0000-\\u001F\\u007F-\\u009F]+/relations)?)$"
+        }
+      ]
+    },
+    "CatalogOptionResourcePath": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/CanonicalResourcePath"
+        },
+        {
+          "type": "string",
+          "pattern": "^workspace/connectors/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[89ab][0-9a-f]{3}-[0-9a-f]{12}/catalog/(?:catalog-selection/options/catalogs|(?:catalogs/[^/\\u0000-\\u001F\\u007F-\\u009F]+/)?selection/options/schemas(?:/[^/\\u0000-\\u001F\\u007F-\\u009F]+/relations)?)/[^/\\u0000-\\u001F\\u007F-\\u009F]+$"
+        }
+      ]
+    },
+    "CatalogOptionRefreshCollectionPath": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/CanonicalResourcePath"
+        },
+        {
+          "type": "string",
+          "pattern": "^workspace/connectors/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[89ab][0-9a-f]{3}-[0-9a-f]{12}/catalog/(?:catalog-selection/option-refreshes/catalogs|(?:catalogs/[^/\\u0000-\\u001F\\u007F-\\u009F]+/)?selection/option-refreshes/schemas(?:/[^/\\u0000-\\u001F\\u007F-\\u009F]+/relations)?)$"
+        }
+      ]
+    },
+    "CatalogOptionRefreshResourcePath": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/CanonicalResourcePath"
+        },
+        {
+          "type": "string",
+          "pattern": "^workspace/connectors/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[89ab][0-9a-f]{3}-[0-9a-f]{12}/catalog/(?:catalog-selection/option-refreshes/catalogs|(?:catalogs/[^/\\u0000-\\u001F\\u007F-\\u009F]+/)?selection/option-refreshes/schemas(?:/[^/\\u0000-\\u001F\\u007F-\\u009F]+/relations)?)/[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+        }
+      ]
+    },
+    "CatalogIngestionResourcePath": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/CanonicalResourcePath"
+        },
+        {
+          "type": "string",
+          "pattern": "^workspace/connectors/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[89ab][0-9a-f]{3}-[0-9a-f]{12}/catalog(?:/catalogs/[^/\\u0000-\\u001F\\u007F-\\u009F]+)?/ingestions/[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+        }
+      ]
+    },
+    "CatalogIngestionFailureResourcePath": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/CanonicalResourcePath"
+        },
+        {
+          "type": "string",
+          "pattern": "^workspace/connectors/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[89ab][0-9a-f]{3}-[0-9a-f]{12}/catalog(?:/catalogs/[^/\\u0000-\\u001F\\u007F-\\u009F]+)?/ingestions/[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}/failures/[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+        }
+      ]
+    },
+    "CatalogCollectionPath": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/CanonicalResourcePath"
+        },
+        {
+          "type": "string",
+          "pattern": "^workspace/connectors/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[89ab][0-9a-f]{3}-[0-9a-f]{12}/catalog/(?:catalogs|(?:catalogs/[^/\\u0000-\\u001F\\u007F-\\u009F]+/)?schemas(?:/[^/\\u0000-\\u001F\\u007F-\\u009F]+/relations)?|(?:catalogs/[^/\\u0000-\\u001F\\u007F-\\u009F]+/)?ingestions(?:/[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}/failures)?)$"
+        }
+      ]
+    },
+    "WorkspaceInstalledCollectionPath": {
+      "enum": [
+        "workspace/connectors",
+        "workspace/dashboards",
+        "workspace/explore/runs",
+        "workspace/metrics",
+        "workspace/semantic-models",
+        "workspace/pages"
+      ]
+    },
+    "ConnectorResourcePath": {
+      "type": "string",
+      "pattern": "^workspace/connectors/[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+    },
+    "PageResourcePath": {
+      "type": "string",
+      "pattern": "^workspace/pages/[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+    },
+    "PageVersionCollectionPath": {
+      "type": "string",
+      "pattern": "^workspace/pages/[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}/versions$"
+    },
+    "PageVersionResourcePath": {
+      "type": "string",
+      "pattern": "^workspace/pages/[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}/versions/(?:[1-9][0-9]{0,8}|1[0-9]{9}|20[0-9]{8}|21[0-3][0-9]{7}|214[0-6][0-9]{6}|2147[0-3][0-9]{5}|21474[0-7][0-9]{4}|214748[0-2][0-9]{3}|2147483[0-5][0-9]{2}|21474836[0-3][0-9]|214748364[0-7])$"
+    },
+    "PageUploadResourcePath": {
+      "type": "string",
+      "pattern": "^workspace/page-content-uploads/[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+    },
+    "PagesTreeResourcePath": {
+      "const": "workspace/pages/tree"
+    },
+    "OrganizationCollectionPath": {
+      "type": "string",
+      "pattern": "^organization/(?:members|invitations|workspaces(?:/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[89ab][0-9a-f]{3}-[0-9a-f]{12}/members)?)$"
+    },
+    "OrganizationResourcePath": {
+      "const": "organization"
+    },
+    "OrganizationMemberPath": {
+      "type": "string",
+      "pattern": "^organization/members/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+    },
+    "OrganizationInvitationPath": {
+      "type": "string",
+      "pattern": "^organization/invitations/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+    },
+    "WorkspaceManagementCollectionPath": {
+      "type": "string",
+      "pattern": "^workspace/(?:members|member-candidates|lineage/(?:relations|semantic-models|metrics))$"
+    },
+    "WorkspaceMemberPath": {
+      "type": "string",
+      "pattern": "^workspace/members/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+    },
+    "WorkspaceMemberCandidatePath": {
+      "type": "string",
+      "pattern": "^workspace/member-candidates/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+    },
+    "WorkspaceAccessPath": {
+      "const": "workspace/access"
+    },
+    "WorkspaceAuthorizationPath": {
+      "const": "workspace/authorization"
+    },
+    "LineageResourcePath": {
+      "type": "string",
+      "pattern": "^workspace/lineage/(?:relations|semantic-models|metrics)/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+    },
+    "DashboardSchedulesResourcePath": {
+      "type": "string",
+      "pattern": "^workspace/dashboards/[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}/(?:draft/)?schedules$"
+    },
+    "DashboardOccurrenceCollectionPath": {
+      "type": "string",
+      "pattern": "^workspace/dashboards/[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}/occurrences$"
+    },
+    "DashboardOccurrenceResourcePath": {
+      "type": "string",
+      "pattern": "^workspace/dashboards/[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}/occurrences/(?!__proto__/)[A-Za-z_][A-Za-z0-9_]{0,127}/[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(?:\\.[0-9]{1,9})?Z$"
+    },
+    "PageContentResourcePath": {
+      "type": "string",
+      "pattern": "^workspace/pages/[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}/content$"
+    },
+    "PageSessionCollectionPath": {
+      "type": "string",
+      "pattern": "^workspace/pages/[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}/sessions$"
+    },
+    "PageSessionResourcePath": {
+      "type": "string",
+      "pattern": "^workspace/pages/[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}/sessions/[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+    },
+    "PageRunCollectionPath": {
+      "type": "string",
+      "pattern": "^workspace/pages/[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}/sessions/[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}/query-runs$"
+    },
+    "PageRunResourcePath": {
+      "type": "string",
+      "pattern": "^workspace/pages/[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}/sessions/[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}/query-runs/[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+    },
+    "PageResultResourcePath": {
+      "type": "string",
+      "pattern": "^workspace/pages/[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}/sessions/[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}/query-runs/[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}/result$"
+    },
+    "OrganizationWorkspaceMemberPath": {
+      "type": "string",
+      "pattern": "^organization/workspaces/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[89ab][0-9a-f]{3}-[0-9a-f]{12}/members/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+    },
+    "SemanticModelHistoryPath": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/CanonicalResourcePath"
+        },
+        {
+          "type": "string",
+          "pattern": "^workspace/semantic-models/(?![a-z0-9_]*__)[a-z](?:[a-z0-9_]*[a-z0-9])?/history/[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+        }
+      ]
+    },
+    "SemanticModelVersionPath": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/CanonicalResourcePath"
+        },
+        {
+          "type": "string",
+          "pattern": "^workspace/semantic-models/(?![a-z0-9_]*__)[a-z](?:[a-z0-9_]*[a-z0-9])?/history/[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}/[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+        }
+      ]
+    },
+    "MetricHistoryPath": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/CanonicalResourcePath"
+        },
+        {
+          "type": "string",
+          "pattern": "^workspace/metrics/(?![a-z0-9_]*__)[a-z](?:[a-z0-9_]*[a-z0-9])?/history/[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+        }
+      ]
+    },
+    "MetricVersionPath": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/CanonicalResourcePath"
+        },
+        {
+          "type": "string",
+          "pattern": "^workspace/metrics/(?![a-z0-9_]*__)[a-z](?:[a-z0-9_]*[a-z0-9])?/history/[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}/[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+        }
+      ]
+    },
+    "DashboardHistoryPath": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/CanonicalResourcePath"
+        },
+        {
+          "type": "string",
+          "pattern": "^workspace/dashboards/[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}/history$"
+        }
+      ]
+    },
+    "DashboardVersionPath": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/CanonicalResourcePath"
+        },
+        {
+          "type": "string",
+          "pattern": "^workspace/dashboards/[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}/history/[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+        }
+      ]
+    }
+  }
+}

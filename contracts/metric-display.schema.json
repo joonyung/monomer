@@ -1,0 +1,278 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://monomer.cc/schemas/metric-display.schema.json",
+  "title": "Metric display",
+  "description": "Execution-time metric presentation metadata. Formatting does not change exact result values.",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/number"
+    },
+    {
+      "$ref": "#/$defs/currencyDisplay"
+    },
+    {
+      "$ref": "#/$defs/percent"
+    }
+  ],
+  "$defs": {
+    "decimals": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 6
+    },
+    "currency": {
+      "type": "string",
+      "description": "Current ISO 4217 currency and funds codes from SIX List One, published 2026-09-17. Source: https://www.six-group.com/dam/download/financial-information/data-center/iso-currrency/lists/list-one.xml",
+      "enum": [
+        "AED",
+        "AFN",
+        "ALL",
+        "AMD",
+        "AOA",
+        "ARS",
+        "AUD",
+        "AWG",
+        "AZN",
+        "BAM",
+        "BBD",
+        "BDT",
+        "BHD",
+        "BIF",
+        "BMD",
+        "BND",
+        "BOB",
+        "BOV",
+        "BRL",
+        "BSD",
+        "BTN",
+        "BWP",
+        "BYN",
+        "BZD",
+        "CAD",
+        "CDF",
+        "CHE",
+        "CHF",
+        "CHW",
+        "CLF",
+        "CLP",
+        "CNY",
+        "COP",
+        "COU",
+        "CRC",
+        "CUP",
+        "CVE",
+        "CZK",
+        "DJF",
+        "DKK",
+        "DOP",
+        "DZD",
+        "EGP",
+        "ERN",
+        "ETB",
+        "EUR",
+        "FJD",
+        "FKP",
+        "GBP",
+        "GEL",
+        "GHS",
+        "GIP",
+        "GMD",
+        "GNF",
+        "GTQ",
+        "GYD",
+        "HKD",
+        "HNL",
+        "HTG",
+        "HUF",
+        "IDR",
+        "ILS",
+        "INR",
+        "IQD",
+        "IRR",
+        "ISK",
+        "JMD",
+        "JOD",
+        "JPY",
+        "KES",
+        "KGS",
+        "KHR",
+        "KMF",
+        "KPW",
+        "KRW",
+        "KWD",
+        "KYD",
+        "KZT",
+        "LAK",
+        "LBP",
+        "LKR",
+        "LRD",
+        "LSL",
+        "LYD",
+        "MAD",
+        "MDL",
+        "MGA",
+        "MKD",
+        "MMK",
+        "MNT",
+        "MOP",
+        "MRU",
+        "MUR",
+        "MVR",
+        "MWK",
+        "MXN",
+        "MXV",
+        "MYR",
+        "MZN",
+        "NAD",
+        "NGN",
+        "NIO",
+        "NOK",
+        "NPR",
+        "NZD",
+        "OMR",
+        "PAB",
+        "PEN",
+        "PGK",
+        "PHP",
+        "PKR",
+        "PLN",
+        "PYG",
+        "QAR",
+        "RON",
+        "RSD",
+        "RUB",
+        "RWF",
+        "SAR",
+        "SBD",
+        "SCR",
+        "SDG",
+        "SEK",
+        "SGD",
+        "SHP",
+        "SLE",
+        "SOS",
+        "SRD",
+        "SSP",
+        "STN",
+        "SVC",
+        "SYP",
+        "SZL",
+        "THB",
+        "TJS",
+        "TMT",
+        "TND",
+        "TOP",
+        "TRY",
+        "TTD",
+        "TWD",
+        "TZS",
+        "UAH",
+        "UGX",
+        "USD",
+        "USN",
+        "UYI",
+        "UYU",
+        "UYW",
+        "UZS",
+        "VED",
+        "VES",
+        "VND",
+        "VUV",
+        "WST",
+        "XAD",
+        "XAF",
+        "XAG",
+        "XAU",
+        "XBA",
+        "XBB",
+        "XBC",
+        "XBD",
+        "XCD",
+        "XCG",
+        "XDR",
+        "XOF",
+        "XPD",
+        "XPF",
+        "XPT",
+        "XSU",
+        "XTS",
+        "XUA",
+        "XXX",
+        "YER",
+        "ZAR",
+        "ZMW",
+        "ZWG"
+      ]
+    },
+    "unit": {
+      "type": "string",
+      "enum": [
+        "percent",
+        "second",
+        "millisecond",
+        "minute",
+        "hour",
+        "day",
+        "byte",
+        "kilobyte",
+        "megabyte",
+        "gigabyte"
+      ]
+    },
+    "number": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "style",
+        "decimals"
+      ],
+      "properties": {
+        "style": {
+          "const": "NUMBER"
+        },
+        "decimals": {
+          "$ref": "#/$defs/decimals"
+        },
+        "unit": {
+          "$ref": "#/$defs/unit"
+        }
+      }
+    },
+    "currencyDisplay": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "style",
+        "decimals",
+        "currency"
+      ],
+      "properties": {
+        "style": {
+          "const": "CURRENCY"
+        },
+        "decimals": {
+          "$ref": "#/$defs/decimals"
+        },
+        "currency": {
+          "$ref": "#/$defs/currency"
+        }
+      }
+    },
+    "percent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "style",
+        "decimals"
+      ],
+      "properties": {
+        "style": {
+          "const": "PERCENT"
+        },
+        "decimals": {
+          "$ref": "#/$defs/decimals"
+        }
+      }
+    }
+  }
+}

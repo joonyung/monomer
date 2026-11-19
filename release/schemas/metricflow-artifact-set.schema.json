@@ -1,0 +1,220 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://monomer.cc/release/schemas/metricflow-artifact-set/v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schemaVersion",
+    "version",
+    "artifactSetDigest",
+    "source",
+    "artifacts",
+    "distribution",
+    "releaseEvidencePolicy"
+  ],
+  "properties": {
+    "$schema": {
+      "const": "../schemas/metricflow-artifact-set.schema.json"
+    },
+    "schemaVersion": {
+      "const": 1
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
+      "description": "The release version is pinned only in metricflow-artifact-set.json. The contract verifier binds coordinates, paths and release URIs to this value."
+    },
+    "artifactSetDigest": {
+      "$ref": "#/$defs/digest"
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "uri",
+        "commit"
+      ],
+      "properties": {
+        "uri": {
+          "const": "https://github.com/monomerhq/metricflow-kotlin"
+        },
+        "commit": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40}$"
+        }
+      }
+    },
+    "artifacts": {
+      "type": "array",
+      "minItems": 9,
+      "maxItems": 9,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "coordinate",
+          "relativePath",
+          "sha256"
+        ],
+        "properties": {
+          "coordinate": {
+            "type": "string",
+            "pattern": "^cc\\.monomer\\.metricflow:metricflow-(?:core|engine|render-(?:trino|bigquery|snowflake|databricks|redshift|postgres|duckdb)):[0-9]+\\.[0-9]+\\.[0-9]+$"
+          },
+          "relativePath": {
+            "type": "string",
+            "pattern": "^cc/monomer/metricflow/metricflow-[a-z-]+/[0-9]+\\.[0-9]+\\.[0-9]+/metricflow-[a-z-]+-[0-9]+\\.[0-9]+\\.[0-9]+\\.jar$"
+          },
+          "sha256": {
+            "$ref": "#/$defs/digest"
+          }
+        }
+      }
+    },
+    "distribution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "productModuleAllowlist",
+        "excludedModules",
+        "mavenRepositoryBundle",
+        "releaseEvidence"
+      ],
+      "properties": {
+        "status": {
+          "const": "ACTIVATED"
+        },
+        "productModuleAllowlist": {
+          "$ref": "#/$defs/productModuleAllowlist"
+        },
+        "excludedModules": {
+          "$ref": "#/$defs/excludedModules"
+        },
+        "mavenRepositoryBundle": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "uri",
+            "archiveSha256",
+            "manifestPath",
+            "manifestSha256",
+            "contentType"
+          ],
+          "properties": {
+            "uri": {
+              "type": "string",
+              "format": "uri"
+            },
+            "archiveSha256": {
+              "$ref": "#/$defs/digest"
+            },
+            "manifestPath": {
+              "const": "maven-repository/.monomer-metricflow-manifest.json"
+            },
+            "manifestSha256": {
+              "$ref": "#/$defs/digest",
+              "description": "The release manifest asset hash, which must equal the archive marker bytes."
+            },
+            "contentType": {
+              "const": "application/zip"
+            }
+          }
+        },
+        "releaseEvidence": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "provenance",
+            "sbom"
+          ],
+          "properties": {
+            "provenance": {
+              "$ref": "#/$defs/evidenceArtifact"
+            },
+            "sbom": {
+              "$ref": "#/$defs/evidenceArtifact"
+            }
+          }
+        }
+      }
+    },
+    "releaseEvidencePolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "statementType",
+        "predicateType",
+        "provenanceSubjectCoverage",
+        "sourceBinding",
+        "sbomFormat",
+        "sbomComponentCoverage"
+      ],
+      "properties": {
+        "statementType": {
+          "const": "https://in-toto.io/Statement/v1"
+        },
+        "predicateType": {
+          "const": "https://slsa.dev/provenance/v1"
+        },
+        "provenanceSubjectCoverage": {
+          "const": "EXACT_ARTIFACT_SET"
+        },
+        "sourceBinding": {
+          "const": "EXACT_URI_AND_COMMIT"
+        },
+        "sbomFormat": {
+          "const": "CycloneDX"
+        },
+        "sbomComponentCoverage": {
+          "const": "REQUIRED_ARTIFACT_SET"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "productModuleAllowlist": {
+      "type": "array",
+      "minItems": 9,
+      "maxItems": 9,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^metricflow-(?:core|engine|render-(?:trino|bigquery|snowflake|databricks|redshift|postgres|duckdb))$"
+      }
+    },
+    "excludedModules": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^internal-diff-runner$"
+      },
+      "maxItems": 1
+    },
+    "evidenceArtifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "uri",
+        "sha256"
+      ],
+      "properties": {
+        "uri": {
+          "type": "string",
+          "format": "uri"
+        },
+        "sha256": {
+          "$ref": "#/$defs/digest"
+        }
+      }
+    },
+    "digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    }
+  }
+}

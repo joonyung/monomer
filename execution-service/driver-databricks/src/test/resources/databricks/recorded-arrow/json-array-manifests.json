@@ -1,0 +1,1233 @@
+[
+  {
+    "label": "async-poll",
+    "response": {
+      "status": {
+        "state": "SUCCEEDED"
+      },
+      "manifest": {
+        "format": "JSON_ARRAY",
+        "schema": {
+          "column_count": 1,
+          "columns": [
+            {
+              "name": "a",
+              "type_text": "INT",
+              "type_name": "INT",
+              "position": 0
+            }
+          ]
+        },
+        "total_chunk_count": 1,
+        "chunks": [
+          {
+            "chunk_index": 0,
+            "row_offset": 0,
+            "row_count": 1
+          }
+        ],
+        "total_row_count": 1,
+        "truncated": false
+      }
+    }
+  },
+  {
+    "label": "bind-exact-types",
+    "response": {
+      "status": {
+        "state": "SUCCEEDED"
+      },
+      "manifest": {
+        "format": "JSON_ARRAY",
+        "schema": {
+          "column_count": 10,
+          "columns": [
+            {
+              "name": "small",
+              "type_text": "DECIMAL(2,2)",
+              "type_name": "DECIMAL",
+              "position": 0,
+              "type_precision": 2,
+              "type_scale": 2
+            },
+            {
+              "name": "small_type",
+              "type_text": "STRING",
+              "type_name": "STRING",
+              "position": 1
+            },
+            {
+              "name": "upper",
+              "type_text": "DECIMAL(38,18)",
+              "type_name": "DECIMAL",
+              "position": 2,
+              "type_precision": 38,
+              "type_scale": 18
+            },
+            {
+              "name": "lower",
+              "type_text": "DECIMAL(38,18)",
+              "type_name": "DECIMAL",
+              "position": 3,
+              "type_precision": 38,
+              "type_scale": 18
+            },
+            {
+              "name": "tiny",
+              "type_text": "DECIMAL(18,18)",
+              "type_name": "DECIMAL",
+              "position": 4,
+              "type_precision": 18,
+              "type_scale": 18
+            },
+            {
+              "name": "gap",
+              "type_text": "DATE",
+              "type_name": "DATE",
+              "position": 5
+            },
+            {
+              "name": "zero",
+              "type_text": "DATE",
+              "type_name": "DATE",
+              "position": 6
+            },
+            {
+              "name": "bce",
+              "type_text": "DATE",
+              "type_name": "DATE",
+              "position": 7
+            },
+            {
+              "name": "ntz",
+              "type_text": "TIMESTAMP_NTZ",
+              "type_name": "TIMESTAMP_NTZ",
+              "position": 8
+            },
+            {
+              "name": "ntz_type",
+              "type_text": "STRING",
+              "type_name": "STRING",
+              "position": 9
+            }
+          ]
+        },
+        "total_chunk_count": 1,
+        "chunks": [
+          {
+            "chunk_index": 0,
+            "row_offset": 0,
+            "row_count": 1
+          }
+        ],
+        "total_row_count": 1,
+        "truncated": false
+      }
+    }
+  },
+  {
+    "label": "bind-null-types",
+    "response": {
+      "status": {
+        "state": "SUCCEEDED"
+      },
+      "manifest": {
+        "format": "JSON_ARRAY",
+        "schema": {
+          "column_count": 4,
+          "columns": [
+            {
+              "name": "ts",
+              "type_text": "TIMESTAMP",
+              "type_name": "TIMESTAMP",
+              "position": 0
+            },
+            {
+              "name": "ntz",
+              "type_text": "TIMESTAMP_NTZ",
+              "type_name": "TIMESTAMP_NTZ",
+              "position": 1
+            },
+            {
+              "name": "dt",
+              "type_text": "DATE",
+              "type_name": "DATE",
+              "position": 2
+            },
+            {
+              "name": "dec",
+              "type_text": "DECIMAL(38,18)",
+              "type_name": "DECIMAL",
+              "position": 3,
+              "type_precision": 38,
+              "type_scale": 18
+            }
+          ]
+        },
+        "total_chunk_count": 1,
+        "chunks": [
+          {
+            "chunk_index": 0,
+            "row_offset": 0,
+            "row_count": 1
+          }
+        ],
+        "total_row_count": 1,
+        "truncated": false
+      }
+    }
+  },
+  {
+    "label": "bind-rounding",
+    "response": {
+      "status": {
+        "state": "SUCCEEDED"
+      },
+      "manifest": {
+        "format": "JSON_ARRAY",
+        "schema": {
+          "column_count": 5,
+          "columns": [
+            {
+              "name": "decimal_scaled",
+              "type_text": "DECIMAL(2,2)",
+              "type_name": "DECIMAL",
+              "position": 0,
+              "type_precision": 2,
+              "type_scale": 2
+            },
+            {
+              "name": "tiny_scaled",
+              "type_text": "DECIMAL(18,18)",
+              "type_name": "DECIMAL",
+              "position": 1,
+              "type_precision": 18,
+              "type_scale": 18
+            },
+            {
+              "name": "ts_nanos",
+              "type_text": "TIMESTAMP",
+              "type_name": "TIMESTAMP",
+              "position": 2
+            },
+            {
+              "name": "ts_micros",
+              "type_text": "BIGINT",
+              "type_name": "LONG",
+              "position": 3
+            },
+            {
+              "name": "ntz_nanos",
+              "type_text": "TIMESTAMP_NTZ",
+              "type_name": "TIMESTAMP_NTZ",
+              "position": 4
+            }
+          ]
+        },
+        "total_chunk_count": 1,
+        "chunks": [
+          {
+            "chunk_index": 0,
+            "row_offset": 0,
+            "row_count": 1
+          }
+        ],
+        "total_row_count": 1,
+        "truncated": false
+      }
+    }
+  },
+  {
+    "label": "bind-timestamp-offsets",
+    "response": {
+      "status": {
+        "state": "SUCCEEDED"
+      },
+      "manifest": {
+        "format": "JSON_ARRAY",
+        "schema": {
+          "column_count": 6,
+          "columns": [
+            {
+              "name": "session_zone",
+              "type_text": "STRING",
+              "type_name": "STRING",
+              "position": 0
+            },
+            {
+              "name": "z",
+              "type_text": "TIMESTAMP",
+              "type_name": "TIMESTAMP",
+              "position": 1
+            },
+            {
+              "name": "off",
+              "type_text": "TIMESTAMP",
+              "type_name": "TIMESTAMP",
+              "position": 2
+            },
+            {
+              "name": "z_micros",
+              "type_text": "BIGINT",
+              "type_name": "LONG",
+              "position": 3
+            },
+            {
+              "name": "off_micros",
+              "type_text": "BIGINT",
+              "type_name": "LONG",
+              "position": 4
+            },
+            {
+              "name": "same",
+              "type_text": "BOOLEAN",
+              "type_name": "BOOLEAN",
+              "position": 5
+            }
+          ]
+        },
+        "total_chunk_count": 1,
+        "chunks": [
+          {
+            "chunk_index": 0,
+            "row_offset": 0,
+            "row_count": 1
+          }
+        ],
+        "total_row_count": 1,
+        "truncated": false
+      }
+    }
+  },
+  {
+    "label": "inline-edges",
+    "response": {
+      "status": {
+        "state": "SUCCEEDED"
+      },
+      "manifest": {
+        "format": "JSON_ARRAY",
+        "schema": {
+          "column_count": 31,
+          "columns": [
+            {
+              "name": "session_zone",
+              "type_text": "STRING",
+              "type_name": "STRING",
+              "position": 0
+            },
+            {
+              "name": "ts_dst_gap",
+              "type_text": "TIMESTAMP",
+              "type_name": "TIMESTAMP",
+              "position": 1
+            },
+            {
+              "name": "ts_after_gap",
+              "type_text": "TIMESTAMP",
+              "type_name": "TIMESTAMP",
+              "position": 2
+            },
+            {
+              "name": "ts_negative",
+              "type_text": "TIMESTAMP",
+              "type_name": "TIMESTAMP",
+              "position": 3
+            },
+            {
+              "name": "ts_calendar_gap",
+              "type_text": "TIMESTAMP",
+              "type_name": "TIMESTAMP",
+              "position": 4
+            },
+            {
+              "name": "ts_year_zero",
+              "type_text": "TIMESTAMP",
+              "type_name": "TIMESTAMP",
+              "position": 5
+            },
+            {
+              "name": "ts_upper",
+              "type_text": "TIMESTAMP",
+              "type_name": "TIMESTAMP",
+              "position": 6
+            },
+            {
+              "name": "ts_lower",
+              "type_text": "TIMESTAMP",
+              "type_name": "TIMESTAMP",
+              "position": 7
+            },
+            {
+              "name": "ntz_dst_gap",
+              "type_text": "TIMESTAMP_NTZ",
+              "type_name": "TIMESTAMP_NTZ",
+              "position": 8
+            },
+            {
+              "name": "ntz_after_gap",
+              "type_text": "TIMESTAMP_NTZ",
+              "type_name": "TIMESTAMP_NTZ",
+              "position": 9
+            },
+            {
+              "name": "ntz_calendar_gap",
+              "type_text": "TIMESTAMP_NTZ",
+              "type_name": "TIMESTAMP_NTZ",
+              "position": 10
+            },
+            {
+              "name": "ntz_year_zero",
+              "type_text": "TIMESTAMP_NTZ",
+              "type_name": "TIMESTAMP_NTZ",
+              "position": 11
+            },
+            {
+              "name": "ntz_upper",
+              "type_text": "TIMESTAMP_NTZ",
+              "type_name": "TIMESTAMP_NTZ",
+              "position": 12
+            },
+            {
+              "name": "ntz_lower",
+              "type_text": "TIMESTAMP_NTZ",
+              "type_name": "TIMESTAMP_NTZ",
+              "position": 13
+            },
+            {
+              "name": "date_pre_cutover",
+              "type_text": "DATE",
+              "type_name": "DATE",
+              "position": 14
+            },
+            {
+              "name": "date_calendar_gap",
+              "type_text": "DATE",
+              "type_name": "DATE",
+              "position": 15
+            },
+            {
+              "name": "date_alias",
+              "type_text": "DATE",
+              "type_name": "DATE",
+              "position": 16
+            },
+            {
+              "name": "date_year_zero",
+              "type_text": "DATE",
+              "type_name": "DATE",
+              "position": 17
+            },
+            {
+              "name": "date_bce",
+              "type_text": "DATE",
+              "type_name": "DATE",
+              "position": 18
+            },
+            {
+              "name": "date_lower",
+              "type_text": "DATE",
+              "type_name": "DATE",
+              "position": 19
+            },
+            {
+              "name": "date_upper",
+              "type_text": "DATE",
+              "type_name": "DATE",
+              "position": 20
+            },
+            {
+              "name": "decimal_small",
+              "type_text": "DECIMAL(3,2)",
+              "type_name": "DECIMAL",
+              "position": 21,
+              "type_precision": 3,
+              "type_scale": 2
+            },
+            {
+              "name": "decimal_upper",
+              "type_text": "DECIMAL(38,18)",
+              "type_name": "DECIMAL",
+              "position": 22,
+              "type_precision": 38,
+              "type_scale": 18
+            },
+            {
+              "name": "decimal_lower",
+              "type_text": "DECIMAL(38,18)",
+              "type_name": "DECIMAL",
+              "position": 23,
+              "type_precision": 38,
+              "type_scale": 18
+            },
+            {
+              "name": "decimal_tiny",
+              "type_text": "DECIMAL(38,18)",
+              "type_name": "DECIMAL",
+              "position": 24,
+              "type_precision": 38,
+              "type_scale": 18
+            },
+            {
+              "name": "ts_dst_server_micros",
+              "type_text": "BIGINT",
+              "type_name": "LONG",
+              "position": 25
+            },
+            {
+              "name": "ts_negative_server_micros",
+              "type_text": "BIGINT",
+              "type_name": "LONG",
+              "position": 26
+            },
+            {
+              "name": "ts_gap_server_micros",
+              "type_text": "BIGINT",
+              "type_name": "LONG",
+              "position": 27
+            },
+            {
+              "name": "ts_zero_server_micros",
+              "type_text": "BIGINT",
+              "type_name": "LONG",
+              "position": 28
+            },
+            {
+              "name": "ts_upper_server_micros",
+              "type_text": "BIGINT",
+              "type_name": "LONG",
+              "position": 29
+            },
+            {
+              "name": "ts_lower_server_micros",
+              "type_text": "BIGINT",
+              "type_name": "LONG",
+              "position": 30
+            }
+          ]
+        },
+        "total_chunk_count": 1,
+        "chunks": [
+          {
+            "chunk_index": 0,
+            "row_offset": 0,
+            "row_count": 1
+          }
+        ],
+        "total_row_count": 1,
+        "truncated": false
+      }
+    }
+  },
+  {
+    "label": "inline-long-min",
+    "response": {
+      "status": {
+        "state": "SUCCEEDED"
+      },
+      "manifest": {
+        "format": "JSON_ARRAY",
+        "schema": {
+          "column_count": 3,
+          "columns": [
+            {
+              "name": "ts_min",
+              "type_text": "TIMESTAMP",
+              "type_name": "TIMESTAMP",
+              "position": 0
+            },
+            {
+              "name": "ntz_min",
+              "type_text": "TIMESTAMP_NTZ",
+              "type_name": "TIMESTAMP_NTZ",
+              "position": 1
+            },
+            {
+              "name": "ref_min",
+              "type_text": "BIGINT",
+              "type_name": "LONG",
+              "position": 2
+            }
+          ]
+        },
+        "total_chunk_count": 1,
+        "chunks": [
+          {
+            "chunk_index": 0,
+            "row_offset": 0,
+            "row_count": 1
+          }
+        ],
+        "total_row_count": 1,
+        "truncated": false
+      }
+    }
+  },
+  {
+    "label": "limits-byte",
+    "response": {
+      "status": {
+        "state": "SUCCEEDED"
+      },
+      "manifest": {
+        "format": "JSON_ARRAY",
+        "schema": {
+          "column_count": 1,
+          "columns": [
+            {
+              "name": "n",
+              "type_text": "INT",
+              "type_name": "INT",
+              "position": 0
+            }
+          ]
+        },
+        "total_chunk_count": 0,
+        "total_row_count": 0,
+        "truncated": true
+      }
+    }
+  },
+  {
+    "label": "limits-row",
+    "response": {
+      "status": {
+        "state": "SUCCEEDED"
+      },
+      "manifest": {
+        "format": "JSON_ARRAY",
+        "schema": {
+          "column_count": 1,
+          "columns": [
+            {
+              "name": "n",
+              "type_text": "INT",
+              "type_name": "INT",
+              "position": 0
+            }
+          ]
+        },
+        "total_chunk_count": 1,
+        "chunks": [
+          {
+            "chunk_index": 0,
+            "row_offset": 0,
+            "row_count": 2
+          }
+        ],
+        "total_row_count": 2,
+        "truncated": true
+      }
+    }
+  },
+  {
+    "label": "markers-array-order",
+    "response": {
+      "status": {
+        "state": "SUCCEEDED"
+      },
+      "manifest": {
+        "format": "JSON_ARRAY",
+        "schema": {
+          "column_count": 2,
+          "columns": [
+            {
+              "name": "a",
+              "type_text": "INT",
+              "type_name": "INT",
+              "position": 0
+            },
+            {
+              "name": "b",
+              "type_text": "INT",
+              "type_name": "INT",
+              "position": 1
+            }
+          ]
+        },
+        "total_chunk_count": 1,
+        "chunks": [
+          {
+            "chunk_index": 0,
+            "row_offset": 0,
+            "row_count": 1
+          }
+        ],
+        "total_row_count": 1,
+        "truncated": false
+      }
+    }
+  },
+  {
+    "label": "markers-invalid-position",
+    "response": {
+      "status": {
+        "state": "SUCCEEDED"
+      },
+      "manifest": {
+        "format": "JSON_ARRAY",
+        "schema": {
+          "column_count": 2,
+          "columns": [
+            {
+              "name": "a",
+              "type_text": "INT",
+              "type_name": "INT",
+              "position": 0
+            },
+            {
+              "name": "b",
+              "type_text": "INT",
+              "type_name": "INT",
+              "position": 1
+            }
+          ]
+        },
+        "total_chunk_count": 1,
+        "chunks": [
+          {
+            "chunk_index": 0,
+            "row_offset": 0,
+            "row_count": 1
+          }
+        ],
+        "total_row_count": 1,
+        "truncated": false
+      }
+    }
+  },
+  {
+    "label": "markers-named",
+    "response": {
+      "status": {
+        "state": "SUCCEEDED"
+      },
+      "manifest": {
+        "format": "JSON_ARRAY",
+        "schema": {
+          "column_count": 2,
+          "columns": [
+            {
+              "name": "a",
+              "type_text": "INT",
+              "type_name": "INT",
+              "position": 0
+            },
+            {
+              "name": "b",
+              "type_text": "INT",
+              "type_name": "INT",
+              "position": 1
+            }
+          ]
+        },
+        "total_chunk_count": 1,
+        "chunks": [
+          {
+            "chunk_index": 0,
+            "row_offset": 0,
+            "row_count": 1
+          }
+        ],
+        "total_row_count": 1,
+        "truncated": false
+      }
+    }
+  },
+  {
+    "label": "markers-null-name",
+    "response": {
+      "status": {
+        "state": "SUCCEEDED"
+      },
+      "manifest": {
+        "format": "JSON_ARRAY",
+        "schema": {
+          "column_count": 2,
+          "columns": [
+            {
+              "name": "a",
+              "type_text": "INT",
+              "type_name": "INT",
+              "position": 0
+            },
+            {
+              "name": "b",
+              "type_text": "INT",
+              "type_name": "INT",
+              "position": 1
+            }
+          ]
+        },
+        "total_chunk_count": 1,
+        "chunks": [
+          {
+            "chunk_index": 0,
+            "row_offset": 0,
+            "row_count": 1
+          }
+        ],
+        "total_row_count": 1,
+        "truncated": false
+      }
+    }
+  },
+  {
+    "label": "markers-ordinal",
+    "response": {
+      "status": {
+        "state": "SUCCEEDED"
+      },
+      "manifest": {
+        "format": "JSON_ARRAY",
+        "schema": {
+          "column_count": 2,
+          "columns": [
+            {
+              "name": "a",
+              "type_text": "INT",
+              "type_name": "INT",
+              "position": 0
+            },
+            {
+              "name": "b",
+              "type_text": "INT",
+              "type_name": "INT",
+              "position": 1
+            }
+          ]
+        },
+        "total_chunk_count": 1,
+        "chunks": [
+          {
+            "chunk_index": 0,
+            "row_offset": 0,
+            "row_count": 1
+          }
+        ],
+        "total_row_count": 1,
+        "truncated": false
+      }
+    }
+  },
+  {
+    "label": "markers-position",
+    "response": {
+      "status": {
+        "state": "SUCCEEDED"
+      },
+      "manifest": {
+        "format": "JSON_ARRAY",
+        "schema": {
+          "column_count": 2,
+          "columns": [
+            {
+              "name": "a",
+              "type_text": "INT",
+              "type_name": "INT",
+              "position": 0
+            },
+            {
+              "name": "b",
+              "type_text": "INT",
+              "type_name": "INT",
+              "position": 1
+            }
+          ]
+        },
+        "total_chunk_count": 1,
+        "chunks": [
+          {
+            "chunk_index": 0,
+            "row_offset": 0,
+            "row_count": 1
+          }
+        ],
+        "total_row_count": 1,
+        "truncated": false
+      }
+    }
+  },
+  {
+    "label": "markers-positional-describe",
+    "response": {
+      "status": {
+        "state": "SUCCEEDED"
+      },
+      "manifest": {
+        "format": "JSON_ARRAY",
+        "schema": {
+          "column_count": 4,
+          "columns": [
+            {
+              "name": "col_name",
+              "type_text": "STRING",
+              "type_name": "STRING",
+              "position": 0
+            },
+            {
+              "name": "data_type",
+              "type_text": "STRING",
+              "type_name": "STRING",
+              "position": 1
+            },
+            {
+              "name": "comment",
+              "type_text": "STRING",
+              "type_name": "STRING",
+              "position": 2
+            },
+            {
+              "name": "metadata",
+              "type_text": "STRING",
+              "type_name": "STRING",
+              "position": 3
+            }
+          ]
+        },
+        "total_chunk_count": 1,
+        "chunks": [
+          {
+            "chunk_index": 0,
+            "row_offset": 0,
+            "row_count": 2
+          }
+        ],
+        "total_row_count": 2,
+        "truncated": false
+      }
+    }
+  },
+  {
+    "label": "markers-positional-nulls",
+    "response": {
+      "status": {
+        "state": "SUCCEEDED"
+      },
+      "manifest": {
+        "format": "JSON_ARRAY",
+        "schema": {
+          "column_count": 3,
+          "columns": [
+            {
+              "name": "ts",
+              "type_text": "TIMESTAMP",
+              "type_name": "TIMESTAMP",
+              "position": 0
+            },
+            {
+              "name": "dt",
+              "type_text": "DATE",
+              "type_name": "DATE",
+              "position": 1
+            },
+            {
+              "name": "amount",
+              "type_text": "DECIMAL(38,18)",
+              "type_name": "DECIMAL",
+              "position": 2,
+              "type_precision": 38,
+              "type_scale": 18
+            }
+          ]
+        },
+        "total_chunk_count": 1,
+        "chunks": [
+          {
+            "chunk_index": 0,
+            "row_offset": 0,
+            "row_count": 1
+          }
+        ],
+        "total_row_count": 1,
+        "truncated": false
+      }
+    }
+  },
+  {
+    "label": "markers-repeated",
+    "response": {
+      "status": {
+        "state": "SUCCEEDED"
+      },
+      "manifest": {
+        "format": "JSON_ARRAY",
+        "schema": {
+          "column_count": 2,
+          "columns": [
+            {
+              "name": "a",
+              "type_text": "INT",
+              "type_name": "INT",
+              "position": 0
+            },
+            {
+              "name": "again",
+              "type_text": "INT",
+              "type_name": "INT",
+              "position": 1
+            }
+          ]
+        },
+        "total_chunk_count": 1,
+        "chunks": [
+          {
+            "chunk_index": 0,
+            "row_offset": 0,
+            "row_count": 1
+          }
+        ],
+        "total_row_count": 1,
+        "truncated": false
+      }
+    }
+  },
+  {
+    "label": "markers-reversed-ordinal",
+    "response": {
+      "status": {
+        "state": "SUCCEEDED"
+      },
+      "manifest": {
+        "format": "JSON_ARRAY",
+        "schema": {
+          "column_count": 2,
+          "columns": [
+            {
+              "name": "a",
+              "type_text": "INT",
+              "type_name": "INT",
+              "position": 0
+            },
+            {
+              "name": "b",
+              "type_text": "INT",
+              "type_name": "INT",
+              "position": 1
+            }
+          ]
+        },
+        "total_chunk_count": 1,
+        "chunks": [
+          {
+            "chunk_index": 0,
+            "row_offset": 0,
+            "row_count": 1
+          }
+        ],
+        "total_row_count": 1,
+        "truncated": false
+      }
+    }
+  },
+  {
+    "label": "markers-typed-null",
+    "response": {
+      "status": {
+        "state": "SUCCEEDED"
+      },
+      "manifest": {
+        "format": "JSON_ARRAY",
+        "schema": {
+          "column_count": 2,
+          "columns": [
+            {
+              "name": "n",
+              "type_text": "DECIMAL(38,18)",
+              "type_name": "DECIMAL",
+              "position": 0,
+              "type_precision": 38,
+              "type_scale": 18
+            },
+            {
+              "name": "declared_type",
+              "type_text": "STRING",
+              "type_name": "STRING",
+              "position": 1
+            }
+          ]
+        },
+        "total_chunk_count": 1,
+        "chunks": [
+          {
+            "chunk_index": 0,
+            "row_offset": 0,
+            "row_count": 1
+          }
+        ],
+        "total_row_count": 1,
+        "truncated": false
+      }
+    }
+  },
+  {
+    "label": "markers-unnamed",
+    "response": {
+      "status": {
+        "state": "SUCCEEDED"
+      },
+      "manifest": {
+        "format": "JSON_ARRAY",
+        "schema": {
+          "column_count": 2,
+          "columns": [
+            {
+              "name": "a",
+              "type_text": "INT",
+              "type_name": "INT",
+              "position": 0
+            },
+            {
+              "name": "b",
+              "type_text": "INT",
+              "type_name": "INT",
+              "position": 1
+            }
+          ]
+        },
+        "total_chunk_count": 1,
+        "chunks": [
+          {
+            "chunk_index": 0,
+            "row_offset": 0,
+            "row_count": 1
+          }
+        ],
+        "total_row_count": 1,
+        "truncated": false
+      }
+    }
+  },
+  {
+    "label": "preflight",
+    "response": {
+      "status": {
+        "state": "SUCCEEDED"
+      },
+      "manifest": {
+        "format": "JSON_ARRAY",
+        "schema": {
+          "column_count": 1,
+          "columns": [
+            {
+              "name": "preflight",
+              "type_text": "INT",
+              "type_name": "INT",
+              "position": 0
+            }
+          ]
+        },
+        "total_chunk_count": 1,
+        "chunks": [
+          {
+            "chunk_index": 0,
+            "row_offset": 0,
+            "row_count": 1
+          }
+        ],
+        "total_row_count": 1,
+        "truncated": false
+      }
+    }
+  },
+  {
+    "label": "validate-named",
+    "response": {
+      "status": {
+        "state": "SUCCEEDED"
+      },
+      "manifest": {
+        "format": "JSON_ARRAY",
+        "schema": {
+          "column_count": 4,
+          "columns": [
+            {
+              "name": "col_name",
+              "type_text": "STRING",
+              "type_name": "STRING",
+              "position": 0
+            },
+            {
+              "name": "data_type",
+              "type_text": "STRING",
+              "type_name": "STRING",
+              "position": 1
+            },
+            {
+              "name": "comment",
+              "type_text": "STRING",
+              "type_name": "STRING",
+              "position": 2
+            },
+            {
+              "name": "metadata",
+              "type_text": "STRING",
+              "type_name": "STRING",
+              "position": 3
+            }
+          ]
+        },
+        "total_chunk_count": 1,
+        "chunks": [
+          {
+            "chunk_index": 0,
+            "row_offset": 0,
+            "row_count": 3
+          }
+        ],
+        "total_row_count": 3,
+        "truncated": false
+      }
+    }
+  },
+  {
+    "label": "validate-values",
+    "response": {
+      "status": {
+        "state": "SUCCEEDED"
+      },
+      "manifest": {
+        "format": "JSON_ARRAY",
+        "schema": {
+          "column_count": 4,
+          "columns": [
+            {
+              "name": "col_name",
+              "type_text": "STRING",
+              "type_name": "STRING",
+              "position": 0
+            },
+            {
+              "name": "data_type",
+              "type_text": "STRING",
+              "type_name": "STRING",
+              "position": 1
+            },
+            {
+              "name": "comment",
+              "type_text": "STRING",
+              "type_name": "STRING",
+              "position": 2
+            },
+            {
+              "name": "metadata",
+              "type_text": "STRING",
+              "type_name": "STRING",
+              "position": 3
+            }
+          ]
+        },
+        "total_chunk_count": 1,
+        "chunks": [
+          {
+            "chunk_index": 0,
+            "row_offset": 0,
+            "row_count": 2
+          }
+        ],
+        "total_row_count": 2,
+        "truncated": false
+      }
+    }
+  }
+]

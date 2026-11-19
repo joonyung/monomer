@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "monomer://schema/semantic/time-spine/1",
+  "title": "Semantic Time Spine Definition",
+  "type": "object",
+  "required": ["schemaVersion", "timeSpines"],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "timeSpines": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/timeSpine" }
+    }
+  },
+  "$defs": {
+    "addressPart": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1024,
+      "pattern": "^[^\\u0000]*$"
+    },
+    "granularity": {
+      "enum": [
+        "nanosecond",
+        "microsecond",
+        "millisecond",
+        "second",
+        "minute",
+        "hour",
+        "day",
+        "week",
+        "month",
+        "quarter",
+        "year"
+      ]
+    },
+    "relation": {
+      "type": "object",
+      "required": ["schema", "relation"],
+      "additionalProperties": false,
+      "properties": {
+        "catalog": { "$ref": "#/$defs/addressPart" },
+        "schema": { "$ref": "#/$defs/addressPart" },
+        "relation": { "$ref": "#/$defs/addressPart" }
+      }
+    },
+    "primaryColumn": {
+      "type": "object",
+      "required": ["name", "granularity"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "$ref": "#/$defs/addressPart" },
+        "granularity": { "$ref": "#/$defs/granularity" }
+      }
+    },
+    "timeSpine": {
+      "type": "object",
+      "required": ["relation", "primaryColumn"],
+      "additionalProperties": false,
+      "properties": {
+        "relation": { "$ref": "#/$defs/relation" },
+        "primaryColumn": { "$ref": "#/$defs/primaryColumn" }
+      }
+    }
+  }
+}

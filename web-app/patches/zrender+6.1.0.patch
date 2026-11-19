@@ -1,0 +1,15 @@
+diff --git a/node_modules/zrender/lib/canvas/Painter.js b/node_modules/zrender/lib/canvas/Painter.js
+index 78dc6c8..c7905d8 100644
+--- a/node_modules/zrender/lib/canvas/Painter.js
++++ b/node_modules/zrender/lib/canvas/Painter.js
+@@ -652,7 +652,9 @@ var CanvasPainter = (function () {
+             }
+             this._width = width;
+             this._height = height;
+-            this._ensureLayer(CANVAS_ZLEVEL).resize(width, height);
++            eachLayer(this._i, function (layer) {
++                layer.resize(width, height);
++            });
+         }
+         else {
+             var domRoot = this._domRoot;

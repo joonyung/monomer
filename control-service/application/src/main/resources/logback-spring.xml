@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <conversionRule conversionWord="safeEx" class="cc.monomer.control.observability.MessageFreeThrowableConverter"/>
+    <condition class="ch.qos.logback.core.boolex.PropertyEqualityCondition">
+        <key>CONSOLE_LOG_STRUCTURED_FORMAT</key>
+        <value>ecs</value>
+    </condition>
+    <if>
+        <then>
+            <include resource="org/springframework/boot/logging/logback/structured-console-appender.xml"/>
+        </then>
+        <else>
+            <include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
+        </else>
+    </if>
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+</configuration>

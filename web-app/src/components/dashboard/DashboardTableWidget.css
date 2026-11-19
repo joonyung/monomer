@@ -1,0 +1,39 @@
+.dashboard-table-widget { display: flex; flex-direction: column; height: 100%; min-height: 0; min-width: 0; color: var(--foreground); font-size: 12px; font-variant-numeric: tabular-nums; }
+.dashboard-table-toolbar { display: flex; flex-wrap: nowrap; height: 33px; min-height: 33px; flex-shrink: 0; align-items: center; gap: 8px; padding: 8px 12px; color: var(--foreground-secondary); font-size: 11px; }
+.dashboard-table-toolbar > span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.dashboard-table-copy-actions { flex-shrink: 0; display: flex; flex-wrap: wrap; gap: 4px; margin-left: auto; }
+.dashboard-table-widget button:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: -3px; }
+.dashboard-table-widget .dashboard-table-scroll { flex: 1; min-height: 0; overflow: auto; }
+.dashboard-table-widget .dashboard-table-scroll:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: -3px; }
+.dashboard-table-widget table { min-width: 100%; table-layout: fixed; border-spacing: 0; border-collapse: separate; text-align: left; }
+.dashboard-table-widget thead { position: sticky; top: 0; z-index: 1; background: var(--background); }
+.dashboard-table-widget th { height: 32px; padding: 0; border-bottom: 1px solid var(--border); color: var(--foreground-secondary); font-size: 11px; font-weight: 400; }
+.dashboard-table-widget th button { display: flex; align-items: center; justify-content: space-between; gap: 8px; height: 31px; width: 100%; padding: 4px 12px; text-align: start; }
+.dashboard-table-widget th button span:first-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.dashboard-table-widget th[data-numeric] button { flex-direction: row-reverse; justify-content: flex-start; text-align: end; }
+.dashboard-table-widget td[data-numeric] .dashboard-table-cell-content { justify-content: flex-end; }
+.dashboard-table-widget td { padding: 8px 12px; border-bottom: 1px solid var(--border-light); overflow: hidden; vertical-align: middle; }
+.dashboard-table-widget td[aria-selected="true"] { background: var(--surface) !important; color: var(--foreground) !important; }
+.dashboard-table-widget:focus-within td[aria-selected="true"] { box-shadow: inset 2px 0 var(--accent-marker); }
+.dashboard-table-widget td:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: -3px; background: var(--surface) !important; color: var(--foreground) !important; }
+.dashboard-table-widget td[data-cell-error="true"] { background: var(--background) !important; color: var(--foreground) !important; }
+.dashboard-table-cell-content { display: flex; align-items: center; gap: 4px; overflow: hidden; }
+.dashboard-table-cell-content > span:first-child { width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.dashboard-table-graphic { display: block; width: 100%; height: 100%; object-fit: contain; }
+.dashboard-table-cell-error { flex-shrink: 0; color: var(--error); font-size: 10px; }
+.dashboard-table-widget .dashboard-table-spacer { padding: 0; border: 0; }
+.dashboard-table-error { margin: 0; padding: 8px 12px; color: var(--error); font-size: 12px; }
+.dashboard-table-empty { padding: 24px 12px; text-align: center; color: var(--foreground-secondary); }
+
+.dashboard-table-pivot thead { z-index: 3; }
+.dashboard-table-pivot tfoot { background: var(--background); }
+.dashboard-table-pivot tfoot[data-pinned] { position: sticky; bottom: 0; z-index: 2; }
+.dashboard-table-pivot tfoot tr:first-child td { border-top: 1px solid var(--border); }
+.dashboard-table-pivot .dashboard-table-pivot-row-header { position: sticky; z-index: 1; background: var(--background); }
+.dashboard-table-pivot .dashboard-table-pivot-total { font-weight: 500; }
+.dashboard-table-pivot-header-label { display: block; padding: 4px 12px; overflow: hidden; line-height: 23px; text-overflow: ellipsis; white-space: nowrap; }
+.dashboard-table-pivot th[data-numeric] > .dashboard-table-pivot-header-label { text-align: end; }
+
+.dashboard-table-copy-menu { position: fixed; margin: 0; width: 184px; padding: 4px; border: 1px solid var(--border); border-radius: 6px; background: var(--background); color: var(--foreground); box-shadow: var(--shadow-overlay); }
+.dashboard-table-copy-menu button { display: block; width: 100%; min-height: 36px; padding: 8px; border: 0; border-radius: 3px; text-align: left; font-size: 12px; font-weight: 400; background: transparent; }
+.dashboard-table-copy-menu button:hover, .dashboard-table-copy-menu button:focus-visible { background: var(--surface); outline: none; }

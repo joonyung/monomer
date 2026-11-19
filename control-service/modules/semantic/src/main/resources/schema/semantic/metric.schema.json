@@ -1,0 +1,543 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "monomer://schema/semantic/metric/3",
+  "title": "Metric Definition",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/simpleMetric"
+    },
+    {
+      "$ref": "#/$defs/ratioMetric"
+    },
+    {
+      "$ref": "#/$defs/derivedMetric"
+    },
+    {
+      "$ref": "#/$defs/cumulativeMetric"
+    },
+    {
+      "$ref": "#/$defs/conversionMetric"
+    }
+  ],
+  "$defs": {
+    "elementName": {
+      "type": "string",
+      "pattern": "^(?![a-z0-9_]*__)[a-z](?:[a-z0-9_]*[a-z0-9])?$"
+    },
+    "optionalText": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[^\\u0000]*$"
+    },
+    "metricInput": {
+      "type": "object",
+      "required": [
+        "metricName"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "metricName": {
+          "$ref": "#/$defs/elementName"
+        },
+        "filter": {
+          "$ref": "#/$defs/filter"
+        },
+        "alias": {
+          "$ref": "#/$defs/elementName"
+        },
+        "offsetWindow": {
+          "$ref": "#/$defs/window"
+        },
+        "offsetToGrain": {
+          "enum": [
+            "nanosecond",
+            "microsecond",
+            "millisecond",
+            "second",
+            "minute",
+            "hour",
+            "day",
+            "week",
+            "month",
+            "quarter",
+            "year"
+          ]
+        }
+      }
+    },
+    "window": {
+      "type": "string",
+      "pattern": "^[1-9][0-9]* (day|days|week|weeks|month|months|quarter|quarters|year|years)$"
+    },
+    "dimensionReference": {
+      "type": "object",
+      "required": [
+        "semanticModelName",
+        "name"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "semanticModelName": {
+          "$ref": "#/$defs/elementName"
+        },
+        "name": {
+          "$ref": "#/$defs/elementName"
+        },
+        "granularity": {
+          "enum": [
+            "nanosecond",
+            "microsecond",
+            "millisecond",
+            "second",
+            "minute",
+            "hour",
+            "day",
+            "week",
+            "month",
+            "quarter",
+            "year"
+          ]
+        }
+      }
+    },
+    "predicate": {
+      "type": "object",
+      "required": [
+        "dimension",
+        "operator",
+        "values"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "dimension": {
+          "$ref": "#/$defs/dimensionReference"
+        },
+        "operator": {
+          "enum": [
+            "eq",
+            "ne",
+            "gt",
+            "gte",
+            "lt",
+            "lte",
+            "in",
+            "not_in",
+            "between",
+            "is_null",
+            "is_not_null",
+            "like",
+            "not_like",
+            "contains",
+            "starts_with"
+          ]
+        },
+        "values": {
+          "type": "array",
+          "maxItems": 100,
+          "items": {
+            "type": "string",
+            "pattern": "^[^\\u0000]*$"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "operator": {
+                "enum": [
+                  "is_null",
+                  "is_not_null"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "values": {
+                "minItems": 0,
+                "maxItems": 0
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "operator": {
+                "const": "between"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "values": {
+                "minItems": 2,
+                "maxItems": 2
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "operator": {
+                "enum": [
+                  "in",
+                  "not_in"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "values": {
+                "minItems": 1
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "operator": {
+                "enum": [
+                  "eq",
+                  "ne",
+                  "gt",
+                  "gte",
+                  "lt",
+                  "lte",
+                  "like",
+                  "not_like",
+                  "contains",
+                  "starts_with"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "values": {
+                "minItems": 1,
+                "maxItems": 1
+              }
+            }
+          }
+        }
+      ]
+    },
+    "filter": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/predicate"
+        },
+        {
+          "type": "object",
+          "required": [
+            "and"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "and": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "$ref": "#/$defs/filter"
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "or"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "or": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "$ref": "#/$defs/filter"
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "not"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "not": {
+              "$ref": "#/$defs/filter"
+            }
+          }
+        }
+      ]
+    },
+    "common": {
+      "type": "object",
+      "required": [
+        "schemaVersion",
+        "name",
+        "type"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": 3
+        },
+        "name": {
+          "$ref": "#/$defs/elementName"
+        },
+        "type": {
+          "enum": [
+            "simple",
+            "ratio",
+            "derived",
+            "cumulative",
+            "conversion"
+          ]
+        },
+        "label": {
+          "$ref": "#/$defs/optionalText"
+        },
+        "description": {
+          "$ref": "#/$defs/optionalText"
+        },
+        "timeGranularity": {
+          "enum": [
+            "nanosecond",
+            "microsecond",
+            "millisecond",
+            "second",
+            "minute",
+            "hour",
+            "day",
+            "week",
+            "month",
+            "quarter",
+            "year"
+          ]
+        },
+        "filters": {
+          "type": "array",
+          "maxItems": 32,
+          "items": {
+            "$ref": "#/$defs/filter"
+          }
+        },
+        "display": {
+          "oneOf": [
+            {
+              "$ref": "https://monomer.cc/schemas/metric-display.schema.json"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "simpleMetric": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/$defs/common"
+        },
+        {
+          "type": "object",
+          "required": [
+            "semanticModelName",
+            "measure"
+          ],
+          "properties": {
+            "type": {
+              "const": "simple"
+            },
+            "semanticModelName": {
+              "$ref": "#/$defs/elementName"
+            },
+            "measure": {
+              "$ref": "#/$defs/elementName"
+            }
+          }
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "ratioMetric": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/$defs/common"
+        },
+        {
+          "type": "object",
+          "required": [
+            "numerator",
+            "denominator"
+          ],
+          "properties": {
+            "type": {
+              "const": "ratio"
+            },
+            "numerator": {
+              "$ref": "#/$defs/metricInput"
+            },
+            "denominator": {
+              "$ref": "#/$defs/metricInput"
+            }
+          }
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "derivedMetric": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/$defs/common"
+        },
+        {
+          "type": "object",
+          "required": [
+            "expression",
+            "inputMetrics"
+          ],
+          "properties": {
+            "type": {
+              "const": "derived"
+            },
+            "expression": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^[^\\u0000]*$"
+            },
+            "inputMetrics": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "$ref": "#/$defs/metricInput"
+              }
+            }
+          }
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "cumulativeMetric": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/$defs/common"
+        },
+        {
+          "type": "object",
+          "required": [
+            "inputMetric"
+          ],
+          "properties": {
+            "type": {
+              "const": "cumulative"
+            },
+            "inputMetric": {
+              "$ref": "#/$defs/metricInput"
+            },
+            "window": {
+              "$ref": "#/$defs/window"
+            },
+            "grainToDate": {
+              "enum": [
+                "nanosecond",
+                "microsecond",
+                "millisecond",
+                "second",
+                "minute",
+                "hour",
+                "day",
+                "week",
+                "month",
+                "quarter",
+                "year"
+              ]
+            },
+            "periodAggregation": {
+              "enum": [
+                "first",
+                "last",
+                "average"
+              ]
+            }
+          }
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "constantProperty": {
+      "type": "object",
+      "required": [
+        "baseProperty",
+        "conversionProperty"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "baseProperty": {
+          "$ref": "#/$defs/elementName"
+        },
+        "conversionProperty": {
+          "$ref": "#/$defs/elementName"
+        }
+      }
+    },
+    "conversionMetric": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/$defs/common"
+        },
+        {
+          "type": "object",
+          "required": [
+            "entity",
+            "calculation",
+            "baseMetric",
+            "conversionMetric"
+          ],
+          "properties": {
+            "type": {
+              "const": "conversion"
+            },
+            "entity": {
+              "$ref": "#/$defs/elementName"
+            },
+            "calculation": {
+              "enum": [
+                "conversions",
+                "conversion_rate"
+              ]
+            },
+            "baseMetric": {
+              "$ref": "#/$defs/metricInput"
+            },
+            "conversionMetric": {
+              "$ref": "#/$defs/metricInput"
+            },
+            "window": {
+              "$ref": "#/$defs/window"
+            },
+            "constantProperties": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/constantProperty"
+              }
+            }
+          }
+        }
+      ],
+      "unevaluatedProperties": false
+    }
+  }
+}

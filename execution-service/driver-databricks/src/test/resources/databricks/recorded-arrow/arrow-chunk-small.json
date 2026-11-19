@@ -1,0 +1,41 @@
+{
+  "status": {
+    "state": "SUCCEEDED"
+  },
+  "manifest": {
+    "format": "ARROW_STREAM",
+    "schema": {
+      "column_count": 1,
+      "columns": [
+        {
+          "name": "n",
+          "type_text": "INT",
+          "type_name": "INT",
+          "position": 0
+        }
+      ]
+    },
+    "total_chunk_count": 1,
+    "chunks": [
+      {
+        "chunk_index": 0,
+        "row_offset": 0,
+        "row_count": 3,
+        "byte_count": 328
+      }
+    ],
+    "total_row_count": 3,
+    "total_byte_count": 328,
+    "truncated": false
+  },
+  "result": {
+    "external_links": [
+      {
+        "chunk_index": 0,
+        "row_offset": 0,
+        "row_count": 3,
+        "byte_count": 328
+      }
+    ]
+  }
+}

@@ -1,0 +1,149 @@
+{
+  "sha256": "a82b5c109d3cd72574e4d5ec248492dd6d8fcf8aa9e1dd67caa9cdadf6637d58",
+  "columns": [
+    {
+      "name": "session_zone",
+      "type": "Utf8",
+      "nullable": false,
+      "values": [
+        "Etc/UTC"
+      ]
+    },
+    {
+      "name": "z",
+      "type": "Timestamp(MICROSECOND, Etc/UTC)",
+      "nullable": false,
+      "values": [
+        "1788220800000000"
+      ]
+    },
+    {
+      "name": "off",
+      "type": "Timestamp(MICROSECOND, Etc/UTC)",
+      "nullable": false,
+      "values": [
+        "1788220800000000"
+      ]
+    },
+    {
+      "name": "micro",
+      "type": "Timestamp(MICROSECOND, Etc/UTC)",
+      "nullable": false,
+      "values": [
+        "1710037800123456"
+      ]
+    },
+    {
+      "name": "neg",
+      "type": "Timestamp(MICROSECOND, Etc/UTC)",
+      "nullable": false,
+      "values": [
+        "-1"
+      ]
+    },
+    {
+      "name": "gap",
+      "type": "Date(DAY)",
+      "nullable": false,
+      "values": [
+        "-141432"
+      ]
+    },
+    {
+      "name": "zero",
+      "type": "Date(DAY)",
+      "nullable": false,
+      "values": [
+        "-719528"
+      ]
+    },
+    {
+      "name": "bce",
+      "type": "Date(DAY)",
+      "nullable": false,
+      "values": [
+        "-1458413"
+      ]
+    },
+    {
+      "name": "ntz",
+      "type": "Timestamp(MICROSECOND, null)",
+      "nullable": false,
+      "values": [
+        "1710037800123456"
+      ]
+    },
+    {
+      "name": "small",
+      "type": "Decimal(2, 2, 128)",
+      "nullable": false,
+      "values": [
+        "0.05"
+      ]
+    },
+    {
+      "name": "upper",
+      "type": "Decimal(38, 18, 128)",
+      "nullable": false,
+      "values": [
+        "99999999999999999999.999999999999999999"
+      ]
+    },
+    {
+      "name": "lower",
+      "type": "Decimal(38, 18, 128)",
+      "nullable": false,
+      "values": [
+        "-99999999999999999999.999999999999999999"
+      ]
+    },
+    {
+      "name": "tiny",
+      "type": "Decimal(18, 18, 128)",
+      "nullable": false,
+      "values": [
+        "0.000000000000000001"
+      ]
+    },
+    {
+      "name": "trailing",
+      "type": "Decimal(4, 4, 128)",
+      "nullable": false,
+      "values": [
+        "0.0500"
+      ]
+    },
+    {
+      "name": "null_ts",
+      "type": "Timestamp(MICROSECOND, Etc/UTC)",
+      "nullable": true,
+      "values": [
+        null
+      ]
+    },
+    {
+      "name": "null_ntz",
+      "type": "Timestamp(MICROSECOND, null)",
+      "nullable": true,
+      "values": [
+        null
+      ]
+    },
+    {
+      "name": "null_date",
+      "type": "Date(DAY)",
+      "nullable": true,
+      "values": [
+        null
+      ]
+    },
+    {
+      "name": "null_decimal",
+      "type": "Decimal(38, 18, 128)",
+      "nullable": true,
+      "values": [
+        null
+      ]
+    }
+  ]
+}

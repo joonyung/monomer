@@ -1,0 +1,362 @@
+type Query {
+    organizationMembershipInvitations(organizationId: ID!): [OrganizationMembershipInvitation!]!
+    me: Me!
+    accessibleWorkspaces: [AccessibleWorkspace!]!
+    managedWorkspaces(organizationId: ID!): [Workspace!]!
+    workspaceAccess(workspaceId: ID!): WorkspaceAccess!
+    workspaceAuthorizationAssignments(workspaceId: ID!): WorkspaceAuthorizationAssignments!
+    organizationMembers(organizationId: ID!): [OrganizationMember!]!
+    organizationUsage(organizationId: ID!): OrganizationUsage!
+    workspaceMembers(workspaceId: ID!): [WorkspaceMember!]!
+    workspaceOwnerCandidates(organizationId: ID!, workspaceId: ID!): [User!]!
+    workspaceMemberCandidates(workspaceId: ID!): WorkspaceMemberCandidates!
+    lineageDefaultFocus(workspaceId: ID!): LineageResource
+    lineageResources(workspaceId: ID!, kind: ResourceKind!, query: String, cursor: String, pageSize: Int!): LineageResourcePage!
+    lineageFocusCone(workspaceId: ID!, focus: LineageResourceRefInput!): LineageFocusCone!
+}
+
+type Mutation {
+    updateMyDisplayName(displayName: String!): User!
+    createOrganizationMembershipInvitation(organizationId: ID!, email: String!, workspaceAccess: [InvitationWorkspaceAccessInput!]!): InvitationDeliveryResult!
+    resendOrganizationMembershipInvitation(organizationId: ID!, invitationId: ID!): InvitationDeliveryResult!
+    cancelOrganizationMembershipInvitation(organizationId: ID!, invitationId: ID!): InvitationDeliveryResult!
+    createOrganization(displayName: String!): OrganizationBootstrap!
+    createWorkspace(organizationId: ID!, displayName: String!, initialOwnerUserId: ID!): Workspace!
+    updateOrganizationDisplayName(organizationId: ID!, displayName: String!): Organization!
+
+    updateOrganizationMemberRole(organizationId: ID!, userId: ID!, role: OrganizationRole!): OrganizationMembership!
+    removeOrganizationMember(organizationId: ID!, userId: ID!): Boolean!
+
+    addWorkspaceMember(workspaceId: ID!, principalId: ID!, role: WorkspaceRole!): WorkspaceMembership!
+    setWorkspaceMemberRole(workspaceId: ID!, userId: ID!, role: WorkspaceRole!): Boolean!
+    removeWorkspaceMember(workspaceId: ID!, principalId: ID!): Boolean!
+    setWorkspacePublicPages(workspaceId: ID!, publicPages: Boolean!): Workspace!
+    setWorkspaceReportingTimeZone(workspaceId: ID!, timeZone: String!): Workspace!
+    renameWorkspace(workspaceId: ID!, displayName: String!): Workspace!
+
+}
+
+type Me {
+    user: User!
+    organizationMemberships: [OrganizationMembershipView!]!
+    loginIdentities: [LoginIdentity!]!
+}
+
+type LoginIdentity {
+    provider: String!
+    linkedAt: String!
+}
+
+type User {
+    id: ID!
+    email: String!
+    displayName: String!
+}
+
+type OrganizationMembershipView {
+    organization: Organization!
+    role: String!
+}
+
+type Organization {
+    plan: String!
+    createdAt: String!
+    id: ID!
+    displayName: String!
+}
+
+type Workspace {
+    sample: WorkspaceSample
+    publicPages: Boolean!
+    reportingTimeZone: String!
+    createdAt: String!
+    memberCount: Int!
+    id: ID!
+    organizationId: ID!
+    name: String!
+}
+
+type AccessibleWorkspace {
+    sample: WorkspaceSample
+    publicPages: Boolean!
+    reportingTimeZone: String!
+    createdAt: String!
+    memberCount: Int!
+    id: ID!
+    organizationId: ID!
+    name: String!
+    role: WorkspaceRole!
+}
+
+type OrganizationBootstrap {
+    organization: Organization!
+    defaultWorkspace: Workspace!
+    membership: OrganizationMembership!
+}
+
+type OrganizationMember {
+    workspaces: [OrganizationMemberWorkspace!]!
+    user: User!
+    role: String!
+    joinedAt: String!
+}
+
+type OrganizationUsage {
+    limits: OrganizationResourceCounts
+    usage: OrganizationResourceCounts!
+}
+
+type OrganizationResourceCounts {
+    members: Int!
+    workspaces: Int!
+    pendingInvitations: Int!
+}
+
+type WorkspaceMember {
+    principalId: ID!
+    displayName: String!
+    user: User
+    role: WorkspaceRole!
+}
+
+type WorkspaceMemberCandidates {
+    users: [OrganizationMember!]!
+}
+
+enum OrganizationRole { ADMIN MEMBER }
+
+type ResourceRef {
+    kind: ResourceKind!
+    id: ID!
+}
+
+type WorkspaceAccess {
+    granted: Boolean!
+    organizationId: ID
+    role: WorkspaceRole
+    owners: [WorkspaceOwnerSummary!]!
+}
+
+type WorkspaceOwnerSummary {
+    userId: ID!
+    displayName: String!
+}
+
+type WorkspaceAuthorizationAssignments {
+    authorizationRevision: String!
+    members: [WorkspaceMember!]!
+}
+
+enum ResourceKind { RELATION SEMANTIC_MODEL METRIC }
+input LineageResourceRefInput {
+    kind: ResourceKind!
+    id: ID!
+}
+
+type LineageFocusCone {
+    workspaceId: ID!
+    focus: LineageResource!
+    ancestors: [LineageResource!]!
+    descendants: [LineageResource!]!
+    siblings: [LineageResource!]!
+    edges: [LineageEdge!]!
+    siblingEdges: [LineageEdge!]!
+    entityPeers: [LineageEntityPeer!]!
+    detail: LineageResourceDetail!
+    missingDefinitions: [LineageResource!]!
+    dashboardUsages: [LineageDashboardUsage!]!
+}
+
+type LineageDashboardUsage {
+    dashboardId: ID!
+    title: String!
+    queryNames: [String!]!
+    metricIds: [ID!]!
+}
+
+type LineageConnector {
+    id: ID!
+    displayName: String!
+    type: LineageConnectorProductType!
+}
+
+enum LineageConnectorProductType {
+    POSTGRESQL
+    BIGQUERY
+    SNOWFLAKE
+    DATABRICKS
+    REDSHIFT
+    TRINO
+    DUCKDB
+}
+
+type LineageResourceDetail {
+    relation: LineageRelationDetail
+    semanticModel: LineageSemanticModelDetail
+    metric: LineageMetricDetail
+}
+
+type LineageRelationDetail {
+    columns: [LineageRelationColumn!]!
+}
+
+type LineageRelationColumn {
+    name: String!
+    nativeType: String!
+    nullable: Boolean!
+    hasDefault: Boolean!
+    primaryKey: Boolean!
+    foreignKey: Boolean!
+}
+
+type LineageSemanticModelDetail {
+    entities: [LineageSemanticEntity!]!
+    dimensions: [LineageSemanticDimension!]!
+    measures: [LineageSemanticMeasure!]!
+}
+
+type LineageSemanticEntity {
+    name: String!
+    label: String
+    description: String
+    type: LineageSemanticEntityKind!
+}
+
+type LineageSemanticDimension {
+    name: String!
+    label: String
+    description: String
+    type: LineageSemanticDimensionKind!
+    granularity: LineageTimeGranularity
+}
+
+type LineageSemanticMeasure {
+    name: String!
+    label: String
+    description: String
+    aggregation: LineageMeasureAggregation!
+}
+
+type LineageMetricDetail {
+    type: LineageMetricType!
+    inputs: [LineageMetricInput!]!
+    timeGranularity: LineageTimeGranularity
+}
+
+type LineageMetricInput {
+    kind: LineageMetricInputKind!
+    name: String!
+    semanticModelName: String
+}
+
+enum LineageSemanticEntityKind { PRIMARY UNIQUE FOREIGN NATURAL }
+enum LineageSemanticDimensionKind { CATEGORICAL TIME }
+enum LineageMeasureAggregation { SUM COUNT COUNT_DISTINCT AVERAGE MIN MAX MEDIAN SUM_BOOLEAN }
+enum LineageMetricType { SIMPLE RATIO DERIVED CUMULATIVE CONVERSION }
+enum LineageMetricInputKind { MEASURE METRIC }
+enum LineageTimeGranularity {
+    NANOSECOND
+    MICROSECOND
+    MILLISECOND
+    SECOND
+    MINUTE
+    HOUR
+    DAY
+    WEEK
+    MONTH
+    QUARTER
+    YEAR
+}
+
+type LineageResourcePage {
+    items: [LineageResource!]!
+    nextCursor: String
+}
+
+type LineageResource {
+    resource: ResourceRef!
+    label: String!
+    address: String!
+    description: String
+    connector: LineageConnector
+    missing: Boolean!
+}
+
+type LineageEdge {
+    dependent: ResourceRef!
+    parent: ResourceRef!
+}
+
+type LineageEntityPeer {
+    resource: LineageResource!
+    sharedEntities: [String!]!
+    alreadyInCone: Boolean!
+}
+
+
+
+type OrganizationMembership {
+    organizationId: ID!
+    userId: ID!
+    role: String!
+}
+
+type WorkspaceMembership {
+    workspaceId: ID!
+    principalId: ID!
+    role: WorkspaceRole!
+}
+
+type Principal {
+    id: ID!
+    displayName: String!
+}
+
+type OrganizationMemberWorkspace {
+    sample: WorkspaceSample
+    id: ID!
+    name: String!
+    role: WorkspaceRole!
+    memberCount: Int!
+    ownerCount: Int!
+}
+
+type WorkspaceSample {
+    dataset: String!
+    state: String!
+    initiator: ID!
+}
+
+type OrganizationMembershipInvitation {
+    id: ID!
+    organizationId: ID!
+    deliveryEmail: String!
+    createdAt: String!
+    expiresAt: String!
+    lastDeliveryAttemptAt: String
+    lastSentAt: String
+    status: InvitationStatus!
+    invitedBy: User
+    workspaceAccess: [InvitationWorkspaceAccess!]!
+}
+type InvitationWorkspaceAccess {
+    workspaceId: ID!
+    workspaceDisplayName: String!
+    role: WorkspaceRole!
+}
+input InvitationWorkspaceAccessInput {
+    workspaceId: ID!
+    role: WorkspaceRole!
+}
+enum InvitationStatus { PENDING EXPIRED }
+type InvitationDeliveryResult {
+    outcome: InvitationDeliveryOutcome!
+    invitation: OrganizationMembershipInvitation
+    retryAfter: Int
+}
+enum InvitationDeliveryOutcome {
+    SENT DELIVERY_FAILED INVITATION_PENDING ALREADY_MEMBER
+    RATE_LIMITED CANCELLED UNAVAILABLE INVALID_EMAIL INVALID_WORKSPACE_ACCESS
+}
+
+enum WorkspaceRole { VIEWER EXPLORER EDITOR OWNER }

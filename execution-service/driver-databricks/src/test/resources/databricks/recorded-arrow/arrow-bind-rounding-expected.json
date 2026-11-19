@@ -1,0 +1,37 @@
+{
+  "sha256": "1d7ff986c2928fd60cc2b69f708bf3c5fc68bced07af0575cf1dfc255b90e07f",
+  "columns": [
+    {
+      "name": "d",
+      "type": "Decimal(2, 2, 128)",
+      "nullable": false,
+      "values": [
+        "0.06"
+      ]
+    },
+    {
+      "name": "tiny",
+      "type": "Decimal(18, 18, 128)",
+      "nullable": false,
+      "values": [
+        "0.000000000000000000"
+      ]
+    },
+    {
+      "name": "ts",
+      "type": "Timestamp(MICROSECOND, Etc/UTC)",
+      "nullable": false,
+      "values": [
+        "1788220800123456"
+      ]
+    },
+    {
+      "name": "ntz",
+      "type": "Timestamp(MICROSECOND, null)",
+      "nullable": false,
+      "values": [
+        "1710037800123456"
+      ]
+    }
+  ]
+}

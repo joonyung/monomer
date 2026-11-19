@@ -1,0 +1,9 @@
+modules/identity-access/src/main/resources/db/identity-runtime/schema.sql
+modules/execution-runtime/src/main/resources/db/execution-runtime.sql
+modules/connector/src/main/resources/db/connector/schema.sql
+modules/catalog/src/main/resources/db/catalog/schema.sql
+modules/semantic/src/main/resources/db/semantic/schema.sql
+modules/explore/src/main/resources/db/explore/schema.sql
+modules/dashboard/src/main/resources/db/dashboard/schema.sql
+modules/pages/src/main/resources/schema-postgres.sql
+modules/search/src/main/resources/db/search/schema.sql

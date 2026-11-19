@@ -1,0 +1,32 @@
+{
+  "dev": {
+    "account": "111122223333",
+    "region": "us-east-1",
+    "stackPrefix": "MonomerDev",
+    "resourcePrefix": "monomer-dev",
+    "vpcCidr": "10.77.0.0/16",
+    "availabilityZones": ["us-east-1a", "us-east-1b"],
+    "appOrigin": "https://app.dev.monomer.cc",
+    "apiOrigin": "https://api.dev.monomer.cc",
+    "publicOrigin": "https://dev.monomer.cc",
+    "internalNamespace": "monomer.dev.internal",
+    "identityKey": "dev",
+    "senderDomain": "notify.dev.monomer.cc",
+    "executionCpu": 512
+  },
+  "prod": {
+    "account": "444455556666",
+    "region": "us-east-1",
+    "stackPrefix": "MonomerProd",
+    "resourcePrefix": "monomer-prod",
+    "vpcCidr": "10.78.0.0/16",
+    "availabilityZones": ["us-east-1a", "us-east-1b"],
+    "appOrigin": "https://app.monomer.cc",
+    "apiOrigin": "https://api.monomer.cc",
+    "publicOrigin": "https://monomer.cc",
+    "internalNamespace": "monomer.prod.internal",
+    "identityKey": "public",
+    "senderDomain": "notify.monomer.cc",
+    "executionCpu": 1024
+  }
+}

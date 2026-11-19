@@ -1,0 +1,21 @@
+{
+  "name": "@monomer/cloud-dev",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "build": "python3 database-bootstrap/prepare.py && tsc",
+    "test": "python3 -m unittest discover -s tests -v && npm run build && node --test build/test/*.test.js",
+    "synth": "npm run build && cdk synth --no-lookups --quiet -c environment=dev",
+    "check": "python3 -m unittest discover -s tests -v && npm run build && node --test build/test/*.test.js && cdk synth --no-lookups --quiet -c environment=dev && cdk synth --no-lookups --quiet -c environment=prod",
+    "synth:prod": "npm run build && cdk synth --no-lookups --quiet -c environment=prod"
+  },
+  "dependencies": {
+    "aws-cdk-lib": "2.268.0",
+    "constructs": "10.8.1"
+  },
+  "devDependencies": {
+    "@types/node": "24.13.3",
+    "aws-cdk": "2.1140.0",
+    "typescript": "7.0.2"
+  }
+}

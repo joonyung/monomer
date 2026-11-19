@@ -1,0 +1,585 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "monomer://schema/dashboard/1",
+  "title": "Monomer Dashboard current definition",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "meta", "parameters", "variables", "queries", "widgets", "layout"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "meta": { "$ref": "#/$defs/meta" },
+    "parameters": { "$ref": "#/$defs/valueDefinitions" },
+    "variables": { "$ref": "#/$defs/variableDefinitions" },
+    "queries": { "$ref": "#/$defs/queries" },
+    "widgets": { "$ref": "#/$defs/widgets" },
+    "layout": { "$ref": "#/$defs/layout" },
+    "schedules": { "type": "object", "propertyNames": { "$ref": "#/$defs/name" }, "additionalProperties": { "$ref": "#/$defs/schedule" } }
+  },
+  "$defs": {
+    "schedule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "cron",
+        "timeZone",
+        "parameters"
+      ],
+      "properties": {
+        "cron": {
+          "type": "string",
+          "minLength": 1
+        },
+        "timeZone": {
+          "type": "string",
+          "minLength": 1
+        },
+        "parameters": {
+          "type": "object",
+          "propertyNames": {
+            "$ref": "#/$defs/name"
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/scheduleBinding"
+          }
+        }
+      }
+    },
+    "scheduleBinding": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "type",
+            "value"
+          ],
+          "properties": {
+            "type": {
+              "const": "LITERAL"
+            },
+            "value": {}
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "type",
+            "offsetDays"
+          ],
+          "properties": {
+            "type": {
+              "const": "RELATIVE_DATE"
+            },
+            "offsetDays": {
+              "type": "integer",
+              "minimum": -2147483648,
+              "maximum": 2147483647
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "type",
+            "unit",
+            "offset"
+          ],
+          "properties": {
+            "type": {
+              "const": "CALENDAR_RANGE"
+            },
+            "unit": {
+              "enum": [
+                "DAY",
+                "WEEK",
+                "MONTH"
+              ]
+            },
+            "offset": {
+              "type": "integer",
+              "minimum": -2147483648,
+              "maximum": 2147483647
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "type"
+          ],
+          "properties": {
+            "type": {
+              "const": "SCHEDULED_TIME"
+            }
+          }
+        }
+      ]
+    },
+    "name": { "type": "string", "pattern": "^[A-Za-z_][A-Za-z0-9_]*$", "maxLength": 128, "not": { "const": "__proto__" } },
+    "semanticName": { "$ref": "monomer://schema/semantic/query/4#/$defs/elementName" },
+    "meta": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["title"],
+      "properties": {
+        "title": { "type": "string", "minLength": 1 },
+        "description": { "type": ["string", "null"], "minLength": 1 }
+      }
+    },
+    "displayLabel": {
+      "description": "Authored single-line display text: 1 to 120 characters without leading or trailing whitespace or line breaks.",
+      "type": "string", "minLength": 1, "maxLength": 120, "pattern": "^[^\\s](?:[^\\r\\n]*[^\\s])?$"
+    },
+    "valueType": {
+      "enum": ["TEXT", "NUMBER", "BOOLEAN", "DATE", "TIMESTAMP", "TEXT_SET", "NUMBER_SET", "DATE_SET", "TIMESTAMP_SET", "DATE_RANGE", "TIMESTAMP_RANGE"]
+    },
+    "valueDefinition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "nullable"],
+      "properties": {
+        "type": { "$ref": "#/$defs/valueType" },
+        "nullable": { "type": "boolean" },
+        "label": { "type": ["string", "null"], "minLength": 1 },
+        "description": { "type": ["string", "null"], "minLength": 1 },
+        "control": { "$ref": "#/$defs/control" }
+      },
+      "allOf": [
+        { "if": { "properties": { "type": { "const": "TEXT" } } }, "then": { "properties": { "control": { "oneOf": [ { "$ref": "#/$defs/textChoiceControl" }, { "$ref": "#/$defs/textFreeControl" } ] } } } },
+        { "if": { "properties": { "type": { "const": "NUMBER" } } }, "then": { "properties": { "control": { "oneOf": [ { "$ref": "#/$defs/numberChoiceControl" }, { "$ref": "#/$defs/numberFreeControl" } ] } } } },
+        { "if": { "properties": { "type": { "const": "BOOLEAN" } } }, "then": { "properties": { "control": { "$ref": "#/$defs/booleanChoiceControl" } } } },
+        { "if": { "properties": { "type": { "const": "DATE" } } }, "then": { "properties": { "control": { "oneOf": [ { "$ref": "#/$defs/dateChoiceControl" }, { "$ref": "#/$defs/dateFreeControl" } ] } } } },
+        { "if": { "properties": { "type": { "const": "TIMESTAMP" } } }, "then": { "properties": { "control": { "oneOf": [ { "$ref": "#/$defs/timestampChoiceControl" }, { "$ref": "#/$defs/timestampFreeControl" } ] } } } },
+        { "if": { "properties": { "type": { "const": "TEXT_SET" } } }, "then": { "properties": { "control": { "oneOf": [ { "$ref": "#/$defs/textChoiceControl" }, { "$ref": "#/$defs/textFreeControl" } ] } } } },
+        { "if": { "properties": { "type": { "const": "NUMBER_SET" } } }, "then": { "properties": { "control": { "oneOf": [ { "$ref": "#/$defs/numberChoiceControl" }, { "$ref": "#/$defs/numberFreeControl" } ] } } } },
+        { "if": { "properties": { "type": { "const": "DATE_SET" } } }, "then": { "properties": { "control": { "oneOf": [ { "$ref": "#/$defs/dateChoiceControl" }, { "$ref": "#/$defs/dateFreeControl" } ] } } } },
+        { "if": { "properties": { "type": { "const": "TIMESTAMP_SET" } } }, "then": { "properties": { "control": { "oneOf": [ { "$ref": "#/$defs/timestampChoiceControl" }, { "$ref": "#/$defs/timestampFreeControl" } ] } } } },
+        { "if": { "properties": { "type": { "const": "DATE_RANGE" } } }, "then": { "properties": { "control": { "$ref": "#/$defs/dateRangeControl" } } } },
+        { "if": { "properties": { "type": { "const": "TIMESTAMP_RANGE" } } }, "then": { "properties": { "control": { "$ref": "#/$defs/timestampRangeControl" } } } },
+        { "if": { "properties": { "nullable": { "const": false } } }, "then": { "properties": { "control": { "not": { "required": ["emptyLabel"] } } } } }
+      ]
+    },
+    "textOption": {
+      "type": "object", "additionalProperties": false, "required": ["value"],
+      "properties": { "value": { "type": "string" }, "label": { "type": ["string", "null"], "minLength": 1 } }
+    },
+    "numberOption": {
+      "type": "object", "additionalProperties": false, "required": ["value"],
+      "properties": { "value": { "$ref": "#/$defs/canonicalDecimal" }, "label": { "type": ["string", "null"], "minLength": 1 } }
+    },
+    "booleanOption": {
+      "type": "object", "additionalProperties": false, "required": ["value"],
+      "properties": { "value": { "type": "boolean" }, "label": { "type": ["string", "null"], "minLength": 1 } }
+    },
+    "dateOption": {
+      "type": "object", "additionalProperties": false, "required": ["value"],
+      "properties": { "value": { "type": "string", "format": "date" }, "label": { "type": ["string", "null"], "minLength": 1 } }
+    },
+    "timestampOption": {
+      "type": "object", "additionalProperties": false, "required": ["value"],
+      "properties": { "value": { "type": "string", "format": "date-time" }, "label": { "type": ["string", "null"], "minLength": 1 } }
+    },
+    "textChoiceControl": {
+      "type": "object", "additionalProperties": false, "required": ["options"],
+      "properties": { "options": { "type": "array", "minItems": 1, "maxItems": 500, "items": { "$ref": "#/$defs/textOption" } }, "emptyLabel": { "$ref": "#/$defs/displayLabel" } }
+    },
+    "numberChoiceControl": {
+      "type": "object", "additionalProperties": false, "required": ["options"],
+      "properties": { "options": { "type": "array", "minItems": 1, "maxItems": 500, "items": { "$ref": "#/$defs/numberOption" } }, "emptyLabel": { "$ref": "#/$defs/displayLabel" } }
+    },
+    "booleanChoiceControl": {
+      "type": "object", "additionalProperties": false, "required": ["options"],
+      "properties": { "options": { "type": "array", "minItems": 1, "maxItems": 500, "items": { "$ref": "#/$defs/booleanOption" } }, "emptyLabel": { "$ref": "#/$defs/displayLabel" } }
+    },
+    "dateChoiceControl": {
+      "type": "object", "additionalProperties": false, "required": ["options"],
+      "properties": { "options": { "type": "array", "minItems": 1, "maxItems": 500, "items": { "$ref": "#/$defs/dateOption" } }, "emptyLabel": { "$ref": "#/$defs/displayLabel" } }
+    },
+    "timestampChoiceControl": {
+      "type": "object", "additionalProperties": false, "required": ["options"],
+      "properties": { "options": { "type": "array", "minItems": 1, "maxItems": 500, "items": { "$ref": "#/$defs/timestampOption" } }, "emptyLabel": { "$ref": "#/$defs/displayLabel" } }
+    },
+    "textFreeControl": {
+      "type": "object", "additionalProperties": false, "minProperties": 1,
+      "properties": { "placeholder": { "type": "string", "minLength": 1 } }
+    },
+    "numberFreeControl": {
+      "type": "object", "additionalProperties": false, "minProperties": 1,
+      "properties": {
+        "placeholder": { "type": "string", "minLength": 1 },
+        "min": { "$ref": "#/$defs/canonicalDecimal" }, "max": { "$ref": "#/$defs/canonicalDecimal" }
+      }
+    },
+    "dateFreeControl": {
+      "type": "object", "additionalProperties": false, "minProperties": 1,
+      "properties": {
+        "min": { "type": "string", "format": "date" }, "max": { "type": "string", "format": "date" }
+      }
+    },
+    "timestampFreeControl": {
+      "type": "object", "additionalProperties": false, "minProperties": 1,
+      "properties": {
+        "min": { "type": "string", "format": "date-time" }, "max": { "type": "string", "format": "date-time" }
+      }
+    },
+    "dateRangeControl": {
+      "type": "object", "additionalProperties": false, "minProperties": 1,
+      "properties": {
+        "min": { "type": "string", "format": "date" }, "max": { "type": "string", "format": "date" },
+        "startPlaceholder": { "type": "string", "minLength": 1 }, "endPlaceholder": { "type": "string", "minLength": 1 }
+      }
+    },
+    "timestampRangeControl": {
+      "type": "object", "additionalProperties": false, "minProperties": 1,
+      "properties": {
+        "min": { "type": "string", "format": "date-time" }, "max": { "type": "string", "format": "date-time" },
+        "startPlaceholder": { "type": "string", "minLength": 1 }, "endPlaceholder": { "type": "string", "minLength": 1 }
+      }
+    },
+    "control": {
+      "description": "Static input UI settings for a Parameter or INPUT. options and min/max limit only what this UI lets people choose and submit; they are not a global allow list or range constraint on API bindings or Variable values. Values are validated against the declared type, nullability, and typed shape, and are not rewritten to fit the control.",
+      "type": "object", "additionalProperties": false, "minProperties": 1,
+      "properties": {
+        "options": {
+          "type": "array", "minItems": 1, "maxItems": 500,
+          "items": {
+            "type": "object", "additionalProperties": false, "required": ["value"],
+            "properties": {
+              "value": { "type": ["string", "boolean"] },
+              "label": { "type": ["string", "null"], "minLength": 1 }
+            }
+          }
+        },
+        "placeholder": { "type": "string", "minLength": 1 },
+        "min": { "type": "string", "minLength": 1 },
+        "max": { "type": "string", "minLength": 1 },
+        "emptyLabel": { "$ref": "#/$defs/displayLabel", "description": "Choice controls only. Label for the empty (null) choice of a nullable value, for example All regions. Hosts show Any when absent." },
+        "startPlaceholder": { "type": "string", "minLength": 1 },
+        "endPlaceholder": { "type": "string", "minLength": 1 }
+      },
+      "oneOf": [
+        {
+          "required": ["options"],
+          "not": { "anyOf": [
+            { "required": ["placeholder"] }, { "required": ["min"] }, { "required": ["max"] },
+            { "required": ["startPlaceholder"] }, { "required": ["endPlaceholder"] }
+          ] }
+        },
+        {
+          "not": { "anyOf": [{ "required": ["options"] }, { "required": ["emptyLabel"] }] },
+          "anyOf": [
+            { "required": ["placeholder"] }, { "required": ["min"] }, { "required": ["max"] },
+            { "required": ["startPlaceholder"] }, { "required": ["endPlaceholder"] }
+          ]
+        }
+      ]
+    },
+    "variableDefinition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "nullable", "initial"],
+      "properties": {
+        "type": { "$ref": "#/$defs/valueType" },
+        "nullable": { "type": "boolean" },
+        "label": { "type": ["string", "null"], "minLength": 1 },
+        "description": { "type": ["string", "null"], "minLength": 1 },
+        "initial": { "$ref": "#/$defs/initialValue" }
+      },
+      "allOf": [
+        { "if": { "properties": { "type": { "const": "TEXT" } } }, "then": { "properties": { "initial": { "oneOf": [ { "$ref": "#/$defs/parameterRef" }, { "type": ["string", "null"] } ] } } } },
+        { "if": { "properties": { "type": { "const": "NUMBER" } } }, "then": { "properties": { "initial": { "oneOf": [ { "$ref": "#/$defs/parameterRef" }, { "oneOf": [ { "$ref": "#/$defs/canonicalDecimal" }, { "type": "null" } ] } ] } } } },
+        { "if": { "properties": { "type": { "const": "BOOLEAN" } } }, "then": { "properties": { "initial": { "oneOf": [ { "$ref": "#/$defs/parameterRef" }, { "type": ["boolean", "null"] } ] } } } },
+        { "if": { "properties": { "type": { "const": "DATE" } } }, "then": { "properties": { "initial": { "oneOf": [ { "$ref": "#/$defs/parameterRef" }, { "type": ["string", "null"], "format": "date" } ] } } } },
+        { "if": { "properties": { "type": { "const": "TIMESTAMP" } } }, "then": { "properties": { "initial": { "oneOf": [ { "$ref": "#/$defs/parameterRef" }, { "type": ["string", "null"], "format": "date-time" } ] } } } },
+        { "if": { "properties": { "type": { "const": "TEXT_SET" } } }, "then": { "properties": { "initial": { "oneOf": [ { "$ref": "#/$defs/parameterRef" }, { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string" } }, { "type": "null" } ] } } } },
+        { "if": { "properties": { "type": { "const": "NUMBER_SET" } } }, "then": { "properties": { "initial": { "oneOf": [ { "$ref": "#/$defs/parameterRef" }, { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/canonicalDecimal" } }, { "type": "null" } ] } } } },
+        { "if": { "properties": { "type": { "const": "DATE_SET" } } }, "then": { "properties": { "initial": { "oneOf": [ { "$ref": "#/$defs/parameterRef" }, { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "format": "date" } }, { "type": "null" } ] } } } },
+        { "if": { "properties": { "type": { "const": "TIMESTAMP_SET" } } }, "then": { "properties": { "initial": { "oneOf": [ { "$ref": "#/$defs/parameterRef" }, { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "format": "date-time" } }, { "type": "null" } ] } } } },
+        { "if": { "properties": { "type": { "const": "DATE_RANGE" } } }, "then": { "properties": { "initial": { "oneOf": [ { "$ref": "#/$defs/parameterRef" }, { "type": "object", "additionalProperties": false, "required": ["start", "end"], "properties": { "start": { "type": "string", "format": "date" }, "end": { "type": "string", "format": "date" } } }, { "type": "null" } ] } } } },
+        { "if": { "properties": { "type": { "const": "TIMESTAMP_RANGE" } } }, "then": { "properties": { "initial": { "oneOf": [ { "$ref": "#/$defs/parameterRef" }, { "type": "object", "additionalProperties": false, "required": ["start", "end"], "properties": { "start": { "type": "string", "format": "date-time" }, "end": { "type": "string", "format": "date-time" } } }, { "type": "null" } ] } } } },
+        { "if": { "properties": { "nullable": { "const": false } } }, "then": { "properties": { "initial": { "not": { "type": "null" } } } } }
+      ]
+    },
+    "valueDefinitions": {
+      "type": "object",
+      "propertyNames": { "$ref": "#/$defs/name" },
+      "additionalProperties": { "$ref": "#/$defs/valueDefinition" }
+    },
+    "variableDefinitions": {
+      "type": "object",
+      "propertyNames": { "$ref": "#/$defs/name" },
+      "additionalProperties": { "$ref": "#/$defs/variableDefinition" }
+    },
+    "valueRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "name"],
+      "properties": {
+        "kind": { "enum": ["PARAMETER", "VARIABLE"] },
+        "name": { "$ref": "#/$defs/name" },
+        "endpoint": { "enum": ["start", "end"], "description": "Reads DATE_RANGE as DATE and TIMESTAMP_RANGE as TIMESTAMP, keeping the source nullability. The Dashboard owner validates the referenced name, type, and consumer fit." }
+      }
+    },
+    "wholeValueRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "name"],
+      "properties": {
+        "kind": { "enum": ["PARAMETER", "VARIABLE"] },
+        "name": { "$ref": "#/$defs/name" }
+      }
+    },
+    "parameterRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "name"],
+      "properties": {
+        "kind": { "const": "PARAMETER" },
+        "name": { "$ref": "#/$defs/name" }
+      }
+    },
+    "metricTimeEndpoint": {
+      "oneOf": [
+        { "$ref": "#/$defs/valueRef" },
+        { "$ref": "#/$defs/dateMetricTimeEndpoint" },
+        { "$ref": "#/$defs/timestampMetricTimeEndpoint" }
+      ]
+    },
+    "dateMetricTimeEndpoint": {
+      "type": "object", "additionalProperties": false,
+      "required": ["kind", "value"],
+      "properties": { "kind": { "const": "DATE" }, "value": { "type": "string", "format": "date" } }
+    },
+    "timestampMetricTimeEndpoint": {
+      "type": "object", "additionalProperties": false,
+      "required": ["kind", "value"],
+      "properties": { "kind": { "const": "TIMESTAMP" }, "value": { "type": "string", "format": "date-time" } }
+    },
+    "valueSourceScalar": {
+      "oneOf": [
+        { "$ref": "#/$defs/valueRef" },
+        { "type": "string" },
+        { "type": "boolean" }
+      ]
+    },
+    "valueSourceArray": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "oneOf": [ { "type": "string" }, { "type": "boolean" } ] }
+    },
+    "canonicalDecimal": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 40,
+      "pattern": "^(?:0|-?(?:(?:[1-9][0-9]{0,19})(?:\\.[0-9]{0,17}[1-9])?|0\\.[0-9]{0,17}[1-9]))$"
+    },
+    "textValueSource": {
+      "oneOf": [ { "$ref": "#/$defs/valueRef" }, { "type": "string" } ]
+    },
+    "numberValueSource": {
+      "oneOf": [ { "$ref": "#/$defs/valueRef" }, { "$ref": "#/$defs/canonicalDecimal" } ]
+    },
+    "booleanValueSource": {
+      "oneOf": [ { "$ref": "#/$defs/valueRef" }, { "type": "boolean" } ]
+    },
+    "dateValueSource": {
+      "oneOf": [ { "$ref": "#/$defs/valueRef" }, { "type": "string", "format": "date" } ]
+    },
+    "timestampValueSource": {
+      "oneOf": [ { "$ref": "#/$defs/valueRef" }, { "type": "string", "format": "date-time" } ]
+    },
+    "textValueArray": {
+      "type": "array", "minItems": 1, "maxItems": 100, "uniqueItems": true,
+      "items": { "type": "string", "maxLength": 256 }
+    },
+    "numberValueArray": {
+      "type": "array", "minItems": 1, "maxItems": 100, "uniqueItems": true,
+      "items": { "$ref": "#/$defs/canonicalDecimal" }
+    },
+    "dateValueArray": {
+      "type": "array", "minItems": 1, "maxItems": 100, "uniqueItems": true,
+      "items": { "type": "string", "format": "date" }
+    },
+    "timestampValueArray": {
+      "type": "array", "minItems": 1, "maxItems": 100, "uniqueItems": true,
+      "items": { "type": "string", "format": "date-time" }
+    },
+    "textManySource": {
+      "oneOf": [ { "$ref": "#/$defs/wholeValueRef" }, { "$ref": "#/$defs/textValueArray" } ]
+    },
+    "numberManySource": {
+      "oneOf": [ { "$ref": "#/$defs/wholeValueRef" }, { "$ref": "#/$defs/numberValueArray" } ]
+    },
+    "dateManySource": {
+      "oneOf": [ { "$ref": "#/$defs/wholeValueRef" }, { "$ref": "#/$defs/dateValueArray" } ]
+    },
+    "timestampManySource": {
+      "oneOf": [ { "$ref": "#/$defs/wholeValueRef" }, { "$ref": "#/$defs/timestampValueArray" } ]
+    },
+    "initialValue": {
+      "oneOf": [
+        { "$ref": "#/$defs/parameterRef" },
+        { "type": "null" },
+        { "type": "string" },
+        { "type": "boolean" },
+        { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": ["string", "boolean"] } },
+        { "type": "object", "additionalProperties": false, "required": ["start", "end"], "properties": {
+          "start": { "type": "string" },
+          "end": { "type": "string" }
+        } }
+      ]
+    },
+    "groupBy": {
+      "oneOf": [
+        { "$ref": "monomer://schema/semantic/query/4#/$defs/dimensionGroupBy" },
+        { "$ref": "monomer://schema/semantic/query/4#/$defs/entityGroupBy" },
+        { "$ref": "monomer://schema/semantic/query/4#/$defs/metricTimeGroupBy" }
+      ]
+    },
+    "filterBase": {
+      "type": "object", "additionalProperties": false,
+      "required": ["kind", "dimension", "operator", "value"],
+      "properties": {
+        "kind": { "enum": ["TEXT", "NUMBER", "BOOLEAN", "DATE", "TIMESTAMP"] },
+        "dimension": {
+          "type": "object", "additionalProperties": false,
+          "required": ["semanticModelName", "name"],
+          "properties": { "semanticModelName": { "$ref": "monomer://schema/semantic/query/4#/$defs/elementName" }, "name": { "$ref": "monomer://schema/semantic/query/4#/$defs/elementName" } }
+        },
+        "operator": { "enum": ["EQUALS", "NOT_EQUALS", "IN", "NOT_IN", "GREATER_THAN", "GREATER_THAN_OR_EQUAL", "LESS_THAN", "LESS_THAN_OR_EQUAL", "IS_NULL", "IS_NOT_NULL"] },
+        "value": { "oneOf": [ { "$ref": "#/$defs/valueSourceScalar" }, { "$ref": "#/$defs/valueSourceArray" }, { "type": "null" } ] },
+        "emptyBehavior": { "enum": ["OMIT", "ERROR"] }
+      }
+    },
+    "filter": {
+      "oneOf": [
+        { "allOf": [ { "$ref": "#/$defs/filterBase" }, { "type": "object", "properties": { "kind": { "const": "TEXT" }, "operator": { "enum": ["EQUALS", "NOT_EQUALS"] }, "value": { "$ref": "#/$defs/textValueSource" } } } ] },
+        { "allOf": [ { "$ref": "#/$defs/filterBase" }, { "type": "object", "properties": { "kind": { "const": "TEXT" }, "operator": { "enum": ["IN", "NOT_IN"] }, "value": { "$ref": "#/$defs/textManySource" } } } ] },
+        { "allOf": [ { "$ref": "#/$defs/filterBase" }, { "type": "object", "properties": { "kind": { "const": "TEXT" }, "operator": { "enum": ["IS_NULL", "IS_NOT_NULL"] }, "value": { "type": "null" } } } ] },
+        { "allOf": [ { "$ref": "#/$defs/filterBase" }, { "type": "object", "properties": { "kind": { "const": "NUMBER" }, "operator": { "enum": ["EQUALS", "NOT_EQUALS", "GREATER_THAN", "GREATER_THAN_OR_EQUAL", "LESS_THAN", "LESS_THAN_OR_EQUAL"] }, "value": { "$ref": "#/$defs/numberValueSource" } } } ] },
+        { "allOf": [ { "$ref": "#/$defs/filterBase" }, { "type": "object", "properties": { "kind": { "const": "NUMBER" }, "operator": { "enum": ["IN", "NOT_IN"] }, "value": { "$ref": "#/$defs/numberManySource" } } } ] },
+        { "allOf": [ { "$ref": "#/$defs/filterBase" }, { "type": "object", "properties": { "kind": { "const": "NUMBER" }, "operator": { "enum": ["IS_NULL", "IS_NOT_NULL"] }, "value": { "type": "null" } } } ] },
+        { "allOf": [ { "$ref": "#/$defs/filterBase" }, { "type": "object", "properties": { "kind": { "const": "BOOLEAN" }, "operator": { "enum": ["EQUALS", "NOT_EQUALS"] }, "value": { "$ref": "#/$defs/booleanValueSource" } } } ] },
+        { "allOf": [ { "$ref": "#/$defs/filterBase" }, { "type": "object", "properties": { "kind": { "const": "BOOLEAN" }, "operator": { "enum": ["IS_NULL", "IS_NOT_NULL"] }, "value": { "type": "null" } } } ] },
+        { "allOf": [ { "$ref": "#/$defs/filterBase" }, { "type": "object", "properties": { "kind": { "const": "DATE" }, "operator": { "enum": ["EQUALS", "NOT_EQUALS", "GREATER_THAN", "GREATER_THAN_OR_EQUAL", "LESS_THAN", "LESS_THAN_OR_EQUAL"] }, "value": { "$ref": "#/$defs/dateValueSource" } } } ] },
+        { "allOf": [ { "$ref": "#/$defs/filterBase" }, { "type": "object", "properties": { "kind": { "const": "DATE" }, "operator": { "enum": ["IN", "NOT_IN"] }, "value": { "$ref": "#/$defs/dateManySource" } } } ] },
+        { "allOf": [ { "$ref": "#/$defs/filterBase" }, { "type": "object", "properties": { "kind": { "const": "DATE" }, "operator": { "enum": ["IS_NULL", "IS_NOT_NULL"] }, "value": { "type": "null" } } } ] },
+        { "allOf": [ { "$ref": "#/$defs/filterBase" }, { "type": "object", "properties": { "kind": { "const": "TIMESTAMP" }, "operator": { "enum": ["EQUALS", "NOT_EQUALS", "GREATER_THAN", "GREATER_THAN_OR_EQUAL", "LESS_THAN", "LESS_THAN_OR_EQUAL"] }, "value": { "$ref": "#/$defs/timestampValueSource" } } } ] },
+        { "allOf": [ { "$ref": "#/$defs/filterBase" }, { "type": "object", "properties": { "kind": { "const": "TIMESTAMP" }, "operator": { "enum": ["IN", "NOT_IN"] }, "value": { "$ref": "#/$defs/timestampManySource" } } } ] },
+        { "allOf": [ { "$ref": "#/$defs/filterBase" }, { "type": "object", "properties": { "kind": { "const": "TIMESTAMP" }, "operator": { "enum": ["IS_NULL", "IS_NOT_NULL"] }, "value": { "type": "null" } } } ] }
+      ]
+    },
+    "order": { "$ref": "monomer://schema/semantic/query/4#/$defs/order" },
+    "semanticQuery": {
+      "type": "object", "additionalProperties": false,
+      "required": ["schemaVersion", "metrics", "groupBys", "metricTimeRange", "filters", "orderBy", "rowLimit"],
+      "properties": {
+        "schemaVersion": { "const": 4 },
+        "metrics": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "monomer://schema/semantic/query/4#/$defs/elementName" } },
+        "groupBys": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/groupBy" } },
+        "metricTimeRange": {
+          "oneOf": [
+            { "type": "null" },
+            { "$ref": "#/$defs/wholeValueRef" },
+            { "type": "object", "additionalProperties": false, "required": ["start", "end"], "properties": {
+              "start": { "$ref": "#/$defs/metricTimeEndpoint" },
+              "end": { "$ref": "#/$defs/metricTimeEndpoint" }
+            } }
+          ]
+        },
+        "filters": { "type": "array", "items": { "$ref": "#/$defs/filter" } },
+        "orderBy": { "type": "array", "items": { "$ref": "monomer://schema/semantic/query/4#/$defs/order" } },
+        "rowLimit": { "type": "integer", "minimum": 1, "maximum": 100000 }
+      }
+    },
+    "queryType": { "type": "string", "enum": ["SEMANTIC", "SQL"] },
+    "query": {
+      "oneOf": [
+        { "type": "object", "additionalProperties": false,
+          "required": ["type", "connectorId", "query"],
+          "properties": { "type": { "const": "SEMANTIC" }, "connectorId": { "type": "string", "format": "uuid" }, "query": { "$ref": "#/$defs/semanticQuery" } } },
+        { "type": "object", "additionalProperties": false,
+          "required": ["type", "connectorId", "sql", "bindings", "columns", "rowLimit"],
+          "properties": {
+            "type": { "const": "SQL" }, "connectorId": { "type": "string", "format": "uuid" },
+            "sql": { "type": "string", "minLength": 1, "maxLength": 262144, "description": "At most 256 KiB in UTF-8 bytes. Reserved {{alias}} templates are compiled left to right to bound parameters." },
+            "bindings": { "type": "object", "propertyNames": { "$ref": "#/$defs/name" }, "additionalProperties": { "$ref": "#/$defs/valueRef" }, "description": "Every alias must be declared and used. Only scalar refs or range endpoints; SET excluded." },
+            "columns": { "type": "array", "minItems": 1, "maxItems": 1000, "uniqueItems": true, "items": { "type": "string", "minLength": 1, "maxLength": 504 }, "description": "Ordered final Arrow names: NFC without controls or surrounding whitespace." },
+            "rowLimit": { "type": "integer", "minimum": 1, "maximum": 100000 }
+          } }
+      ]
+    },
+    "queries": { "type": "object", "propertyNames": { "$ref": "#/$defs/name" }, "additionalProperties": { "$ref": "#/$defs/query" } },
+    "widget": {
+      "oneOf": [
+        { "type": "object", "additionalProperties": false, "required": ["type", "variableName"], "properties": { "type": { "const": "INPUT" }, "variableName": { "$ref": "#/$defs/name" }, "control": { "$ref": "#/$defs/control" } } },
+        { "type": "object", "additionalProperties": false, "required": ["type", "queryName", "columns"], "properties": { "type": { "const": "TABLE" }, "title": { "$ref": "#/$defs/displayLabel", "description": "Optional widget heading shown by hosts." }, "queryName": { "$ref": "#/$defs/name" }, "columns": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/tableColumn" } }, "rowHeight": { "type": "integer", "minimum": 32, "maximum": 160 }, "module": { "$ref": "#/$defs/tableModule" } } },
+        { "type": "object", "additionalProperties": false, "required": ["type", "queryName", "pivot"], "properties": { "type": { "const": "TABLE" }, "title": { "$ref": "#/$defs/displayLabel", "description": "Optional widget heading shown by hosts." }, "queryName": { "$ref": "#/$defs/name" }, "pivot": { "$ref": "#/$defs/tablePivot" }, "rowHeight": { "type": "integer", "minimum": 32, "maximum": 160 }, "module": { "$ref": "#/$defs/tableModule" } } },
+        { "type": "object", "additionalProperties": false, "required": ["type", "content"], "properties": { "type": { "const": "TEXT" }, "content": { "type": "string", "minLength": 1 } } },
+        { "type": "object", "additionalProperties": false, "required": ["type", "queryNames", "module"], "properties": { "type": { "const": "CHART" }, "title": { "$ref": "#/$defs/displayLabel", "description": "Optional widget heading shown by hosts." }, "queryNames": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/name" } }, "module": { "type": "object", "additionalProperties": false, "required": ["inputs", "source"], "properties": { "inputs": { "type": "object", "additionalProperties": false, "required": ["parameters", "variables"], "properties": { "parameters": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/name" } }, "variables": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/name" } } } }, "source": { "type": "string", "minLength": 1, "maxLength": 262144, "description": "TypeScript/JavaScript module exporting defineChart({ render(frame), setup? }). For the source contract, query rows, runtime constraints, and minimal line and big-number examples, read monomer_docs at /en/dashboards/chart-source/index.md. At most 256 KiB in UTF-8 bytes." } } } } }
+      ]
+    },
+    "tableColumn": {
+      "type": "object", "additionalProperties": false, "required": ["field"],
+      "properties": { "field": { "description": "Canonical result key owned by Semantic, for example metric.order_count or dimension.orders.status.", "type": "string", "minLength": 1 }, "header": { "type": ["string", "null"], "minLength": 1 }, "width": { "type": "integer", "minimum": 80, "maximum": 640 } }
+    },
+    "tablePivot": {
+      "description": "Cross-tab layout of the primary query result, used instead of columns. The host only moves result cells into place and never aggregates them. For a SEMANTIC primary query, the rows and columns fields together must equal its group-by result keys and every values field must be one of its metric result keys. For a SQL primary query, every field must be a declared column and each rows and columns key pair must appear at most once in the result. Column keys sort ascending by value; rows keep the query result order. A pivot may generate at most 200 value columns. For examples and totals, read monomer_docs at /en/dashboards/pivot-tables/index.md.",
+      "type": "object", "additionalProperties": false, "required": ["rows", "columns", "values", "valuesAxis"],
+      "properties": {
+        "rows": { "description": "Row header fields, left to right. May be empty.", "type": "array", "maxItems": 8, "items": { "$ref": "#/$defs/tableColumn" } },
+        "columns": { "description": "Fields whose values become column headers, outermost first.", "type": "array", "minItems": 1, "maxItems": 3, "items": { "$ref": "#/$defs/pivotAxisField" } },
+        "values": { "description": "Fields shown in the cells. A width applies to every generated column of that value.", "type": "array", "minItems": 1, "maxItems": 20, "items": { "$ref": "#/$defs/tableColumn" } },
+        "valuesAxis": { "description": "COLUMNS repeats the values under each column key. ROWS lists each value as its own row, for metric scorecards.", "enum": ["COLUMNS", "ROWS"] },
+        "totals": { "description": "Named SEMANTIC queries that supply totals; never summed in the browser. Each query's group-bys must equal the rows fields (a total column), the columns fields (a total row), or be empty (the grand total). Each must use the primary query's connector, metricTimeRange and filters, and select every values metric. Every displayed row or column key must appear in its total result.", "type": "array", "minItems": 1, "maxItems": 3, "uniqueItems": true, "items": { "$ref": "#/$defs/name" } }
+      }
+    },
+    "pivotAxisField": {
+      "type": "object", "additionalProperties": false, "required": ["field"],
+      "properties": { "field": { "description": "Canonical result key owned by Semantic, for example metric_time.month or dimension.orders.region.", "type": "string", "minLength": 1 }, "header": { "type": ["string", "null"], "minLength": 1 } }
+    },
+    "tableModule": {
+      "description": "Optional defineTable presentation source. The primary queryName is included automatically; inputs.queries declares only distinct auxiliary queries. The owner validates all query, parameter and variable references and the source's 256 KiB UTF-8 byte limit.",
+      "type": "object", "additionalProperties": false, "required": ["inputs", "source"],
+      "properties": {
+        "inputs": {
+          "type": "object", "additionalProperties": false, "required": ["queries", "parameters", "variables"],
+          "properties": {
+            "queries": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/name" } },
+            "parameters": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/name" } },
+            "variables": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/name" } }
+          }
+        },
+        "source": { "type": "string", "minLength": 1, "maxLength": 262144, "description": "TypeScript/JavaScript module exporting defineTable({ render(frame) }); render returns optional row and cell callbacks that compute presentation only. The cell input includes displayText, the text the host shows for that cell by default; return { text: displayText, background } to change style while keeping host formatting. Intl (explicit locale; DateTimeFormat needs an explicit timeZone and date) and explicit Date values are available; current time, randomness, timers, network and DOM are not. For the contract and tested examples, read monomer_docs at /en/dashboards/table-source/index.md. At most 256 KiB in UTF-8 bytes." }
+      }
+    },
+    "widgets": { "type": "object", "propertyNames": { "$ref": "#/$defs/name" }, "additionalProperties": { "$ref": "#/$defs/widget" } },
+    "layout": {
+      "type": "object", "additionalProperties": false, "required": ["sections"],
+      "properties": { "sections": { "type": "array", "items": { "$ref": "#/$defs/section" } } }
+    },
+    "section": {
+      "type": "object", "additionalProperties": false, "required": ["id", "height", "root"],
+      "properties": { "id": { "$ref": "#/$defs/name" }, "height": { "$ref": "#/$defs/sectionHeight" }, "root": { "$ref": "#/$defs/layoutNode" } }
+    },
+    "sectionHeight": {
+      "description": "CONTENT is required when the root needs no allotted height. SCALED is required for CHART, TABLE, SPACER directly inside COLUMN, or a STACK containing such nodes; scale times 300 CSS px is the desktop minimum height. The owner validates these rules against the full definition.",
+      "oneOf": [
+        { "type": "object", "additionalProperties": false, "required": ["mode"], "properties": { "mode": { "const": "CONTENT" } } },
+        { "type": "object", "additionalProperties": false, "required": ["mode", "scale"], "properties": { "mode": { "const": "SCALED" }, "scale": { "type": "number", "minimum": 0.3, "maximum": 10.0, "multipleOf": 0.1 } } }
+      ]
+    },
+    "layoutNode": {
+      "description": "STACK nesting preserves the declared tree, including equal directions. Each STACK's separation applies only between its direct children (omitted means GAP), and weights are relative to that parent. ROW children require weight. COLUMN children require weight only when they need allotted height; content children omit it. The owner requires greatest-common-divisor one among present weights (a sole weight is 1) and rejects adjacent SPACER children; it does not flatten the tree.",
+      "oneOf": [
+        { "type": "object", "additionalProperties": false, "required": ["type", "id", "widgetId"], "properties": { "type": { "const": "WIDGET" }, "id": { "$ref": "#/$defs/name" }, "widgetId": { "$ref": "#/$defs/name" } } },
+        { "type": "object", "additionalProperties": false, "required": ["type", "id"], "properties": { "type": { "const": "SPACER" }, "id": { "$ref": "#/$defs/name" } } },
+        { "type": "object", "additionalProperties": false, "required": ["type", "id", "direction", "children"], "properties": { "type": { "const": "STACK" }, "id": { "$ref": "#/$defs/name" }, "direction": { "enum": ["ROW", "COLUMN"] }, "separation": { "enum": ["GAP", "DIVIDER"] }, "children": { "type": "array", "minItems": 2, "items": { "type": "object", "additionalProperties": false, "required": ["node"], "properties": { "weight": { "type": "integer", "minimum": 1 }, "node": { "$ref": "#/$defs/layoutNode" } } } } } }
+      ]
+    }
+  }
+}
