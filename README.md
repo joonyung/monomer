@@ -1,6 +1,6 @@
 # Monomer
 
-An agent-native business intelligence platform ([monomer.cc](https://monomer.cc)).
+An analytics workspace for teams and their AI agents ([monomer.cc](https://monomer.cc)).
 
 Monomer separates **durable product authority** (semantics, permissions, workspaces, and run lifecycles) from **stateless external warehouse execution** so both humans and AI agents operate over the exact same governed metrics, dashboards, and query execution pipeline.
 
